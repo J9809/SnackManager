@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 1. db서버 정보를 wiring -->
+    <properties resource="config/dbconn.properties" />
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+
+<!--    <typeAliases>-->
+<!--        <package name="com.service.spring.domain"/>-->
+<!--    </typeAliases>-->
+
+    <!--  3. jdbc 환경세팅 -->
+    <environments default="DD">
+        <environment id="DD">
+            <transactionManager type="JDBC"/>
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="${jdbc.oracle.driver}"/>
+                <property name="url" value="${jdbc.oracle.url}"/>
+                <property name="username" value="${jdbc.oracle.username}"/>
+                <property name="password" value="${jdbc.oracle.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+<!--    <mappers>-->
+<!--        <mapper resource="mapper/phone_query.xml"/>-->
+<!--    </mappers>-->
+</configuration>
+
+
