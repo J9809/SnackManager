@@ -1,25 +1,4 @@
 BEGIN
-    EXECUTE IMMEDIATE 'DROP SEQUENCE snack_sequence';
-EXCEPTION
-    WHEN OTHERS THEN
-        NULL;
-END;
-
-BEGIN
-    EXECUTE IMMEDIATE 'DROP SEQUENCE vote_sequence';
-EXCEPTION
-    WHEN OTHERS THEN
-        NULL;
-END;
-
-BEGIN
-    EXECUTE IMMEDIATE 'DROP SEQUENCE history_sequence';
-EXCEPTION
-    WHEN OTHERS THEN
-        NULL;
-END;
-
-BEGIN
     EXECUTE IMMEDIATE 'DROP TABLE vote';
 EXCEPTION
     WHEN OTHERS THEN
@@ -32,6 +11,16 @@ EXCEPTION
     WHEN OTHERS THEN
         NULL;
 END;
+
+begin
+    for rec in (select sequence_name
+                from   DBA_SEQUENCES
+                where  sequence_name in ('SNACK_SEQUENCE', 'VOTE_SEQUENCE', 'HISTORY_SEQUENCE')
+        )
+        loop
+            execute immediate 'drop sequence '|| rec.sequence_name;
+        end loop;
+end;
 
 begin
     for rec in (select table_name
