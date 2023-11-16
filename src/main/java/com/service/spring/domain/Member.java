@@ -1,15 +1,15 @@
 package com.service.spring.domain;
 
-public class MemberVO {
+public class Member {
     private String memberId;
     private String password;
     private String name;    
     private String voteFlag;
     private String role;
 	
-    public MemberVO() { }
+    public Member() { }
     
-    public MemberVO(String memberId, String password, String name, String voteFlag, String role) {
+    public Member(String memberId, String password, String name, String voteFlag, String role) {
 		super();
 		this.memberId = memberId;
 		this.password = password;
