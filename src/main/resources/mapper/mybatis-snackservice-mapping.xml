@@ -40,6 +40,12 @@
 		<include refid="select-snack"/>
 	</select>
 	
+	<select id = "login" resultType = "member">
+	SELECT
+	member_id, name, password, vote_flag, role
+	FROM member
+	</select>
+	
 	<update id="updateMember" parameterType="member">
 	UPDATE member SET
 	password = #{password}
@@ -47,6 +53,13 @@
 	</update>
 	
 	
+	
+	<select id = "getHistory" parameterType = "member" resultType = "history">
+	SELECT
+	h.snack_id, h.time, h.count, s.name
+	FROM history h JOIN snack s ON(h.snack_id = s.snack_id)
+	WHERE member_id = #{memberId}
+	</select>
 	
 </mapper>
 
