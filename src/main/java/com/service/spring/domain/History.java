@@ -9,6 +9,12 @@ public class History {
     public History() {
     	
     }
+	public History(String memberId, String snackId, int count) {
+		super();
+		this.memberId = memberId;
+		this.snackId = snackId;
+		this.count = count;
+	}
 	public History(Long historyId, String memberId, String snackId, int count) {
 		super();
 		this.historyId = historyId;

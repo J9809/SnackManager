@@ -11,6 +11,14 @@ public class Snack {
     public Snack() {
     	
     }
+	public Snack(String name, int price, String category, int quantity, String imgUrl) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.category = category;
+		this.quantity = quantity;
+		this.imgUrl = imgUrl;
+	}
 	public Snack(Long snackId, String name, int price, String category, int quantity, String imgUrl) {
 		super();
 		this.snackId = snackId;
