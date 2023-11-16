@@ -9,9 +9,9 @@
         <setting name="mapUnderscoreToCamelCase" value="true" />
     </settings>
 
-<!--    <typeAliases>-->
-<!--        <package name="com.service.spring.domain"/>-->
-<!--    </typeAliases>-->
+    <typeAliases>
+        <package name="com.service.spring.domain"/>
+    </typeAliases>
 
     <!--  3. jdbc 환경세팅 -->
     <environments default="DD">
@@ -25,9 +25,9 @@
             </dataSource>
         </environment>
     </environments>
-<!--    <mappers>-->
-<!--        <mapper resource="mapper/phone_query.xml"/>-->
-<!--    </mappers>-->
+    <mappers>
+        <mapper resource="mapper/phone_query.xml"/>
+    </mappers>
 </configuration>
 
 
