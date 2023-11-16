@@ -3,13 +3,13 @@ package com.service.spring.domain;
 public class History {
 	private Long historyId;
     private String memberId;
-    private String snackId;    
+    private Long snackId;    
     private int count;
     private String time;
     
     public History() {}
-    
-	public History(Long historyId, String memberId, String snackId, int count, String time) {
+
+	public History(Long historyId, String memberId, Long snackId, int count, String time) {
 		super();
 		this.historyId = historyId;
 		this.memberId = memberId;
@@ -34,11 +34,11 @@ public class History {
 		this.memberId = memberId;
 	}
 
-	public String getSnackId() {
+	public Long getSnackId() {
 		return snackId;
 	}
 
-	public void setSnackId(String snackId) {
+	public void setSnackId(Long snackId) {
 		this.snackId = snackId;
 	}
 
@@ -63,6 +63,7 @@ public class History {
 		return "History [historyId=" + historyId + ", memberId=" + memberId + ", snackId=" + snackId + ", count="
 				+ count + ", time=" + time + "]";
 	}
+    
 	
 	
 	
