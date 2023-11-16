@@ -4,37 +4,6 @@
 
 <mapper namespace="SnackMapper">
 
-	<insert id="registerMember" parameterType="member">
-		INSERT
-		INTO member(member_id, name, password, vote_flag, role)
-		VALUES(#{memberId}, #{name}, #{password}, #{voteFlag}, #{role})
-	</insert>
-	
-	<delete id="deleteMember" parameterType="string">
-		DELETE FROM member WHERE member_id=#{VALUE}
-	</delete>
-
-	<select id = "login" resultType = "member">
-	SELECT
-	member_id, name, password, vote_flag, role
-	FROM member
-	</select>
-
-	<resultMap type="snack" id="selectSnackRM">
-		<result property="snackId" column="snack_id"/>
-		<result property="name" column="name"/>
-		<result property="category" column="category"/>
-		<result property="quantity" column="quantity"/>
-		<result property="price" column="price"/>
-		<result property="imgUrl" column="img_url"/>
-	</resultMap>
-		
-	<sql id="select-snack">
-		SELECT
-		name, category, quantity, price, img_url
-		FROM snack
-	</sql>
-	
 	<!-- 사용자 랭크 조회 sql 템플릿 -->
 	<sql id="view-Memberrank">
 		SELECT RANK() OVER (ORDER BY count DESC) 순위, member_id, count
@@ -44,6 +13,49 @@
 		GROUP BY member_id)	
 	</sql>
 	
+	<!-- 전체 재고 조회 sql 템플릿 -->	
+	<sql id="select-snack">
+		SELECT
+		name, category, quantity, price, img_url
+		FROM snack
+	</sql>
+	
+	<!-- 회원 관리 기능 모음집 -->
+	<!-- 회원 가입 -->
+	<insert id="registerMember" parameterType="member">
+		INSERT
+		INTO member(member_id, name, password, vote_flag, role)
+		VALUES(#{memberId}, #{name}, #{password}, #{voteFlag}, #{role})
+	</insert>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM member WHERE member_id=#{VALUE}
+	</delete>
+	
+	<!-- 로그인 -->
+	<select id = "login" resultType = "member">
+	SELECT
+	member_id, name, password, vote_flag, role
+	FROM member
+	</select>
+	
+	<!-- 회원정보 수정-->
+	<update id="updateMember" parameterType="member">
+	UPDATE member SET
+	password = #{password}
+	WHERE member_id = #{memberId}
+	</update>
+	
+	<!-- 마이페이지 기록 조회 -->
+	<select id = "getHistory" parameterType = "member" resultType = "history">
+	SELECT
+	h.snack_id, h.time, h.count, s.name
+	FROM history h JOIN snack s ON(h.snack_id = s.snack_id)
+	WHERE member_id = #{memberId}
+	</select>
+	
+	<!-- 간식 관리 기능 모음집 -->
 	<!-- 전체 재고 조회 기능 -->
 	<select id = "selectAll" resultType="snack">
 		<include refid="select-snack"/>
@@ -80,22 +92,26 @@
 		GROUP BY member_id)	
 	</select>
 	
-	
-	<!-- 회원정보 수정-->
-	<update id="updateMember" parameterType="member">
-	UPDATE member SET
-	password = #{password}
-	WHERE member_id = #{memberId}
-	</update>
-	
-	<!-- 마이페이지 기록 조회 -->
-	<select id = "getHistory" parameterType = "member" resultType = "history">
-	SELECT
-	h.snack_id, h.time, h.count, s.name
-	FROM history h JOIN snack s ON(h.snack_id = s.snack_id)
-	WHERE member_id = #{memberId}
-	</select>
-	
+	<!-- 간식 선택 (재고 수량 변경) -->
+	 <update id = "fetchSnack" parameterType="snack">
+        UPDATE snack
+        SET quantity = #{quantity}
+        WHERE snack_id = #{snackId}
+    </update>
+    
+	<!-- 간식 선택 (history 테이블 추가) -->
+    <insert id = "registerHistory" parameterType="snack">
+        INSERT
+        INTO history(member_id, snack_id, time, count)
+        VALUES (#{memberId}, #{snackId}, sysdate, #{count})
+    </insert>
+    
+    <!-- 간식 등록 -->
+    <insert id="registerSnack" parameterType="snack">
+    	INSERT
+    	INTO snack(name, price, category, quantity, img_url)
+    	VALUES (#{name}, #{price}, #{category}, #{quantity}, #{imgUrl})
+    </insert>
 </mapper>
 
 
