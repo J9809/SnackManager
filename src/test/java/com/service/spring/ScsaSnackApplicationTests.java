@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.service.spring.domain.MemberVO;
+import com.service.spring.domain.Member;
 
 @SpringBootTest
 class ScsaSnackApplicationTests {
@@ -22,8 +22,8 @@ class ScsaSnackApplicationTests {
 	  
 		  //2. SqlSession -- SqlSessionTemplate
 	   SqlSession session=factory.openSession();
-	   MemberVO pvo = new MemberVO("muscleup15", "안광휘", "1234", "N", "student");
-	   MemberVO rvo = session.selectOne("SnackMapper.login", pvo);
+	   Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
+	   Member rvo = session.selectOne("SnackMapper.login", pvo);
 	   System.out.println(rvo);
     }
 
