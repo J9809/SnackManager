@@ -4,26 +4,67 @@
 
 <mapper namespace="SnackMapper">
 
-	<resultMap type="snack" id="selectSnackRM">
+<!-- 	<resultMap type="snack" id="selectSnackRM">
 		<result property="snackId" column="snack_id"/>
 		<result property="name" column="name"/>
 		<result property="category" column="category"/>
 		<result property="quantity" column="quantity"/>
 		<result property="price" column="price"/>
 		<result property="imgUrl" column="img_url"/>
-	</resultMap>
-		
+	</resultMap> -->
+	
+	<!--  전체 재고 조회 sql 템플릿 -->
 	<sql id="select-snack">
 		SELECT
-		snack_id, name, category, quantity, price, img_url
+		name, category, quantity, price, img_url
 		FROM snack
 	</sql>
 	
+	<!-- 사용자 랭크 조회 sql 템플릿 -->
+	<sql id="view-Memberrank">
+		SELECT RANK() OVER (ORDER BY count DESC) 순위, member_id, count
+		FROM (SELECT
+		member_id, sum(count) AS count
+		FROM history
+		GROUP BY member_id)	
+	</sql>
 	
-	<select id = "selectAll" resultMap="selectSnackRM">
+	<!-- 전체 재고 조회 기능 -->
+	<select id = "selectAll" resultType="snack">
 		<include refid="select-snack"/>
 	</select>
 	
+	<!-- 전체 투표 결과 조회 기능 -->
+	<select id = "viewVote" resultType="vote">
+		SELECT 
+		member_id, snack_id
+		FROM vote
+	</select>
+	
+	<!-- 전체 사용자 랭킹 조회 기능 -->
+	<select id = "viewAllMemberrank">
+		<include refid="view-Memberrank"/>
+	</select>
+	
+	<!-- 전체 과자 랭킹 조회 기능 -->
+	<select id = "viewAllSnackrank">
+		 SELECT RANK() OVER (ORDER BY count DESC) 순위, s.name, t.count
+	     FROM (SELECT
+		 snack_id, sum(count) AS count
+	     FROM history
+	     GROUP BY snack_id) t JOIN snack s ON (t.snack_id=s.snack_id)
+	</select>
+	
+	<!-- 과자별 사용자 랭킹 조회 기능 -->
+	<select id = "viewAllSnackrank">
+		 SELECT RANK() OVER (ORDER BY count DESC) 순위, member_id, count
+		FROM (SELECT
+		member_id, sum(count) AS count
+		FROM history
+		WHERE snack_id=#{snack_id}
+		GROUP BY member_id)	
+	</select>
+
 </mapper>
 
 
