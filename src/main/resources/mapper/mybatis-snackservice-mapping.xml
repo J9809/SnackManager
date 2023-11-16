@@ -3,13 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="SnackMapper">
-
-<<<<<<< HEAD
-	<select id = "login" resultType = "member">
-	SELECT
-	member_id, name, password, vote_flag, role
-	FROM member
-=======
+	
 	<resultMap type="snack" id="selectSnackRM">
 		<result property="snackId" column="snack_id"/>
 		<result property="name" column="name"/>
@@ -28,7 +22,12 @@
 	
 	<select id = "selectAll" resultMap="selectSnackRM">
 		<include refid="select-snack"/>
->>>>>>> a8a9229d0db6f3cda164b45f0d639133a1729911
+	</select>
+	
+	<select id = "login" resultType = "member">
+	SELECT
+	member_id, name, password, vote_flag, role
+	FROM member
 	</select>
 	
 	<update id="updateMember" parameterType="member">
@@ -38,6 +37,13 @@
 	</update>
 	
 	
+	
+	<select id = "getHistory" parameterType = "member" resultType = "history">
+	SELECT
+	h.snack_id, h.time, h.count, s.name
+	FROM history h JOIN snack s ON(h.snack_id = s.snack_id)
+	WHERE member_id = #{memberId}
+	</select>
 	
 </mapper>
 
