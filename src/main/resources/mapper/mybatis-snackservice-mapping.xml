@@ -4,12 +4,22 @@
 
 <mapper namespace="SnackMapper">
 
-<<<<<<< HEAD
+	<insert id="registerMember" parameterType="member">
+		INSERT
+		INTO member(member_id, name, password, vote_flag, role)
+		VALUES(#{memberId}, #{name}, #{password}, #{voteFlag}, #{role})
+	</insert>
+	
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM member WHERE member_id=#{VALUE}
+	</delete>
+
 	<select id = "login" resultType = "member">
 	SELECT
 	member_id, name, password, vote_flag, role
 	FROM member
-=======
+	</select>
+
 	<resultMap type="snack" id="selectSnackRM">
 		<result property="snackId" column="snack_id"/>
 		<result property="name" column="name"/>
@@ -28,7 +38,6 @@
 	
 	<select id = "selectAll" resultMap="selectSnackRM">
 		<include refid="select-snack"/>
->>>>>>> a8a9229d0db6f3cda164b45f0d639133a1729911
 	</select>
 	
 	<update id="updateMember" parameterType="member">
