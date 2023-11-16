@@ -43,11 +43,11 @@ class ScsaSnackApplicationTests {
             System.out.println(vo);
         System.out.println("\n============================================\n");
         
-        System.out.println("\n======================사용자 랭킹 조회======================\n");
-        List<History> list3=ssession.selectList("SnackMapper.viewhistory");
-        for(History vo:list3)
-            System.out.println(vo);
-        System.out.println("\n============================================\n");
+//        System.out.println("\n======================사용자 랭킹 조회======================\n");
+//        List<History> list3=ssession.selectList("SnackMapper.viewhistory");
+//        for(History vo:list3)
+//            System.out.println(vo);
+//        System.out.println("\n============================================\n");
       
         
 //        Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
