@@ -6,9 +6,8 @@ public class MemberVO {
     private String name;    
     private String voteFlag;
     private String role;
-    
-    
-    public MemberVO() {}
+	
+    public MemberVO() { }
     
     public MemberVO(String memberId, String password, String name, String voteFlag, String role) {
 		super();
@@ -19,13 +18,12 @@ public class MemberVO {
 		this.role = role;
 	}
     
-	public String getMemberId() {
+    public String getMemberId() {
 		return memberId;
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -50,13 +48,12 @@ public class MemberVO {
 	public void setRole(String role) {
 		this.role = role;
 	}
-    
 	@Override
 	public String toString() {
 		return "MemberVO [memberId=" + memberId + ", password=" + password + ", name=" + name + ", voteFlag=" + voteFlag
 				+ ", role=" + role + "]";
 	}
 	
-	
-	
+    
+    
 }
