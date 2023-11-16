@@ -71,7 +71,7 @@
 	</select>
 	
 	<!-- 과자별 사용자 랭킹 조회 기능 -->
-	<select id = "viewAllSnackrank">
+	<select id = "viewSnackByMember">
 		 SELECT RANK() OVER (ORDER BY count DESC) 순위, member_id, count
 		FROM (SELECT
 		member_id, sum(count) AS count
@@ -80,7 +80,7 @@
 		GROUP BY member_id)	
 	</select>
 	
-
+	
 	<!-- 회원정보 수정-->
 	<update id="updateMember" parameterType="member">
 	UPDATE member SET
