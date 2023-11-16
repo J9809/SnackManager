@@ -48,13 +48,13 @@ class ScsaSnackApplicationTests {
         for(History vo:list3)
             System.out.println(vo);
         System.out.println("\n============================================\n");
-        SqlSession session=factory.openSession();
+      
         
-        Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
-        List<History> list = session.selectList("SnackMapper.getHistory", pvo);
-        for(History h : list) {
-        	System.out.println(h);
-        }
+//        Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
+//        List<History> list4 = session.selectList("SnackMapper.getHistory", pvo);
+//        for(History h : list4) {
+//        	System.out.println(h);
+//        }
         
         //3. 쿼리문 실행
 
