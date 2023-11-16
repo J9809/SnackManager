@@ -2,41 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ProductMapper">
+<mapper namespace="SnackMapper">
 
-	<!--INSERT 문에서 시퀀스 값이 pk일때 PVO, RVO를 동기화시키는 방법  -->
-	<insert id = "addProduct" parameterType="myProduct">
-	<selectKey keyProperty="id" order="BEFORE" resultType="int">
-		SELECT myproduct_seq.nextVal FROM dual
-	</selectKey>
-	INSERT
-	INTO myproduct (id, name, maker, price)
-	VALUES(#{id}, #{name}, #{maker}, #{price})
-	</insert>
-	
-	
+	<resultMap type="snack" id="selectSnackRM">
+		<result property="snackId" column="snack_id"/>
+		<result property="name" column="name"/>
+		<result property="category" column="category"/>
+		<result property="quantity" column="quantity"/>
+		<result property="price" column="price"/>
+		<result property="imgUrl" column="img_url"/>
+	</resultMap>
+		
 	<sql id="select-snack">
-	SELECT
-	snackid, name, category, quantity, price, imgurl
-	FROM snack
+		SELECT
+		snack_id, name, category, quantity, price, img_url
+		FROM snack
 	</sql>
 	
-	<!--dynamic query 
-	1. 상품명(특정 단어가 포함되면 가져오기
-	2. 제조사별로 가져오기
-	3. 모든 상품 가져오기
-	 -->
-	<select id = "findProducts" parameterType = "myProduct" resultType = "myProduct">
-		<include refid="select-myproduct"/>
-	<where>
-	<if test = "value != null">
-	 maker LIKE #{maker}
-	</if>
-	<if test="value != null">
-	OR name LIKE'%' || #{VALUE} || '%'
-	</if>
-	</where>
-	ORDER BY id DESC
+	
+	<select id = "selectAll" resultMap="selectSnackRM">
+		<include refid="select-snack"/>
 	</select>
 	
 </mapper>
