@@ -67,6 +67,7 @@ create table snack (
     snack_id   number(10) not null,
     name varchar2(100) not null,
     category varchar2(10) not null,
+    price number(10) not null,
     quantity number(10) not null,
     img_url varchar2(100) not null
 );
@@ -159,9 +160,9 @@ create or replace trigger vote_on_insert
     end; 
 /
 
-insert into snack (name, category, quantity, img_url) values ('카누', '음료', 5, 'mock_url');
-insert into snack (name, category, quantity, img_url) values ('후레쉬베리', '과자', 7, 'mock_url');
-insert into snack (name, category, quantity, img_url) values ('트롤리', '젤리', 10, 'mock_url');
+insert into snack (name, category, price, quantity, img_url) values ('카누', '음료', 1000, 5, 'mock_url');
+insert into snack (name, category, price, quantity, img_url) values ('후레쉬베리', '과자', 2000, 7, 'mock_url');
+insert into snack (name, category, price, quantity, img_url) values ('트롤리', '젤리', 700, 10, 'mock_url');
 
 insert into member values  ('cos', '최우성', '1234', 'N', 'admin');
 insert into member values  ('did6436', '양석현', '1234', 'N', 'student');
