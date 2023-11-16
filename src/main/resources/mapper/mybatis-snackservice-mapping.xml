@@ -15,10 +15,10 @@
 	</insert>
 	
 	
-	<sql id="select-myproduct">
+	<sql id="select-snack">
 	SELECT
-	id, name, maker, price
-	FROM myproduct
+	snackid, name, category, quantity, price, imgurl
+	FROM snack
 	</sql>
 	
 	<!--dynamic query 
