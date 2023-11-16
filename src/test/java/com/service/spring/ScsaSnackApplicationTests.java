@@ -27,21 +27,40 @@ class ScsaSnackApplicationTests {
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
 
         //2. SqlSession -- SqlSessionTemplate
-        SqlSession ssession=factory.openSession();
+        SqlSession session=factory.openSession();
 
         //3. 쿼리문 실행
         System.out.println("\n======================전체 재고 조회======================\n");
-        List<Snack> list=ssession.selectList("SnackMapper.selectAll");
+        List<Snack> list=session.selectList("SnackMapper.selectAll");
         for(Snack vo:list)
             System.out.println(vo);
-        System.out.println("\n============================================\n");
 
 
         System.out.println("\n======================투표 결과 조회======================\n");
-        List<Vote> list2=ssession.selectList("SnackMapper.viewVote");
+        List<Vote> list2=session.selectList("SnackMapper.viewVote");
         for(Vote vo:list2)
             System.out.println(vo);
-        System.out.println("\n============================================\n");
+        
+//        // Snack03
+//        System.out.println("\n======================간식 선택 수량 변경======================\n");
+//        Snack snack = new Snack(1000L, null, 0, null, 10, null);
+//        int row=session.update("SnackMapper.fetchSnack", snack);
+//        System.out.println(row+" 명이 수정 성공!!");
+//        session.commit();
+//    
+//
+//        // Snack04
+//        System.out.println("\n======================간식 선택 기록 추가======================\n");
+//        History history = new History(null, "cos", 1000L, 4, "1234");
+//        row=session.insert("SnackMapper.registerHistory", history);
+//        System.out.println(row+" 명이 수정 성공!!");
+//        session.commit();
+        
+        // 간식 등록
+        Snack newsnack = new Snack("포켓몬빵", 99999, "과자", 1, "gogo");
+        int a = session.insert("SnackMapper.registerSnack", newsnack);
+        System.out.println(a+" 등록 성공!!");
+        session.commit();
         
 //        System.out.println("\n======================사용자 랭킹 조회======================\n");
 //        List<History> list3=ssession.selectList("SnackMapper.viewhistory");
@@ -55,8 +74,6 @@ class ScsaSnackApplicationTests {
 //        for(History h : list4) {
 //        	System.out.println(h);
 //        }
-        
-        //3. 쿼리문 실행
 
 		
 	}
