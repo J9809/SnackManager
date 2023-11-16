@@ -1,5 +1,6 @@
 package com.service.spring;
 
+import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.service.spring.domain.History;
 import com.service.spring.domain.Snack;
 import com.service.spring.domain.Vote;
+import com.service.spring.domain.Member;
 
 @SpringBootTest
 class ScsaSnackApplicationTests {
@@ -46,7 +48,16 @@ class ScsaSnackApplicationTests {
         for(History vo:list3)
             System.out.println(vo);
         System.out.println("\n============================================\n");
+        SqlSession session=factory.openSession();
         
+        Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
+        List<History> list = session.selectList("SnackMapper.getHistory", pvo);
+        for(History h : list) {
+        	System.out.println(h);
+        }
+        
+        //3. 쿼리문 실행
+
 		
 	}
 

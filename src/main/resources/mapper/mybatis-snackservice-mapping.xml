@@ -65,6 +65,27 @@
 		GROUP BY member_id)	
 	</select>
 
+	<select id = "login" resultType = "member">
+	SELECT
+	member_id, name, password, vote_flag, role
+	FROM member
+	</select>
+	
+	<update id="updateMember" parameterType="member">
+	UPDATE member SET
+	password = #{password}
+	WHERE member_id = #{memberId}
+	</update>
+	
+	
+	
+	<select id = "getHistory" parameterType = "member" resultType = "history">
+	SELECT
+	h.snack_id, h.time, h.count, s.name
+	FROM history h JOIN snack s ON(h.snack_id = s.snack_id)
+	WHERE member_id = #{memberId}
+	</select>
+	
 </mapper>
 
 
