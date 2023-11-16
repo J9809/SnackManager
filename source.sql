@@ -1,9 +1,34 @@
 BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE snack_sequence';
+EXCEPTION
+    WHEN OTHERS THEN
+        NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE vote_sequence';
+EXCEPTION
+    WHEN OTHERS THEN
+        NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE history_sequence';
+EXCEPTION
+    WHEN OTHERS THEN
+        NULL;
+END;
+/
+
+BEGIN
     EXECUTE IMMEDIATE 'DROP TABLE vote';
 EXCEPTION
     WHEN OTHERS THEN
         NULL;
 END;
+/
 
 BEGIN
     EXECUTE IMMEDIATE 'DROP TABLE history';
@@ -11,26 +36,24 @@ EXCEPTION
     WHEN OTHERS THEN
         NULL;
 END;
+/
 
-begin
-    for rec in (select sequence_name
-                from   DBA_SEQUENCES
-                where  sequence_name in ('SNACK_SEQUENCE', 'VOTE_SEQUENCE', 'HISTORY_SEQUENCE')
-        )
-        loop
-            execute immediate 'drop sequence '|| rec.sequence_name;
-        end loop;
-end;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE snack';
+EXCEPTION
+    WHEN OTHERS THEN
+        NULL;
+END;
+/
 
-begin
-    for rec in (select table_name
-                from   user_tables
-                where  table_name in ('SNACK', 'MEMBER')
-        )
-        loop
-            execute immediate 'drop table '|| rec.table_name;
-        end loop;
-end;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE member';
+EXCEPTION
+    WHEN OTHERS THEN
+        NULL;
+END;
+/
+
 
 create table member(
     member_id varchar2(10) primary key ,
@@ -71,7 +94,7 @@ alter table member
 alter table snack
     add (
         constraint snack_pk primary key (snack_id),
-        constraint category_chk check ( category in ('Í≥ºÏûê', 'Ï†§Î¶¨', 'ÏùåÎ£å'))
+        constraint category_chk check ( category in ('∞˙¿⁄', '¡©∏Æ', '¿Ω∑·'))
         );
 
 alter table history
@@ -113,7 +136,8 @@ create or replace trigger snack_on_insert
         select snack_sequence.nextval
             into :new.snack_id
         from dual;
-    end;
+    end; 
+/
 
 create or replace trigger history_on_insert
     before insert on history
@@ -122,7 +146,8 @@ create or replace trigger history_on_insert
         select history_sequence.nextval
             into :new.history_id
         from dual;
-    end;
+    end; 
+/
 
 create or replace trigger vote_on_insert
     before insert on vote
@@ -131,15 +156,16 @@ create or replace trigger vote_on_insert
         select vote_sequence.nextval
             into :new.vote_id
         from dual;
-    end;
+    end; 
+/
 
-insert into snack (name, category, quantity, img_url) values ('Ïπ¥ÎàÑ', 'ÏùåÎ£å', 5, 'mock_url');
-insert into snack (name, category, quantity, img_url) values ('ÌôîÏù¥Ìä∏ÌïòÏûÑ', 'Í≥ºÏûê', 7, 'mock_url');
-insert into snack (name, category, quantity, img_url) values ('Ìä∏Î°§Î¶¨', 'Ï†§Î¶¨', 10, 'mock_url');
+insert into snack (name, category, quantity, img_url) values ('ƒ´¥©', '¿Ω∑·', 5, 'mock_url');
+insert into snack (name, category, quantity, img_url) values ('»ƒ∑πΩ¨∫£∏Æ', '∞˙¿⁄', 7, 'mock_url');
+insert into snack (name, category, quantity, img_url) values ('∆Æ∑—∏Æ', '¡©∏Æ', 10, 'mock_url');
 
-insert into member values  ('cos', 'ÏµúÏö∞ÏÑ±', '1234', 'N', 'admin');
-insert into member values  ('did6436', 'ÏñëÏÑùÌòÑ', '1234', 'N', 'student');
-insert into member values  ('muscleup15', 'ÏïàÍ¥ëÌúò', '1234', 'N', 'student');
+insert into member values  ('cos', '√÷øÏº∫', '1234', 'N', 'admin');
+insert into member values  ('did6436', 'æÁºÆ«ˆ', '1234', 'N', 'student');
+insert into member values  ('muscleup15', 'æ»±§»÷', '1234', 'N', 'student');
 
 insert into history (member_id, snack_id, time, count) values ('did6436', 1001, CURRENT_DATE, 15);
 insert into history (member_id, snack_id, time, count) values ('did6436', 1002, CURRENT_DATE, 13);
