@@ -22,9 +22,16 @@ class ScsaSnackApplicationTests {
 	  
 		  //2. SqlSession -- SqlSessionTemplate
 	   SqlSession session=factory.openSession();
-	   Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
-	   Member rvo = session.selectOne("SnackMapper.login", pvo);
-	   System.out.println(rvo);
+	   Member pvo = new Member("muscleup15", "5678", "안광휘", "N", "student");
+//	   Member rvo = session.selectOne("SnackMapper.login", pvo);
+//	   System.out.println(rvo);
+	   
+	   //update test
+	   int a = session.update("SnackMapper.updateMember", pvo);
+	   session.commit();
+	   System.out.println(a);
+	   
+	   
     }
 
 }

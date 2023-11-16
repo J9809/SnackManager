@@ -10,6 +10,12 @@
 	FROM member
 	</select>
 	
+	<update id="updateMember" parameterType="member">
+	UPDATE member SET
+	password = #{password}
+	WHERE member_id = #{memberId}
+	</update>
+	
 	
 	
 </mapper>
