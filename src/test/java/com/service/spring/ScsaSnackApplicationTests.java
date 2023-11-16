@@ -14,15 +14,16 @@ import com.service.spring.domain.Member;
 @SpringBootTest
 class ScsaSnackApplicationTests {
 	
-	
     @Test
     void contextLoads() throws Exception{
         Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
       
        SqlSession session=factory.openSession();
+       
+       
        Member pvo = new Member("qweck", "1234", "양희재", "N", "student");
-       int a = session.insert("SnackMapper.registerMember", pvo);
+       int a = session.delete("SnackMapper.deleteMember", "qweck");
        session.commit();
        System.out.println(a);
     }

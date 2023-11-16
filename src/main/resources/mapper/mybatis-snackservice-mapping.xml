@@ -9,6 +9,10 @@
 		INTO member(member_id, name, password, vote_flag, role)
 		VALUES(#{memberId}, #{name}, #{password}, #{voteFlag}, #{role})
 	</insert>
+	
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM member WHERE member_id=#{VALUE}
+	</delete>
 
 	
 </mapper>
