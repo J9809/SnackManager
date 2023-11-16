@@ -4,8 +4,31 @@
 
 <mapper namespace="SnackMapper">
 
+	<insert id="registerMember" parameterType="member">
+		INSERT
+		INTO member(member_id, name, password, vote_flag, role)
+		VALUES(#{memberId}, #{name}, #{password}, #{voteFlag}, #{role})
+	</insert>
 	
-	<!--  전체 재고 조회 sql 템플릿 -->
+	<delete id="deleteMember" parameterType="string">
+		DELETE FROM member WHERE member_id=#{VALUE}
+	</delete>
+
+	<select id = "login" resultType = "member">
+	SELECT
+	member_id, name, password, vote_flag, role
+	FROM member
+	</select>
+
+	<resultMap type="snack" id="selectSnackRM">
+		<result property="snackId" column="snack_id"/>
+		<result property="name" column="name"/>
+		<result property="category" column="category"/>
+		<result property="quantity" column="quantity"/>
+		<result property="price" column="price"/>
+		<result property="imgUrl" column="img_url"/>
+	</resultMap>
+		
 	<sql id="select-snack">
 		SELECT
 		name, category, quantity, price, img_url
