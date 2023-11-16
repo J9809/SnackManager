@@ -50,7 +50,7 @@ public class Member {
 	}
 	@Override
 	public String toString() {
-		return "MemberVO [memberId=" + memberId + ", password=" + password + ", name=" + name + ", voteFlag=" + voteFlag
+		return "Member [memberId=" + memberId + ", password=" + password + ", name=" + name + ", voteFlag=" + voteFlag
 				+ ", role=" + role + "]";
 	}
 	
