@@ -56,34 +56,36 @@ END;
 
 
 create table member(
-    member_id varchar2(10) primary key ,
-    name    varchar2(100)  not null,
-    password    varchar2(10) not null,
-    vote_flag char(1) not null,
-    role varchar2(10) not null
+                       member_id varchar2(10) primary key ,
+                       name    varchar2(100)  not null,
+                       password    varchar2(10) not null,
+                       vote_flag char(1) not null,
+                       role varchar2(10) not null
 );
 
 create table snack (
-    snack_id   number(10) not null,
-    name varchar2(100) not null,
-    category varchar2(10) not null,
-    price number(10) not null,
-    quantity number(10) not null,
-    img_url varchar2(100) not null
+                       snack_id   number(10) not null,
+                       name varchar2(100) not null,
+                       category varchar2(10) not null,
+                       price number(10) not null,
+                       brand varchar2(100),
+                       quantity number(10) not null,
+                       img_url varchar2(100) not null,
+                       link varchar2(100) not null
 );
 
 create table history (
-    history_id number(10) not null,
-    member_id varchar2(10) not null,
-    snack_id number(10) not null,
-    time DATE not null,
-    count number(10) not null
+                         history_id number(10) not null,
+                         member_id varchar2(10) not null,
+                         snack_id number(10) not null,
+                         time DATE not null,
+                         count number(10) not null
 );
 
 create table vote (
-    vote_id number(10) not null,
-    member_id varchar2(10) not null,
-    snack_id number(10) not null
+                      vote_id number(10) not null,
+                      member_id varchar2(10) not null,
+                      snack_id number(10) not null
 );
 
 alter table member
@@ -95,7 +97,7 @@ alter table member
 alter table snack
     add (
         constraint snack_pk primary key (snack_id),
-        constraint category_chk check ( category in ('°úÀÚ', 'Á©¸®', 'À½·á'))
+        constraint category_chk check ( category in ('ê³¼ì', 'ì ¤ë¦¬', 'ìŒë£Œ'))
         );
 
 alter table history
@@ -133,40 +135,40 @@ create sequence history_sequence
 create or replace trigger snack_on_insert
     before insert on snack
     for each row
-    begin
-        select snack_sequence.nextval
-            into :new.snack_id
-        from dual;
-    end; 
+begin
+    select snack_sequence.nextval
+    into :new.snack_id
+    from dual;
+end;
 /
 
 create or replace trigger history_on_insert
     before insert on history
     for each row
-    begin
-        select history_sequence.nextval
-            into :new.history_id
-        from dual;
-    end; 
+begin
+    select history_sequence.nextval
+    into :new.history_id
+    from dual;
+end;
 /
 
 create or replace trigger vote_on_insert
     before insert on vote
     for each row
-    begin
-        select vote_sequence.nextval
-            into :new.vote_id
-        from dual;
-    end; 
+begin
+    select vote_sequence.nextval
+    into :new.vote_id
+    from dual;
+end;
 /
 
-insert into snack (name, category, price, quantity, img_url) values ('Ä«´©', 'À½·á', 1000, 5, 'mock_url');
-insert into snack (name, category, price, quantity, img_url) values ('ÈÄ·¹½¬º£¸®', '°úÀÚ', 2000, 7, 'mock_url');
-insert into snack (name, category, price, quantity, img_url) values ('Æ®·Ñ¸®', 'Á©¸®', 700, 10, 'mock_url');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('ì¹´ëˆ„', 'ìŒë£Œ', 1000, 'ì¹´ëˆ„', 5, 'mock_url', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('í›„ë ˆì‰¬ë² ë¦¬', 'ê³¼ì', 2000, 'ì˜¤ë¦¬ì˜¨', 7, 'mock_url', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('í•˜ë¦¬ë³´', 'ì ¤ë¦¬', 700, 'í•˜ë¦¬ë³´', 10, 'mock_url', 'mock_link');
 
-insert into member values  ('cos', 'ÃÖ¿ì¼º', '1234', 'N', 'admin');
-insert into member values  ('did6436', '¾ç¼®Çö', '1234', 'N', 'student');
-insert into member values  ('muscleup15', '¾È±¤ÈÖ', '1234', 'N', 'student');
+insert into member values  ('cos', 'ìµœìš°ì„±', '1234', 'N', 'admin');
+insert into member values  ('did6436', 'ì–‘ì„í˜„', '1234', 'N', 'student');
+insert into member values  ('muscleup15', 'ì•ˆê´‘íœ˜', '1234', 'N', 'student');
 
 insert into history (member_id, snack_id, time, count) values ('did6436', 1001, CURRENT_DATE, 15);
 insert into history (member_id, snack_id, time, count) values ('did6436', 1002, CURRENT_DATE, 13);

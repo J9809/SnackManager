@@ -109,8 +109,8 @@
     <!-- 간식 등록 -->
     <insert id="registerSnack" parameterType="snack">
     	INSERT
-    	INTO snack(name, price, category, quantity, img_url)
-    	VALUES (#{name}, #{price}, #{category}, #{quantity}, #{imgUrl})
+    	INTO snack(name, price, brand, category, quantity, img_url, link)
+    	VALUES (#{name}, #{price}, #{brand}, #{category}, #{quantity}, #{imgUrl}, #{link})
     </insert>
 </mapper>
 

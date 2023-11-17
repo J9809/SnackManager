@@ -57,10 +57,10 @@ class ScsaSnackApplicationTests {
 //        session.commit();
         
         // 간식 등록
-        Snack newsnack = new Snack("포켓몬빵", 99999, "과자", 1, "gogo");
+        Snack newsnack = new Snack("포켓몬빵", 99999, "", "과자", 1, "gogo", "fake_link");
         int a = session.insert("SnackMapper.registerSnack", newsnack);
         System.out.println(a+" 등록 성공!!");
-        session.commit();
+//        session.commit();
         
 //        System.out.println("\n======================사용자 랭킹 조회======================\n");
 //        List<History> list3=ssession.selectList("SnackMapper.viewhistory");
