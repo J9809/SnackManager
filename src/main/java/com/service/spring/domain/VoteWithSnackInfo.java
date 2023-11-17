@@ -16,10 +16,19 @@ public class VoteWithSnackInfo extends Vote {
         this.count = count;
     }
 
+    public VoteWithSnackInfo() {
+    }
+
+    public VoteWithSnackInfo(String snackName, int count) {
+        this.snackName = snackName;
+        this.count = count;
+    }
+
     @Override
     public String toString() {
-        return "VoteWithSnackName{" +
+        return "VoteWithSnackInfo{" +
                 "snackName='" + snackName + '\'' +
-                '}' + " super=" + super.toString();
+                ", count=" + count +
+                '}';
     }
 }

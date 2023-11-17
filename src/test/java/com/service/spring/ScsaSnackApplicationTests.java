@@ -8,11 +8,41 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class ScsaSnackApplicationTests {
+
+    @Test
+    @DisplayName("과자별 사용자 랭킹")
+    public void testSnack() throws Exception {
+        Reader r=Resources.getResourceAsReader("config/SqlMapConfig.xml");
+
+        //1. SqlSessionFactory -- SqlSessionFactoryBean
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
+
+        //2. SqlSession -- SqlSessionTemplate
+        SqlSession session=factory.openSession();
+        Snack snack = new Snack(1001L, "후레쉬베리", 1000, "과자", 10, "fake");
+        List<MemberRank> list = session.selectList("SnackMapper.viewMemberRankBySnack", snack);
+        for (MemberRank mr : list) {
+            System.out.println(mr.toString());
+        }
+    }
+    @Test
+    @DisplayName("사용자 랭킹 조회")
+    public void TestMemberRank() throws Exception {
+        Reader r=Resources.getResourceAsReader("config/SqlMapConfig.xml");
+
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
+        SqlSession session=factory.openSession();
+
+        List<MemberRank> list3= session.selectList("SnackMapper.viewAllMemberRank");
+        for(MemberRank vo:list3)
+            System.out.println(vo.toString());
+    }
 
 	@Test
 	public void unit() throws Exception{
@@ -31,10 +61,10 @@ class ScsaSnackApplicationTests {
 //            System.out.println(vo);
 
 
-        System.out.println("\n======================투표 결과 조회======================\n");
-        List<VoteWithSnackInfo> list2=session.selectList("SnackMapper.viewVote");
-        for(VoteWithSnackInfo ob:list2)
-            System.out.println(ob.getClass() + " " + ob.toString());
+//        System.out.println("\n======================투표 결과 조회======================\n");
+//        List<VoteWithSnackInfo> list2=session.selectList("SnackMapper.viewVote");
+//        for(VoteWithSnackInfo ob:list2)
+//            System.out.println(ob.getClass() + " " + ob.toString());
         
 //        // Snack03
 //        System.out.println("\n======================간식 선택 수량 변경======================\n");
@@ -56,14 +86,17 @@ class ScsaSnackApplicationTests {
 //        int a = session.insert("SnackMapper.registerSnack", newsnack);
 //        System.out.println(a+" 등록 성공!!");
 //        session.commit();
-        
-//        System.out.println("\n======================사용자 랭킹 조회======================\n");
-//        List<History> list3=ssession.selectList("SnackMapper.viewhistory");
-//        for(History vo:list3)
-//            System.out.println(vo);
-//        System.out.println("\n============================================\n");
-      
-        
+
+        System.out.println("\n======================전체 과자 랭킹 조회======================\n");
+        List<SnackRank> listSnackRank=session.selectList("SnackMapper.viewAllSnackRank");
+        for(SnackRank vo:listSnackRank)
+            System.out.println(vo.toString());
+        System.out.println("\n============================================\n");
+
+        System.out.println("\n======================전체 과자 랭킹 조회======================\n");
+
+
+
 //        Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
 //        List<History> list4 = session.selectList("SnackMapper.getHistory", pvo);
 //        for(History h : list4) {

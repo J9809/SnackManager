@@ -3,15 +3,6 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="SnackMapper">
-
-	<!-- 사용자 랭크 조회 sql 템플릿 -->
-	<sql id="view-Memberrank">
-		SELECT RANK() OVER (ORDER BY count DESC) 순위, member_id, count
-		FROM (SELECT
-		member_id, sum(count) AS count
-		FROM history
-		GROUP BY member_id)	
-	</sql>
 	
 	<!-- 전체 재고 조회 sql 템플릿 -->	
 	<sql id="select-snack">
@@ -70,27 +61,36 @@
 	</select>
 	
 	<!-- 전체 사용자 랭킹 조회 기능 -->
-	<select id = "viewAllMemberrank">
-		<include refid="view-Memberrank"/>
+	<select id = "viewAllMemberRank" resultType="memberRank">
+		SELECT RANK() OVER (ORDER BY count DESC) as rank, member_id, count
+		FROM (
+			SELECT
+			member_id, sum(count) AS count
+			FROM history
+			GROUP BY member_id
+			)
 	</select>
 	
 	<!-- 전체 과자 랭킹 조회 기능 -->
-	<select id = "viewAllSnackrank">
-		 SELECT RANK() OVER (ORDER BY count DESC) 순위, s.name, t.count
-	     FROM (SELECT
-		 snack_id, sum(count) AS count
-	     FROM history
-	     GROUP BY snack_id) t JOIN snack s ON (t.snack_id=s.snack_id)
+	<select id = "viewAllSnackRank" resultType="SnackRank">
+		 SELECT RANK() OVER (ORDER BY count DESC) as rank, s.name as name, t.count as count
+	     FROM (
+			 SELECT
+			 snack_id, sum(count) AS count
+			 FROM history
+			 GROUP BY snack_id) t
+	         JOIN snack s ON (t.snack_id=s.snack_id)
 	</select>
 	
 	<!-- 과자별 사용자 랭킹 조회 기능 -->
-	<select id = "viewSnackByMember">
-		 SELECT RANK() OVER (ORDER BY count DESC) 순위, member_id, count
-		FROM (SELECT
-		member_id, sum(count) AS count
-		FROM history
-		WHERE snack_id=#{snack_id}
-		GROUP BY member_id)	
+	<select id = "viewMemberRankBySnack" parameterType="snack" resultType="memberRank">
+		 SELECT RANK() OVER (ORDER BY count DESC) as rank, member_id, count
+			FROM (
+				SELECT
+				member_id, sum(count) AS count
+				FROM history
+				WHERE snack_id=#{snackId}
+				GROUP BY member_id)
 	</select>
 	
 	<!-- 간식 선택 (재고 수량 변경) -->
