@@ -1,4 +1,4 @@
-login.jsp<%--
+<%--
   Created by IntelliJ IDEA.
   User: seonghwan
   Date: 11/17/23
@@ -11,6 +11,6 @@ login.jsp<%--
     <title>Title</title>
 </head>
 <body>
-
+    <a href="login.jsp">login</a> <br>
 </body>
 </html>
