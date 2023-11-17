@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="login.jsp">login</a> <br>
+
+안녕하세요
+
 </body>
 </html>
