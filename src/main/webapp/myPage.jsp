@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Title</title>
@@ -27,5 +28,24 @@
 <br>
 히스토리 가져오기
 <br>
+<table>
+		<thead>
+			<tr>
+				<th>과자명</th>
+				<th>과자갯수</th>
+				<th>먹은시간</th>
+			</tr>
+		</thead>
+		<!--  forEach 사용 -->
+		<tbody>
+			<c:forEach items="${histories}" var="history">
+			<tr>
+				<td>${history.snackName}</td>
+				<td>${history.count}</td>
+				<td>${history.time}</td>
+			</tr>			
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>
