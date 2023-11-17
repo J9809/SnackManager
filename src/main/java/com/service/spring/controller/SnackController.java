@@ -19,7 +19,6 @@ public class SnackController {
     private StudentService studentService;
     @Autowired
     private AdminService adminService;
-
     @GetMapping("admin/selectAll.do")
     public String doSelectAllAdmin(Model model) {
         try {
@@ -36,6 +35,15 @@ public class SnackController {
 
     @GetMapping("student/selectAll.do")
     public String doSelectAllStudent(Model model) {
+        try {
+            List<Snack> snacks = studentService.selectAll();
+            System.out.println("snacks size = " + snacks.size());
+            model.addAttribute("snacks", snacks);
+            model.addAttribute("title", "학생 - 전체 재고 조회");
+            return "studentInventory";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
