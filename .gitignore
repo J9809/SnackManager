@@ -34,4 +34,4 @@ build/
 /.metadata/
 
 ### src ###
-./src/main/resources/config/*
+src/main/resources/config/*
