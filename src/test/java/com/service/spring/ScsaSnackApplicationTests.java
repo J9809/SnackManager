@@ -87,21 +87,19 @@ class ScsaSnackApplicationTests {
 //        System.out.println(a+" 등록 성공!!");
 //        session.commit();
 
-        System.out.println("\n======================전체 과자 랭킹 조회======================\n");
-        List<SnackRank> listSnackRank=session.selectList("SnackMapper.viewAllSnackRank");
-        for(SnackRank vo:listSnackRank)
-            System.out.println(vo.toString());
-        System.out.println("\n============================================\n");
+//        System.out.println("\n======================전체 과자 랭킹 조회======================\n");
+//        List<SnackRank> listSnackRank=session.selectList("SnackMapper.viewAllSnackRank");
+//        for(SnackRank vo:listSnackRank)
+//            System.out.println(vo.toString());
+//        System.out.println("\n============================================\n");
+//
+//        System.out.println("\n======================전체 과자 랭킹 조회======================\n");
 
-        System.out.println("\n======================전체 과자 랭킹 조회======================\n");
 
 
-
-//        Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
-//        List<History> list4 = session.selectList("SnackMapper.getHistory", pvo);
-//        for(History h : list4) {
-//        	System.out.println(h);
-//        }
+        Member pvo = new Member("muscleup15", "1234", "안광휘", "N", "student");
+        Member rvo = session.selectOne("SnackMapper.login", pvo);
+        System.out.println(rvo);
         
         //
 //        System.out.println("\n======================마이페이지 히스토리 조회======================\n");
