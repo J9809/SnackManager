@@ -24,8 +24,6 @@ public class MemberController {
 		try {
 //			System.out.println(member);
 			Member selected = studentService.login(member);
-			System.out.println("테이블 갔다옴?");
-			System.out.println(selected);
 			if (selected!= null) {
 				session.setAttribute("loginUser", selected);
 				return "index";
@@ -34,8 +32,29 @@ public class MemberController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			model.addAttribute("message", "문제내용 - 회원 로그인 진행 중 에러 발생");
 			return "Error";
 		}
+	}
+	
+	@PostMapping("api/updateMember.do")
+	public String updateMember(Member member, HttpSession session, Model model) {
+		 System.out.println("비밀번호 변경");
+		    try {
+		        Member loggedInUser = (Member) session.getAttribute("loginUser");
+		        if (loggedInUser != null) {
+		            String memberId = loggedInUser.getMemberId();
+		            member.setMemberId(memberId);
+		            int result = studentService.updateMember(member);
+		            return "myPage";
+		        } else {
+		            return "login"; 
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        model.addAttribute("message", "문제내용 - 비밀번호 변경 진행 중 에러 발생");
+		        return "Error";
+		    }
 	}
 	
 	

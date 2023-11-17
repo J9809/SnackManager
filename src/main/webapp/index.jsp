@@ -11,9 +11,8 @@
     <title>Title</title>
 </head>
 <body>
+	<jsp:include page="/header.jsp"/>
 
-안녕하세요
-<a href="login.jsp">login</a>
 
 </body>
 </html>
