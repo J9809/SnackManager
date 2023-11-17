@@ -80,9 +80,9 @@ class ScsaSnackApplicationTests {
         System.out.println("\n======================마이페이지 히스토리 조회======================\n");
         Member member = new Member("muscleup15", "1", "1", "Y", "student");
         List<HistoryWithSnackName> result = session.selectList("SnackMapper.getHistory", member);
-        for (HistoryWithSnackName o: result)
-        	System.out.println(o);
-		
+        for (HistoryWithSnackName o: result) {
+            System.out.println(o.getClass() + " " + o.toString());
+        }
 	}
 
 }
