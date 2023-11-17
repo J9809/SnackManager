@@ -1,21 +1,15 @@
 package com.service.spring;
 
-import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
+import com.service.spring.domain.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.service.spring.domain.History;
-import com.service.spring.domain.HistoryWithSnackName;
-import com.service.spring.domain.Snack;
-import com.service.spring.domain.Vote;
-import com.service.spring.domain.Member;
 
 @SpringBootTest
 class ScsaSnackApplicationTests {
@@ -31,16 +25,16 @@ class ScsaSnackApplicationTests {
         SqlSession session=factory.openSession();
 
         //3. 쿼리문 실행
-        System.out.println("\n======================전체 재고 조회======================\n");
-        List<Snack> list=session.selectList("SnackMapper.selectAll");
-        for(Snack vo:list)
-            System.out.println(vo);
+//        System.out.println("\n======================전체 재고 조회======================\n");
+//        List<Snack> list=session.selectList("SnackMapper.selectAll");
+//        for(Snack vo:list)
+//            System.out.println(vo);
 
 
-//        System.out.println("\n======================투표 결과 조회======================\n");
-//        List<Object> list2=session.selectList("SnackMapper.viewVote");
-//        for(Object ob:list2)
-//            System.out.println(ob);
+        System.out.println("\n======================투표 결과 조회======================\n");
+        List<VoteWithSnackInfo> list2=session.selectList("SnackMapper.viewVote");
+        for(VoteWithSnackInfo ob:list2)
+            System.out.println(ob.getClass() + " " + ob.toString());
         
 //        // Snack03
 //        System.out.println("\n======================간식 선택 수량 변경======================\n");
@@ -77,12 +71,12 @@ class ScsaSnackApplicationTests {
 //        }
         
         //
-        System.out.println("\n======================마이페이지 히스토리 조회======================\n");
-        Member member = new Member("muscleup15", "1", "1", "Y", "student");
-        List<HistoryWithSnackName> result = session.selectList("SnackMapper.getHistory", member);
-        for (HistoryWithSnackName o: result) {
-            System.out.println(o.getClass() + " " + o.toString());
-        }
+//        System.out.println("\n======================마이페이지 히스토리 조회======================\n");
+//        Member member = new Member("muscleup15", "1", "1", "Y", "student");
+//        List<HistoryWithSnackName> result = session.selectList("SnackMapper.getHistory", member);
+//        for (HistoryWithSnackName o: result) {
+//            System.out.println(o.getClass() + " " + o.toString());
+//        }
 	}
 
 }

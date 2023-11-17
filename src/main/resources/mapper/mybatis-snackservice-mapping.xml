@@ -63,11 +63,10 @@
 	</select>
 	
 	<!-- 전체 투표 결과 조회 기능 -->
-	<select id = "viewVote" resultType="vote">
-		SELECT 
-		snack_id, COUNT(member_id) AS count
-		FROM vote
-		GROUP BY snack_id
+	<select id = "viewVote" resultType="voteWithSnackInfo">
+		SELECT s.NAME as snackName, COUNT(member_id) AS count
+		FROM vote v JOIN snack s ON (v.SNACK_ID = s.SNACK_ID)
+		GROUP BY s.NAME
 	</select>
 	
 	<!-- 전체 사용자 랭킹 조회 기능 -->
