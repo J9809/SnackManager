@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.service.spring.domain.History;
+import com.service.spring.domain.HistoryWithSnackName;
 import com.service.spring.domain.Snack;
 import com.service.spring.domain.Vote;
 import com.service.spring.domain.Member;
@@ -36,10 +37,10 @@ class ScsaSnackApplicationTests {
             System.out.println(vo);
 
 
-        System.out.println("\n======================투표 결과 조회======================\n");
-        List<Vote> list2=session.selectList("SnackMapper.viewVote");
-        for(Vote vo:list2)
-            System.out.println(vo);
+//        System.out.println("\n======================투표 결과 조회======================\n");
+//        List<Object> list2=session.selectList("SnackMapper.viewVote");
+//        for(Object ob:list2)
+//            System.out.println(ob);
         
 //        // Snack03
 //        System.out.println("\n======================간식 선택 수량 변경======================\n");
@@ -57,9 +58,9 @@ class ScsaSnackApplicationTests {
 //        session.commit();
         
         // 간식 등록
-        Snack newsnack = new Snack("포켓몬빵", 99999, "", "과자", 1, "gogo", "fake_link");
-        int a = session.insert("SnackMapper.registerSnack", newsnack);
-        System.out.println(a+" 등록 성공!!");
+//        Snack newsnack = new Snack("포켓몬빵", 99999, "", "과자", 1, "gogo", "fake_link");
+//        int a = session.insert("SnackMapper.registerSnack", newsnack);
+//        System.out.println(a+" 등록 성공!!");
 //        session.commit();
         
 //        System.out.println("\n======================사용자 랭킹 조회======================\n");
@@ -74,7 +75,13 @@ class ScsaSnackApplicationTests {
 //        for(History h : list4) {
 //        	System.out.println(h);
 //        }
-
+        
+        //
+        System.out.println("\n======================마이페이지 히스토리 조회======================\n");
+        Member member = new Member("muscleup15", "1", "1", "Y", "student");
+        List<HistoryWithSnackName> result = session.selectList("SnackMapper.getHistory", member);
+        for (HistoryWithSnackName o: result)
+        	System.out.println(o);
 		
 	}
 
