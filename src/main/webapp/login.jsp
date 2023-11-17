@@ -12,9 +12,9 @@
 </head>
 <body>
 <form action="login.do" method = "post">
-	<label for "ID">ID:</label>
-	<input type = "text" name = "memberId"><br>
-	<label for "pwd">Password</label>
+	<label>ID:</label>
+	<input type="text" name="memberId"><br>
+	<label>Password</label>
 	<input type = "password" name = "password"><br>
 	<button type = "submit">login</button>
 </form>
