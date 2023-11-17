@@ -1,7 +1,8 @@
-package com.service.spring.dao;
+package com.service.spring.dao.impl;
 
 import java.util.List;
 
+import com.service.spring.dao.VoteDAO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
