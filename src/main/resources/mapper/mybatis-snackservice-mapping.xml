@@ -66,6 +66,7 @@
 		SELECT 
 		member_id, snack_id
 		FROM vote
+		GROUP BY snack_id
 	</select>
 	
 	<!-- 전체 사용자 랭킹 조회 기능 -->
@@ -93,6 +94,7 @@
 	</select>
 	
 	<!-- 간식 선택 (재고 수량 변경) -->
+	<!-- Controller에서 마이너스 해주기 -->
 	 <update id = "fetchSnack" parameterType="snack">
         UPDATE snack
         SET quantity = #{quantity}
@@ -112,6 +114,21 @@
     	INTO snack(name, price, brand, category, quantity, img_url, link)
     	VALUES (#{name}, #{price}, #{brand}, #{category}, #{quantity}, #{imgUrl}, #{link})
     </insert>
+    
+    <!-- 간식 투표 -->
+    <insert id="voteSnack" parameterType="vote">
+    	INSERT
+    	INTO vote(member_id, snack_id)
+    	VALUES (#{memberId}, #{snackId})
+    </insert>
+    
+    <!-- 간식 주문 -->
+	<!-- Controller에서 플러스 해주기 -->
+    <update id = "orderSnack" parameterType="snack">
+        UPDATE snack
+        SET quantity = #{quantity}
+        WHERE snack_id = #{snackId}
+    </update>
 </mapper>
 
 
