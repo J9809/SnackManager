@@ -9,11 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.service.spring</groupId>
-    <artifactId>sp09_PMS</artifactId>
+    <artifactId>scsa-snack</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>sp09_PMS</name>
-    <description>sp09_PMS</description>
+    <name>scsa-snack</name>
+    <description>scsa-snack</description>
     <properties>
         <java.version>1.8</java.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
