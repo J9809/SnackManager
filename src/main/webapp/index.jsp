@@ -12,8 +12,11 @@
 </head>
 <body>
 
-안녕하세요
-<a href="login.jsp">login</a>
+<a href="index.jsp">home</a> <br>
+<a href="login.jsp">login</a> <br>
+<a href="admin/selectAll.do">admin-inventory</a> <br>
+<a href="student/selectAll.do">student-inventory</a> <br>
+<a href="admin/registerSnack.do">admin-register-snack</a>
 
 </body>
 </html>
