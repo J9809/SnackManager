@@ -1,19 +1,14 @@
 package com.service.spring.controller;
 
 import com.service.spring.domain.Snack;
-import com.service.spring.domain.SnackCount;
 import com.service.spring.service.AdminService;
 import com.service.spring.service.StudentService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class SnackController {
@@ -53,10 +48,13 @@ public class SnackController {
     }
 
     @PostMapping( "student/fetchSnack.do")
-    public String doFetchSnack(@RequestBody List<SnackCount> list) {
+    public String doFetchSnack(@RequestBody List<Snack> list) {
         System.out.println("✅ Fetch Snack Controller");
         System.out.println(list);
         try {
+            for (Snack s : list) {
+                studentService.fetchSnack(s);
+            }
             return "index";
         } catch (Exception e) {
             System.out.println("❗️ERROR");
