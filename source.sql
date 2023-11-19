@@ -162,9 +162,17 @@ begin
 end;
 /
 
-insert into snack (name, category, price, brand, quantity, img_url, link) values ('카누', '음료', 1000, '카누', 5, 'mock_url', 'mock_link');
-insert into snack (name, category, price, brand, quantity, img_url, link) values ('후레쉬베리', '과자', 2000, '오리온', 7, 'mock_url', 'mock_link');
-insert into snack (name, category, price, brand, quantity, img_url, link) values ('하리보', '젤리', 700, '하리보', 10, 'mock_url', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('카누', '음료', 1000, '카누', 5, 'https://shopping-phinf.pstatic.net/main_1210737/12107376356.20210127164940.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('카스타드', '과자', 2000, '오리온', 7, 'https://shopping-phinf.pstatic.net/main_1058914/10589149703.20161212165221.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('하리보', '젤리', 700, '하리보', 10, 'https://shopping-phinf.pstatic.net/main_4137396/41373960781.20230723170911.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('포스틱', '과자', 800, '농심', 20, 'https://shopping-phinf.pstatic.net/main_1005319/10053198451.20160923143449.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('빼빼로', '과자', 1200, '롯데', 15, 'https://shopping-phinf.pstatic.net/main_2421250/24212502522.20200921105652.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('홈런볼', '과자', 1300, '해태', 20, 'https://shopping-phinf.pstatic.net/main_5715102/5715102162.20220805140656.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('화이트하임', '과자', 2900, '크라운제과', 20, 'https://shopping-phinf.pstatic.net/main_8392815/8392815969.20210624121423.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('예감', '과자', 850, '오리온', 20, 'https://shopping-phinf.pstatic.net/main_2243410/22434108684.20200409143341.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('후렌치파이 사과', '과자', 1980, '해태', 20, 'https://shopping-phinf.pstatic.net/main_5741707/5741707059.20130319113704.jpg', 'mock_link');
+insert into snack (name, category, price, brand, quantity, img_url, link) values ('새우깡 대용량 지퍼백', '과자', 3880, '농심', 20, 'https://shopping-phinf.pstatic.net/main_8226381/82263818665.4.jpg', 'mock_link');
+
 
 insert into member values  ('cos', '최우성', '1234', 'N', 'admin');
 insert into member values  ('did6436', '양석현', '1234', 'N', 'student');

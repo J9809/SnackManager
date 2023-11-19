@@ -9,13 +9,16 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.service.spring</groupId>
-    <artifactId>sp09_PMS</artifactId>
+    <artifactId>scsa-snack</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>sp09_PMS</name>
-    <description>sp09_PMS</description>
+    <name>scsa-snack</name>
+    <description>scsa-snack</description>
     <properties>
         <java.version>1.8</java.version>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jackson2.version>2.10.2</jackson2.version>
     </properties>
     <dependencies>
         <dependency>
@@ -74,7 +77,18 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson2.version}</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

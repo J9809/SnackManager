@@ -13,6 +13,14 @@
 <body>
 	<jsp:include page="/header.jsp"/>
 
+<<<<<<< HEAD
+=======
+<a href="index.jsp">home</a> <br>
+<a href="login.jsp">login</a> <br>
+<a href="admin/selectAll.do">admin-inventory</a> <br>
+<a href="student/selectAll.do">student-inventory</a> <br>
+<a href="admin/registerSnack.do">admin-register-snack</a>
+>>>>>>> 9499bf74141710f2ae02076ecacbab761b92ba9a
 
 </body>
 </html>

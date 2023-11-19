@@ -7,7 +7,7 @@
 	<!-- 전체 재고 조회 sql 템플릿 -->	
 	<sql id="select-snack">
 		SELECT
-		name, category, quantity, price, img_url
+		SNACK_ID, name, category, quantity, brand, price, img_url
 		FROM snack
 	</sql>
 	
