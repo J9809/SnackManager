@@ -139,10 +139,9 @@
     }
 
     function deleteSnack(event) {
-        const li = event.target.parentElement;
-        const id = li.getAttribute('id');
-        console.log("del id = ", id)
-        $('#snack-selection-list #' + String(id)).remove()
+        const elem = event.target.parentElement.parentElement;
+        const delId = elem.getAttribute('id');
+        $('#snack-selection-container #' + String(delId)).remove()
     }
 
     $(function () {

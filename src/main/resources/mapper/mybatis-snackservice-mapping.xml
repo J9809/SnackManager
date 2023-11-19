@@ -97,7 +97,7 @@
 	<!-- Controller에서 마이너스 해주기 -->
 	 <update id = "fetchSnack" parameterType="snack">
         UPDATE snack
-        SET quantity = #{quantity}
+        SET quantity = quantity - #{quantity}
         WHERE snack_id = #{snackId}
     </update>
     

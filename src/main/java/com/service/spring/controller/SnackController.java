@@ -52,6 +52,9 @@ public class SnackController {
         System.out.println("✅ Fetch Snack Controller");
         System.out.println(list);
         try {
+            for (Snack s : list) {
+                studentService.fetchSnack(s);
+            }
             return "index";
         } catch (Exception e) {
             System.out.println("❗️ERROR");
