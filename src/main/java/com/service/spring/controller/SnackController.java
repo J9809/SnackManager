@@ -3,16 +3,14 @@ package com.service.spring.controller;
 import com.service.spring.domain.Snack;
 import com.service.spring.service.AdminService;
 import com.service.spring.service.StudentService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@Slf4j
 public class SnackController {
 
     @Autowired
@@ -35,9 +33,11 @@ public class SnackController {
 
     @GetMapping("student/selectAll.do")
     public String doSelectAllStudent(Model model) {
+        System.out.println("✅ Select All Snack Controller");
         try {
             List<Snack> snacks = studentService.selectAll();
-            System.out.println("snacks size = " + snacks.size());
+            System.out.println(snacks);
+//            System.out.println("snacks size = " + snacks.size());
             model.addAttribute("snacks", snacks);
             model.addAttribute("title", "학생 - 전체 재고 조회");
             return "studentInventory";
@@ -45,5 +45,20 @@ public class SnackController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @PostMapping( "student/fetchSnack.do")
+    public String doFetchSnack(@RequestBody List<Snack> list) {
+        System.out.println("✅ Fetch Snack Controller");
+        System.out.println(list);
+        try {
+            for (Snack s : list) {
+                studentService.fetchSnack(s);
+            }
+            return "index";
+        } catch (Exception e) {
+            System.out.println("❗️ERROR");
+        }
+        return "index";
     }
 }
