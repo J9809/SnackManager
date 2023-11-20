@@ -29,7 +29,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
 <body>
-
+<div class = "jumbotron">
 <h1 style = "text-align : center;"><%= pageTitle %></h1>
 <div style = "display: flex; justify-content : flex-end; ">
     <div style="margin-right: 10px; display:flex; justify-content : center; align-items: center; "><%= userName %> 님</div>
@@ -37,7 +37,7 @@
     <button class = "btn btn-outline-danger" style="margin-right: 10px;" id = "logoutBtn">로그아웃</button>
 </div>
 <hr>
-
+</div>
 </body>
 </html>
 
