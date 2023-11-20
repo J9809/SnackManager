@@ -44,6 +44,22 @@ class ScsaSnackApplicationTests {
             System.out.println(vo.toString());
     }
 
+    @Test
+    @DisplayName("과자별 사용자 랭킹 조회")
+    public void TestMemberRankBySnack() throws Exception {
+        Reader r=Resources.getResourceAsReader("config/SqlMapConfig.xml");
+
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
+        SqlSession session=factory.openSession();
+
+        Snack snack = new Snack(1001L);
+
+        List<MemberRank> objects = session.selectList("SnackMapper.viewMemberRankBySnack", snack);
+        for (MemberRank o : objects) {
+            System.out.println(o);
+        }
+    }
+
 	@Test
 	public void unit() throws Exception{
 		Reader r=Resources.getResourceAsReader("config/SqlMapConfig.xml");

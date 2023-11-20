@@ -5,6 +5,7 @@ import com.service.spring.dao.MemberDAO;
 import com.service.spring.dao.SnackDAO;
 import com.service.spring.dao.VoteDAO;
 import com.service.spring.domain.MemberRank;
+import com.service.spring.domain.Snack;
 import com.service.spring.domain.SnackRank;
 import com.service.spring.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,10 @@ public class RankServiceImpl implements RankService {
     @Override
     public List<SnackRank> getSnackRank() throws Exception {
         return snackDAO.getSnackRank();
+    }
+
+    @Override
+    public List<MemberRank> getMemberRankBySnack(Snack snack) throws Exception {
+        return snackDAO.getMemberRankBySnack(snack);
     }
 }

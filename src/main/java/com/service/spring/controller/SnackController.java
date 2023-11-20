@@ -128,4 +128,20 @@ public class SnackController {
         }
         return null;
     }
+
+    @GetMapping("getMemberRankBySnack.do")
+    public String doGetMemberRankBySnack(Model model, HttpSession session, @RequestParam String snackId) {
+        try {
+            System.out.println("✅ getMemberRankBySnack Controller - snackId = " + snackId);
+            List<MemberRank> memberRankBySnack = rankService.getMemberRankBySnack(new Snack(Long.parseLong(snackId)));
+
+            System.out.println(memberRankBySnack);
+            model.addAttribute("member", memberRankBySnack);
+            return "MemberRankBySnackTmp";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("❗️ not returned");
+        return null;
+    }
 }

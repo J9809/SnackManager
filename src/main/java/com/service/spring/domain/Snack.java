@@ -39,4 +39,8 @@ public class Snack {
 		this.quantity = quantity;
 		this.imgUrl = imgUrl;
 	}
+
+	public Snack(Long snackId) {
+		this.snackId = snackId;
+	}
 }

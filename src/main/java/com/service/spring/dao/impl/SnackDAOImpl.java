@@ -1,6 +1,7 @@
 package com.service.spring.dao.impl;
 
 import com.service.spring.dao.SnackDAO;
+import com.service.spring.domain.MemberRank;
 import com.service.spring.domain.Snack;
 import com.service.spring.domain.SnackRank;
 import org.apache.ibatis.session.SqlSession;
@@ -39,5 +40,10 @@ public class SnackDAOImpl implements SnackDAO {
     @Override
     public List<SnackRank> getSnackRank() throws Exception {
         return sqlSession.selectList(NS + "viewAllSnackRank");
+    }
+
+    @Override
+    public List<MemberRank> getMemberRankBySnack(Snack snack) throws Exception {
+        return sqlSession.selectList(NS + "viewMemberRankBySnack", snack);
     }
 }

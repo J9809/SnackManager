@@ -18,7 +18,9 @@ contentType="text/html;charset=UTF-8" language="java" %>
 
 
 
-    <a href="getMemberRank.do">member rank</a>
-    <a href="getSnackRank.do">snack rank</a>
+
+    <a href="student/voteSnack.do">vote</a> <br>
+    <a href="getMemberRank.do">member rank</a> <br>
+    <a href="getSnackRank.do">snack rank</a> <br>
   </body>
 </html>
