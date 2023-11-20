@@ -12,7 +12,7 @@ public interface StudentService {
     List<Snack> selectAll() throws Exception;
     int fetchSnack(Snack snack) throws Exception;
     List<HistoryWithSnackName> getHistory(Member member) throws Exception;
-    int registerHistory(Snack snack) throws Exception;
+    int registerHistory(History history) throws Exception;
     int voteSnack(Vote vote) throws Exception;
 
     int voteCheck(Member member) throws Exception;

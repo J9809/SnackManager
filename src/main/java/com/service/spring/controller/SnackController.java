@@ -54,11 +54,14 @@ public class SnackController {
     }
 
     @PostMapping( "student/fetchSnack.do")
-    public String doFetchSnack(@RequestBody List<Snack> list) {
+    public String doFetchSnack(@RequestBody List<Snack> list, HttpSession session) {
 //        System.out.println("✅ Fetch Snack Controller");
         try {
+            Member loginUser = (Member) session.getAttribute("loginUser");
             for (Snack s : list) {
                 studentService.fetchSnack(s);
+                History history = new History(loginUser.getMemberId(), s.getSnackId(), s.getQuantity());
+                studentService.registerHistory(history);
             }
             return "index";
         } catch (Exception e) {
@@ -136,8 +139,8 @@ public class SnackController {
             List<MemberRank> memberRankBySnack = rankService.getMemberRankBySnack(new Snack(Long.parseLong(snackId)));
 
             System.out.println(memberRankBySnack);
-            model.addAttribute("member", memberRankBySnack);
-            return "MemberRankBySnackTmp";
+            model.addAttribute("memberRankList", memberRankBySnack);
+            return "snackRankTmp";
         } catch (Exception e) {
             e.printStackTrace();
         }

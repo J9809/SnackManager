@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.service.spring.domain.MemberRank" %>
+<%@ page import="org.springframework.ui.Model" %><%--
   Created by IntelliJ IDEA.
   User: seonghwan
   Date: 11/20/23
@@ -7,6 +9,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+%>
 <html>
 <head>
     <title>Title</title>
@@ -21,6 +25,7 @@
         </div>
     </c:forEach>
 </div>
+${memberRankList}
 </body>
 </html>
 <script>
@@ -44,8 +49,6 @@
         };
 
         $.ajax(settings).done(function (response) {
-            // console.log(response);
-            location.reload();
         });
     }
 
