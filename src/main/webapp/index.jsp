@@ -13,7 +13,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <body>
   <div class = "jumbotron">
-    <jsp:include page="/header.jsp" >
+    <jsp:include page="./header.jsp" >
    		<jsp:param name="pageTitle" value="간식관리시스템" />
     </jsp:include>
 

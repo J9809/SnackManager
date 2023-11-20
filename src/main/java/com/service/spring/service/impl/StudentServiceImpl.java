@@ -75,4 +75,9 @@ public class StudentServiceImpl implements StudentService {
     public int voteCheck(Member member) throws Exception {
         return voteDAO.checkVote(member);
     }
+
+	@Override
+	public Member checkDuplicateId(String memberId) throws Exception {
+		return memberDAO.checkDuplicateId(memberId);
+	}
 }

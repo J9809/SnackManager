@@ -11,5 +11,6 @@ public interface MemberDAO {
 	Member login(Member member) throws Exception;
 	int updateMember(Member member) throws Exception;
 	List<MemberRank> getMemberRank() throws Exception;
+	Member checkDuplicateId(String memberId) throws Exception;
 	
 }

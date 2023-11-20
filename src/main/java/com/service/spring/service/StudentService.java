@@ -16,4 +16,5 @@ public interface StudentService {
     int voteSnack(Vote vote) throws Exception;
 
     int voteCheck(Member member) throws Exception;
+    Member checkDuplicateId(String memberId) throws Exception;
 }

@@ -32,6 +32,14 @@
 	WHERE member_id=#{memberId} AND password=#{password}
 	</select>
 	
+	<!-- id 중복조회 -->
+	<select id = "checkDuplicateId" parameterType="String" resultType = "member">
+	SELECT
+	member_id, name, password, vote_flag, role
+	FROM member
+	WHERE member_id=#{VALUE}
+	</select>
+	
 	<!-- 회원정보 수정-->
 	<update id="updateMember" parameterType="member">
 	UPDATE member SET

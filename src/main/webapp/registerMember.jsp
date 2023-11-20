@@ -47,6 +47,15 @@
         .signup-title {
             font-size: 2rem; /* 원하는 크기로 조정하세요 */
         }
+        
+        .duplicated{
+        	color : red;
+        }
+        
+        .not-duplicated{
+        	color : green;
+        }
+        
     </style>
 </head>
 <body>
@@ -72,8 +81,9 @@
                             <input type="text" class="form-control" id="memberId" name="memberId">
                         	<button class = "btn btn-secondary" style = "margin-left : 10px;" id = "duplicateChkBtn">중복확인</button>
                         </div>
-                        
                     </div>
+           			<div id = "duplicateMessage" style = "text-align : right; width : 78%; margin-bottom : 20px;"></div>
+                    
                     <div class="form-group">
                         <label class="label-text" for="password">비밀번호</label>
                         <div class="input">
@@ -103,17 +113,73 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function validatePassword() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirm-password").value;
+    function areAllFieldsFilled() {
+        var name = $("#name").val();
+        var memberId = $("#memberId").val();
+        var password = $("#password").val();
+        var confirmPassword = $("#confirm-password").val();
 
-            if (password !== confirmPassword) {
-                alert("비밀번호가 일치하지 않습니다.");
-                return false;
-            }
-            return true;
+        return name !== "" && memberId !== "" && password !== "" && confirmPassword !== "";
+    }    
+    
+    function toggleRegisterButton() {
+        var registerButton = $("button[type='submit']");
+        if (areAllFieldsFilled() && $("#duplicateMessage").hasClass("not-duplicated")) {
+            registerButton.prop("disabled", false);
+        } else {
+            registerButton.prop("disabled", true);
         }
+    }
+
+    $("input").on("input", function() {
+        toggleRegisterButton();
+    });  
+       
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return false;
+        }
+        return true;
+    }
+    
+    
+    $("#duplicateChkBtn").click(function() {
+    	event.preventDefault();
+        var memberId = $("#memberId").val(); // Get the memberId from the input field
+        $.ajax({
+            url: "/checkDuplicateId.do", // Updated URL for the API endpoint
+            method: "GET",
+            data: { memberId: memberId },
+            success: function(response) {
+                console.log(response);
+                if (response === "duplicated") {
+                    document.getElementById('duplicateMessage').innerHTML = '이미 사용 중인 아이디입니다.';
+                    duplicateMessage.classList.add('duplicated');
+                    duplicateMessage.classList.remove('not-duplicated');
+                } else if (response === "not duplicated") {
+                    document.getElementById('duplicateMessage').innerHTML = '사용 가능한 아이디입니다.';
+                    duplicateMessage.classList.add('not-duplicated');
+                    duplicateMessage.classList.remove('duplicated');
+                    toggleRegisterButton(); // Check conditions for enabling the register button
+
+                } else {
+                    console.log("Error or unexpected response:", response);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+
+                
+        
     </script>
 </body>
 </html>
