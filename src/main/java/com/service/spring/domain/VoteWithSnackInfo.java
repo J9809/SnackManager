@@ -24,7 +24,23 @@ public class VoteWithSnackInfo extends Vote {
         this.count = count;
     }
 
-    @Override
+    public String getSnackName() {
+		return snackName;
+	}
+
+	public void setSnackName(String snackName) {
+		this.snackName = snackName;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	@Override
     public String toString() {
         return "VoteWithSnackInfo{" +
                 "snackName='" + snackName + '\'' +
