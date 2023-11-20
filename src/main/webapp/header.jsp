@@ -12,5 +12,9 @@
 </head>
 <body>
 
+<a href = "index.jsp">홈으로</a>
+<a href = "api/viewHistory.do">마이페이지</a>
+<hr>
+
 </body>
 </html>
