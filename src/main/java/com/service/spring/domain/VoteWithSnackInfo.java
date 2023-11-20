@@ -10,7 +10,7 @@ public class VoteWithSnackInfo extends Vote {
     private String snackName;
     private int count;
 
-    public VoteWithSnackInfo(String memberId, String snackId, String snackName, int count) {
+    public VoteWithSnackInfo(String memberId, Long snackId, String snackName, int count) {
         super(memberId, snackId);
         this.snackName = snackName;
         this.count = count;

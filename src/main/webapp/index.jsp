@@ -16,7 +16,8 @@
 <a href="login.jsp">login</a> <br>
 <a href="admin/selectAll.do">admin-inventory</a> <br>
 <a href="student/selectAll.do">student-inventory</a> <br>
-<a href="admin/registerSnack.do">admin-register-snack</a>
+<a href="admin/registerSnack.do">admin-register-snack</a> <br>
+<a href="student/voteSnack.do">vote</a>
 
 </body>
 </html>

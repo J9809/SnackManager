@@ -129,6 +129,13 @@
         SET quantity = #{quantity}
         WHERE snack_id = #{snackId}
     </update>
+
+	<!-- 투표 여부 확인 -->
+	<select id="checkVote" parameterType="member" resultType="int">
+		select count(*)
+		from VOTE
+		where vote.MEMBER_ID = #{memberId}
+	</select>
 </mapper>
 
 
