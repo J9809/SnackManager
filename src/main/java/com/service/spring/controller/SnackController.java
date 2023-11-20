@@ -1,9 +1,8 @@
 package com.service.spring.controller;
 
-import com.service.spring.domain.Member;
-import com.service.spring.domain.Snack;
-import com.service.spring.domain.Vote;
+import com.service.spring.domain.*;
 import com.service.spring.service.AdminService;
+import com.service.spring.service.RankService;
 import com.service.spring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,9 @@ public class SnackController {
     private StudentService studentService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private RankService rankService;
+
     @GetMapping("admin/selectAll.do")
     public String doSelectAllAdmin(Model model) {
         try {
@@ -104,9 +106,25 @@ public class SnackController {
     @GetMapping("getMemberRank.do")
     public String doGetMemberRank(Model model, HttpSession session) {
         try {
-
+            List<MemberRank> memberRank = rankService.getMemberRank();
+            model.addAttribute("list", memberRank);
+            model.addAttribute("title", "멤버 랭킹");
+            return "rank";
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    @GetMapping("getSnackRank.do")
+    public String doGetSnackRank(Model model, HttpSession session) {
+        try {
+            List<SnackRank> snackRank = rankService.getSnackRank();
+            model.addAttribute("list", snackRank);
+            model.addAttribute("title", "스낵 랭킹");
+            return "snackRankTmp";
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

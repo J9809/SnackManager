@@ -62,18 +62,20 @@
 	
 	<!-- 전체 사용자 랭킹 조회 기능 -->
 	<select id = "viewAllMemberRank" resultType="memberRank">
-		SELECT RANK() OVER (ORDER BY count DESC) as rank, member_id, count
+		SELECT RANK() OVER (ORDER BY h.count DESC) as rank, h.member_id, m.name, h.count
 		FROM (
-			SELECT
-			member_id, sum(count) AS count
-			FROM history
-			GROUP BY member_id
-			)
+				 SELECT
+					 member_id, sum(count) AS count
+				 FROM history
+				 GROUP BY member_id
+			 ) h JOIN (
+			MEMBER m
+			) ON m.MEMBER_ID = h.MEMBER_ID
 	</select>
 	
 	<!-- 전체 과자 랭킹 조회 기능 -->
 	<select id = "viewAllSnackRank" resultType="SnackRank">
-		 SELECT RANK() OVER (ORDER BY count DESC) as rank, s.name as name, t.count as count
+		 SELECT RANK() OVER (ORDER BY count DESC) as rank, s.SNACK_ID as snackId, s.name as name, t.count as count
 	     FROM (
 			 SELECT
 			 snack_id, sum(count) AS count

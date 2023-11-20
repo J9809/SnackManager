@@ -7,6 +7,7 @@ import lombok.ToString;
 @Getter @Setter
 @ToString
 public class SnackRank {
+    private Long snackId;
     private String name;
     private int rank;
     private int count;

@@ -12,6 +12,13 @@ contentType="text/html;charset=UTF-8" language="java" %>
     <a href="login.jsp">login</a> <br />
     <a href="admin/selectAll.do">admin-inventory</a> <br />
     <a href="student/selectAll.do">student-inventory</a> <br />
-    <a href="admin/registerSnack.do">admin-register-snack</a>
+    <a href="admin/registerSnack.do">admin-register-snack</a> <br>
+
+
+
+
+
+    <a href="getMemberRank.do">member rank</a>
+    <a href="getSnackRank.do">snack rank</a>
   </body>
 </html>
