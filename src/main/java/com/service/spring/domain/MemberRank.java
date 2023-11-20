@@ -10,4 +10,5 @@ public class MemberRank {
     private String memberId;
     private int rank;
     private int count;
+    private String name;
 }

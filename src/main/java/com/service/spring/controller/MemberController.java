@@ -23,7 +23,7 @@ public class MemberController {
 	@Autowired
 	AdminService adminService;
 	
-	@PostMapping("/login.do")
+	@PostMapping("login.do")
 	public String doLogin(Member member, HttpSession session, Model model) {
 		try {
 //			System.out.println(member);
@@ -100,6 +100,8 @@ public class MemberController {
 	        return "Error";
 		}
 	}
+	
+	
 	
 	
 }

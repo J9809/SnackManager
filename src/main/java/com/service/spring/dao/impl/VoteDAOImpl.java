@@ -3,6 +3,7 @@ package com.service.spring.dao.impl;
 import java.util.List;
 
 import com.service.spring.dao.VoteDAO;
+import com.service.spring.domain.Member;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,11 @@ public class VoteDAOImpl implements VoteDAO {
 	public int voteSnack(Vote vote) throws Exception {
 		int result = sqlSession.insert(NS + "voteSnack", vote);
 		return result;
+	}
+
+	@Override
+	public int checkVote(Member member) throws Exception {
+		return sqlSession.selectOne(NS + "checkVote", member);
 	}
 
 }

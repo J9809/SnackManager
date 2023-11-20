@@ -14,4 +14,6 @@ public interface StudentService {
     List<HistoryWithSnackName> getHistory(Member member) throws Exception;
     int registerHistory(Snack snack) throws Exception;
     int voteSnack(Vote vote) throws Exception;
+
+    int voteCheck(Member member) throws Exception;
 }

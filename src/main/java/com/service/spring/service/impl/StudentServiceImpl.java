@@ -70,4 +70,9 @@ public class StudentServiceImpl implements StudentService {
     public int voteSnack(Vote vote) throws Exception {
         return voteDAO.voteSnack(vote);
     }
+
+    @Override
+    public int voteCheck(Member member) throws Exception {
+        return voteDAO.checkVote(member);
+    }
 }
