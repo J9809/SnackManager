@@ -18,47 +18,57 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <body>
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <button id="changePasswordBtn" class="btn btn-outline-primary mr-2" type="submit">비밀번호 변경하기</button>
-        <button id="getHistoryBtn" class="btn btn-outline-primary" type="submit">히스토리 가져오기</button>
-    </div>
-</nav>
-
-<div id="changePassword">
-    <!-- Change Password form -->
-    <form id="passwordForm" action="api/updateMember.do" method="post">
-        <!-- Form fields -->
-        <label>비밀번호 바꾸기</label>
-        <input type="password" name="password">
-        <button type="submit">변경하기</button>
-        
-    </form>
-</div>
-
-<div id="getHistory" style="display: none;">
-    <!-- History table -->
-    <h2>히스토리 가져오기</h2>
-    <table id="historyTable">
-        <thead>
-			<tr>
-				<th>과자명</th>
-				<th>과자갯수</th>
-				<th>먹은시간</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${histories}" var="history">
-			<tr>
-				<td>${history.snackName}</td>
-				<td>${history.count}</td>
-				<td>${history.time}</td>
-			</tr>			
-			</c:forEach>
-		</tbody>
-    </table>
+<div class = "jumbotron">
+	<h1>마이페이지</h1>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" id="changePasswordBtn">비밀번호 변경하기</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" id="getHistoryBtn">히스토리 가져오기</a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	
+	<div id="changePassword">
+	    <!-- Change Password form -->
+	    <form id="passwordForm" action="api/updateMember.do" method="post">
+	        <!-- Form fields -->
+	        <label>새 비밀번호</label>
+	        <input type="password" name="password"><br>
+	        <button type="submit">변경하기</button>
+	        
+	    </form>
+	    
+	    <button>탈퇴하기 </button>
+	</div>
+	
+	<div id="getHistory" style="display: none;">
+	    <!-- History table -->
+	    <h2>히스토리 가져오기</h2>
+	    <table id="historyTable">
+	        <thead>
+				<tr>
+					<th>과자명</th>
+					<th>과자갯수</th>
+					<th>먹은시간</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${histories}" var="history">
+				<tr>
+					<td>${history.snackName}</td>
+					<td>${history.count}</td>
+					<td>${history.time}</td>
+				</tr>			
+				</c:forEach>
+			</tbody>
+	    </table>
+	</div>
 </div>
 </body>
 </html>
