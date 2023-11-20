@@ -41,6 +41,24 @@ public class MemberController {
 		}
 	}
 	
+	@PostMapping("api/registerMember.do")
+	public String registerMember(Member member, Model model) {
+		System.out.println("회원가입");
+		try {
+			int result = studentService.registerMember(member);
+			if (result == 1) {
+				return "login";
+			}else {
+				return "Error";
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+	        model.addAttribute("message", "문제내용 - 회원가입 진행 중 에러 발생");
+	        return "Error";
+		}
+	}
+	
+	
 	@PostMapping("api/updateMember.do")
 	public String updateMember(Member member, HttpSession session, Model model) {
 		 System.out.println("비밀번호 변경");
