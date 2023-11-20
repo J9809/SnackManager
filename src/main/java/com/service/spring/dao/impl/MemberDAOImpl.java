@@ -46,4 +46,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList(NS + "viewAllMemberRank");
 	}
 
+	@Override
+	public Member checkDuplicateId(String memberId) throws Exception {
+		return sqlSession.selectOne(NS + "checkDuplicateId", memberId);
+	}
+
 }

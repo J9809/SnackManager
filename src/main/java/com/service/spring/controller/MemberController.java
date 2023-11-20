@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.spring.domain.HistoryWithSnackName;
 import com.service.spring.domain.Member;
@@ -47,7 +48,7 @@ public class MemberController {
 		try {
 			int result = studentService.registerMember(member);
 			if (result == 1) {
-				return "login";
+				return "redirect:/login.jsp";
 			}else {
 				return "Error";
 			}
@@ -110,6 +111,24 @@ public class MemberController {
 		} catch (Exception e) {
 	        e.printStackTrace();
 	        model.addAttribute("message", "문제내용 - 사용자 회원탈퇴중 받던 중 에러 발생");
+	        return "Error";
+		}
+		
+	}
+	
+	@GetMapping("checkDuplicateId.do")
+	@ResponseBody
+	public String chkId(String memberId, Model model) {
+		try {
+	        Member member = studentService.checkDuplicateId(memberId);
+	        if (member != null) {
+	        	return "duplicated";
+	        } else {
+	        	return "not duplicated";
+	        }
+		} catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("message", "문제내용 - id 중복확인중 받던 중 에러 발생");
 	        return "Error";
 		}
 		
