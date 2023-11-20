@@ -18,39 +18,71 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <body>
-<div class = "jumbotron">
-	<h1>마이페이지</h1>
+
+<style>
+
+	#changePasswordBtn{
+		border : none;
+	}
+	#getHistoryBtn{
+		border : none;
+	}
 	
+    .active-btn {
+    	background-color : lightgrey;
+    	border-radius : 5%;
+    }
+
+</style>
+
+<div class = "jumbotron">
+	
+	<div>
+	<a href = "http://localhost:9999/index.jsp"><img src = "./img/home.png"/>
+	</a>
+	<h1>마이페이지</h1>
+	</div>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="collapse navbar-collapse" id="navbarNav">
 	    <ul class="navbar-nav">
 	      <li class="nav-item">
-	        <a class="nav-link" id="changePasswordBtn">비밀번호 변경하기</a>
+	        <button class="nav-link" id="changePasswordBtn">비밀번호 변경하기</button>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" id="getHistoryBtn">히스토리 가져오기</a>
+	        <button class="nav-link" id="getHistoryBtn">히스토리 가져오기</button>
 	      </li>
 	    </ul>
 	  </div>
 	</nav>
 	
-	<div id="changePassword">
+	<div id="changePassword" class="jumbotron text-center">
 	    <!-- Change Password form -->
-	    <form id="passwordForm" action="api/updateMember.do" method="post">
-	        <!-- Form fields -->
-	        <label>새 비밀번호</label>
-	        <input type="password" name="password"><br>
-	        <button type="submit">변경하기</button>
-	        
+	    <form id="passwordForm" action="api/updateMember.do" method="post" class="mt-4 d-inline-block w-50">
+		<div id="passwordForm" class="form-group">
+		    <div class="row">
+		        <div class="col-md-4">
+		            <label for="password" class="col-form-label">새 비밀번호</label>
+		        </div>
+		        <div class="col-md-8">
+		            <input type="password" class="form-control" name="password" id="password">
+		        </div>
+		    </div>
+		</div>
+	        <button type="submit" class="btn btn-primary float-md-right">변경하기</button>
 	    </form>
-	    
-	    <button>탈퇴하기 </button>
+	    <hr>
+	    <div style = "margin-top : 50px">
+	        <h3 style = "margin-bottom:20px">회원 탈퇴</h3>
+	        <p>회원 탈퇴 시, 고객 정보 및 개인형 서비스 이용 기록은 개인 정보보호 처리 방침 기준에 따라 삭제됩니다.</p>
+	        <p>회원 탈퇴 시, 더이상 서비스 이용이 불가능합니다.</p>
+	        <button class="btn btn-danger" id = "deleteMemberBtn">탈퇴하기</button>
+	    </div>
 	</div>
+
 	
 	<div id="getHistory" style="display: none;">
 	    <!-- History table -->
-	    <h2>히스토리 가져오기</h2>
-	    <table id="historyTable">
+	    <table id="historyTable" class = "table table-hover" style = "margin-top : 30px;">
 	        <thead>
 				<tr>
 					<th>과자명</th>
@@ -99,6 +131,8 @@
 	    $('#getHistoryBtn').on('click', function(e) {
 	        e.preventDefault();
 	        getHistory(); // Call the function to get and display history
+	        $(this).addClass('active-btn');
+            $('#changePasswordBtn').removeClass('active-btn');
 	    });
 	    
         $('#changePasswordBtn').on('click', function(e) {
@@ -106,7 +140,21 @@
             $('#changePassword').show(); // Show Change Password section
             $('#getHistory').hide(); // Hide Get History section
             $('#historyTable').hide(); // Hide history table if visible
+            $(this).addClass('active-btn');
+            $('#getHistoryBtn').removeClass('active-btn');
         });
-
+		
+        $('#deleteMemberBtn').on('click', function(e){
+	        $.ajax({
+	            type: 'GET', 
+	            url: 'api/getHistory.do', 
+	            success: function(data) {
+	                $('#historyTable').html(data); // Show history table
+	            },
+	            error: function() {
+	                // Handle error if necessary
+	            }
+	        });
+        })
 	  });
 </script>
