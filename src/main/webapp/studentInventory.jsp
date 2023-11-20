@@ -134,7 +134,8 @@
             "data": JSON.stringify(objList),
         };
         $.ajax(settings).done(function (response) {
-            console.log(response);
+            // console.log(response);
+            location.reload();
         });
     }
 
