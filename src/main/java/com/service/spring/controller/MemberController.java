@@ -92,13 +92,27 @@ public class MemberController {
 //				}
 	            return "myPage";
 	        } else {
-	            return "login"; 
+	            return "redirect:/login.jsp"; 
 	        }
 		} catch (Exception e) {
 	        e.printStackTrace();
 	        model.addAttribute("message", "문제내용 - 사용자 섭취내역 받던 중 에러 발생");
 	        return "Error";
 		}
+	}
+	
+	@PostMapping("/api/deleteMember.do")
+	public String deleteMember(Model model, HttpSession session) {
+		try {
+	        Member loggedInUser = (Member) session.getAttribute("loginUser");
+	        int result = studentService.deleteMember(loggedInUser.getMemberId());
+            return "redirect:/login.jsp"; 
+		} catch (Exception e) {
+	        e.printStackTrace();
+	        model.addAttribute("message", "문제내용 - 사용자 회원탈퇴중 받던 중 에러 발생");
+	        return "Error";
+		}
+		
 	}
 	
 	

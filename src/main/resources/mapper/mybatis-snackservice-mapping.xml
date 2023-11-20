@@ -86,13 +86,16 @@
 	
 	<!-- 과자별 사용자 랭킹 조회 기능 -->
 	<select id = "viewMemberRankBySnack" parameterType="snack" resultType="memberRank">
-		 SELECT RANK() OVER (ORDER BY count DESC) as rank, member_id, count
-			FROM (
-				SELECT
-				member_id, sum(count) AS count
-				FROM history
-				WHERE snack_id=#{snackId}
-				GROUP BY member_id)
+		SELECT RANK() OVER (ORDER BY h.count DESC) as rank, h.member_id, m.name, h.count
+		FROM (
+				 SELECT
+					 member_id, sum(count) AS count
+				 FROM history
+				 WHERE SNACK_ID=#{snackId}
+				 GROUP BY member_id
+			 ) h JOIN (
+			MEMBER m
+			) ON m.MEMBER_ID = h.MEMBER_ID
 	</select>
 	
 	<!-- 간식 선택 (재고 수량 변경) -->
