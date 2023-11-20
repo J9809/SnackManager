@@ -17,6 +17,12 @@ public class HistoryWithSnackName extends History{
 		this.snackName = snackName;
 	}
 
+	public String getSnackName() {
+		return snackName;
+	}
+	public void setSnackName(String snackName) {
+		this.snackName = snackName;
+	}
 	@Override
 	public String toString() {
 		return "HistoryWithSnackName{" +
