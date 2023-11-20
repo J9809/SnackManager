@@ -1,5 +1,7 @@
 package com.service.spring.controller;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -69,7 +71,7 @@ public class MemberController {
 		            String memberId = loggedInUser.getMemberId();
 		            member.setMemberId(memberId);
 		            int result = studentService.updateMember(member);
-		            return "myPage";
+		            return "redirect:/myPage.jsp";
 		        } else {
 		            return "login"; 
 		        }
@@ -81,26 +83,24 @@ public class MemberController {
 	}
 	
 	@GetMapping("api/viewHistory.do")
-	public String viewHistory(Model model, HttpSession session) {
-//		System.out.println("히스토리 보는 api 호출됨");
-		try {
+	@ResponseBody
+	public List<HistoryWithSnackName> viewHistory(Model model, HttpSession session) {
+	    try {
 	        Member loggedInUser = (Member) session.getAttribute("loginUser");
 	        if (loggedInUser != null) {
-				List<HistoryWithSnackName> list = studentService.getHistory(loggedInUser);
-				model.addAttribute("histories", list);
-//				for(HistoryWithSnackName h:list) {
-//					System.out.println(h);
-//				}
-	            return "myPage";
+	            List<HistoryWithSnackName> list = studentService.getHistory(loggedInUser);
+	            return list;
 	        } else {
-	            return "redirect:/login.jsp"; 
+	            // Handle the case where the user is not logged in
+	            return Collections.emptyList(); // Return an empty list or handle the case according to your logic
 	        }
-		} catch (Exception e) {
+	    } catch (Exception e) {
 	        e.printStackTrace();
-	        model.addAttribute("message", "문제내용 - 사용자 섭취내역 받던 중 에러 발생");
-	        return "Error";
-		}
+	        // Handle the exception
+	        return Collections.emptyList(); // Return an empty list or handle the error case
+	    }
 	}
+
 	
 	@PostMapping("/api/deleteMember.do")
 	public String deleteMember(Model model, HttpSession session) {

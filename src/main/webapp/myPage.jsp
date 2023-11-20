@@ -116,10 +116,15 @@
 
 	        // Make AJAX call or load content for history
 	        $.ajax({
-	            type: 'GET', 
-	            url: 'api/getHistory.do', 
+	            type: 'GET',
+	            url: 'api/viewHistory.do',
+	            dataType: 'json', // Specify JSON data type
 	            success: function(data) {
-	                $('#historyTable').html(data); // Show history table
+	                // Assuming data is an array of history objects
+	                $.each(data, function(index, history) {
+	                    // Access properties of each history object and append to your table
+	                    $('#historyTable').append('<tr><td>' + history.snackName + '</td><td>' + history.count + '</td><td>' + history.time + '</td></tr>');
+	                });
 	            },
 	            error: function() {
 	                // Handle error if necessary
