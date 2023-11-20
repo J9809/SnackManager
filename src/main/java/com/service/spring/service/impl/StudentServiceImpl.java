@@ -4,10 +4,7 @@ import com.service.spring.dao.HistoryDAO;
 import com.service.spring.dao.MemberDAO;
 import com.service.spring.dao.SnackDAO;
 import com.service.spring.dao.VoteDAO;
-import com.service.spring.domain.HistoryWithSnackName;
-import com.service.spring.domain.Member;
-import com.service.spring.domain.Snack;
-import com.service.spring.domain.Vote;
+import com.service.spring.domain.*;
 import com.service.spring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,8 +59,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int registerHistory(Snack snack) throws Exception {
-        return historyDAO.registerHistory(snack);
+    public int registerHistory(History history) throws Exception {
+        return historyDAO.registerHistory(history);
     }
 
     @Override

@@ -158,7 +158,7 @@
             for (i = 0; i < snackSelectionList.length; i++) {
                 const curId = String(snackSelectionList[i].id)
                 const obj = {};
-                obj.snackId = String(curId);
+                obj.snackId = Number(curId);
                 objList.push(obj);
             }
             post();

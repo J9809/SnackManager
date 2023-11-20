@@ -1,5 +1,11 @@
 package com.service.spring.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter @Setter
+@ToString
 public class History {
 	private Long historyId;
     private String memberId;
@@ -17,57 +23,11 @@ public class History {
 		this.count = count;
 		this.time = time;
 	}
-
-	public Long getHistoryId() {
-		return historyId;
-	}
-
-	public void setHistoryId(Long historyId) {
-		this.historyId = historyId;
-	}
-
-	public String getMemberId() {
-		return memberId;
-	}
-
-	public void setMemberId(String memberId) {
+	public History(String memberId, Long snackId, int count) {
+		super();
 		this.memberId = memberId;
-	}
-
-	public Long getSnackId() {
-		return snackId;
-	}
-
-	public void setSnackId(Long snackId) {
 		this.snackId = snackId;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
 		this.count = count;
 	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	@Override
-	public String toString() {
-		return "History [historyId=" + historyId + ", memberId=" + memberId + ", snackId=" + snackId + ", count="
-				+ count + ", time=" + time + "]";
-	}
-    
-	
-	
-	
-	
-	
 	
 }

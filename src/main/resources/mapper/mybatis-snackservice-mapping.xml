@@ -107,7 +107,7 @@
     </update>
     
 	<!-- 간식 선택 (history 테이블 추가) -->
-    <insert id = "registerHistory" parameterType="snack">
+    <insert id = "registerHistory" parameterType="history">
         INSERT
         INTO history(member_id, snack_id, time, count)
         VALUES (#{memberId}, #{snackId}, sysdate, #{count})
