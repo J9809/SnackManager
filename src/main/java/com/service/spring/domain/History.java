@@ -29,5 +29,55 @@ public class History {
 		this.snackId = snackId;
 		this.count = count;
 	}
-	
+
+	public Long getHistoryId() {
+		return historyId;
+	}
+
+	public void setHistoryId(Long historyId) {
+		this.historyId = historyId;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public Long getSnackId() {
+		return snackId;
+	}
+
+	public void setSnackId(Long snackId) {
+		this.snackId = snackId;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	@Override
+	public String toString() {
+		return "History{" +
+				"historyId=" + historyId +
+				", memberId='" + memberId + '\'' +
+				", snackId=" + snackId +
+				", count=" + count +
+				", time='" + time + '\'' +
+				'}';
+	}
 }

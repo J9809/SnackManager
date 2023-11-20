@@ -93,5 +93,17 @@ public class Snack {
 		this.link = link;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Snack{" +
+				"snackId=" + snackId +
+				", name='" + name + '\'' +
+				", price=" + price +
+				", category='" + category + '\'' +
+				", brand='" + brand + '\'' +
+				", quantity=" + quantity +
+				", imgUrl='" + imgUrl + '\'' +
+				", link='" + link + '\'' +
+				'}';
+	}
 }

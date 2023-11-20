@@ -51,7 +51,13 @@ public class Vote {
 	public void setSnackId(Long snackId) {
 		this.snackId = snackId;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Vote{" +
+				"voteId=" + voteId +
+				", memberId='" + memberId + '\'' +
+				", snackId=" + snackId +
+				'}';
+	}
 }

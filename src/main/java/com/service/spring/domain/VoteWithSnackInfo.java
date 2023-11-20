@@ -40,7 +40,7 @@ public class VoteWithSnackInfo extends Vote {
 		this.count = count;
 	}
 
-	@Override
+    @Override
     public String toString() {
         return "VoteWithSnackInfo{" +
                 "snackName='" + snackName + '\'' +

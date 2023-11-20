@@ -35,6 +35,14 @@ public class MemberRank {
 	public void setName(String name) {
 		this.name = name;
 	}
-    
-    
+
+	@Override
+	public String toString() {
+		return "MemberRank{" +
+				"memberId='" + memberId + '\'' +
+				", rank=" + rank +
+				", count=" + count +
+				", name='" + name + '\'' +
+				'}';
+	}
 }

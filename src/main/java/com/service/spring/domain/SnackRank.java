@@ -35,6 +35,14 @@ public class SnackRank {
 	public void setCount(int count) {
 		this.count = count;
 	}
-    
-    
+
+	@Override
+	public String toString() {
+		return "SnackRank{" +
+				"snackId=" + snackId +
+				", name='" + name + '\'' +
+				", rank=" + rank +
+				", count=" + count +
+				'}';
+	}
 }
