@@ -34,6 +34,7 @@
         .input {
             flex: 1;
             padding-left: 20px;
+            display: flex;
         }
 
         /* 공통 input 필드의 너비를 조정 */
@@ -55,10 +56,10 @@
 
     <main role="main">
         <div class="container">
-            <div class="jumbotron">
+            <div class="jumbotron" style = "display : flex; align-items:center; flex-direction : column;">
                 <h2 class="signup-title" align="center">회원가입</h2>
                 <p class="lead" align="center">회원가입을 하시면 다양한 서비스를 제공받으실 수 있습니다.</p>
-                <form action="api/registerMember.do" method="post" onsubmit="return validatePassword()">
+                <form action="api/registerMember.do" method="post" onsubmit="return validatePassword()" style = "width : 80%;">
                     <div class="form-group">
                         <label class="label-text" for="name">이름</label>
                         <div class="input">
@@ -69,7 +70,9 @@
                         <label class="label-text" for="memberId">아이디</label>
                         <div class="input">
                             <input type="text" class="form-control" id="memberId" name="memberId">
+                        	<button class = "btn btn-secondary" style = "margin-left : 10px;" id = "duplicateChkBtn">중복확인</button>
                         </div>
+                        
                     </div>
                     <div class="form-group">
                         <label class="label-text" for="password">비밀번호</label>
@@ -85,7 +88,7 @@
                     </div>
                     <input type="hidden" name="voteFlag" value="N">
                     <input type="hidden" name="role" value="student">
-                    <div class="row justify-content-end">
+                    <div class="row justify-content-end" style = "width : 81%;">
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary">가입</button>
                         </div>
