@@ -26,16 +26,18 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
 <body>
-
+<div class = "jumbotron">
 <h1 style = "text-align : center;"><%= pageTitle %></h1>
 <div style = "display: flex; justify-content : flex-end; ">
     <div style="margin-right: 10px; display:flex; justify-content : center; align-items: center; "><%= userName %> 님</div>
     <button id = "myPageBtn" class = "btn btn-outline-info" style="margin-right: 10px;">마이페이지</button>
-    <button class = "btn btn-outline-danger" style="margin-right: 10px;">로그아웃</button>
+    <button class = "btn btn-outline-danger" style="margin-right: 10px;" id = "logoutBtn">로그아웃</button>
 </div>
 <hr>
-
+</div>
 </body>
 </html>
 
@@ -43,4 +45,20 @@
 document.getElementById('myPageBtn').addEventListener('click', function() {
     window.location.href = 'myPage.jsp'; // Replace 'mypage.jsp' with your actual page URL
 });
+
+$(document).ready(function() {
+    $('#logoutBtn').on('click', function() {
+        $.ajax({
+            type: 'GET',
+            url: 'logout.do', // Replace with your logout endpoint
+            success: function() {
+                alert('로그아웃 되었습니다.'); // Display logout message
+                window.location.href = '/login.jsp'; // Redirect to the login page
+            },
+            error: function() {
+            }
+        });
+    });
+});
+
 </script>
