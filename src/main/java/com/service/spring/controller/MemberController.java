@@ -134,6 +134,14 @@ public class MemberController {
 		
 	}
 	
+    @GetMapping("logout.do")
+    public String logout(HttpSession session) {
+        if (session != null) {
+            session.invalidate(); // Invalidate the session
+        }
+        return "redirect:/login.jsp"; // Redirect to the login page
+    }
+	
 	
 	
 	
