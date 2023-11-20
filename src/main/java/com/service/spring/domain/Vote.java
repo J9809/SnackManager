@@ -28,4 +28,30 @@ public class Vote {
 		this.snackId = snackId;
 	}
 
+	public Long getVoteId() {
+		return voteId;
+	}
+
+	public void setVoteId(Long voteId) {
+		this.voteId = voteId;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public Long getSnackId() {
+		return snackId;
+	}
+
+	public void setSnackId(Long snackId) {
+		this.snackId = snackId;
+	}
+	
+	
+
 }
