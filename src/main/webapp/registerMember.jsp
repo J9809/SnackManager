@@ -162,6 +162,8 @@
                     document.getElementById('duplicateMessage').innerHTML = '이미 사용 중인 아이디입니다.';
                     duplicateMessage.classList.add('duplicated');
                     duplicateMessage.classList.remove('not-duplicated');
+                    toggleRegisterButton(); // Check conditions for enabling the register button
+
                 } else if (response === "not duplicated") {
                     document.getElementById('duplicateMessage').innerHTML = '사용 가능한 아이디입니다.';
                     duplicateMessage.classList.add('not-duplicated');
