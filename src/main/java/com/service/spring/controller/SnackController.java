@@ -24,7 +24,7 @@ public class SnackController {
     @Autowired
     private RankService rankService;
 
-    @GetMapping("admin/selectAll.do")
+    @GetMapping("selectAllByAdmin.do")
     public String doSelectAllAdmin(Model model) {
         try {
             List<Snack> snacks = adminService.selectAll();
@@ -38,7 +38,7 @@ public class SnackController {
         return null;
     }
 
-    @GetMapping("student/selectAll.do")
+    @GetMapping("selectAllByStudent.do")
     public String doSelectAllStudent(Model model) {
         System.out.println("✅ Select All Snack Controller");
         try {
@@ -73,7 +73,7 @@ public class SnackController {
         return "index";
     }
 
-    @GetMapping("student/voteSnack.do")
+    @GetMapping("voteSnack.do")
     public String doVoteSnackStudent(Model model, HttpSession session) {
         try {
             Member loginUser = (Member) session.getAttribute("loginUser");

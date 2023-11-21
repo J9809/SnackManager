@@ -67,7 +67,7 @@
     
     #selection {
       position: fixed;
-      left: 1100px;
+      right: 100px;
       width: 300px; /* 필요에 따라 너비를 조절하세요 */
       height: 300px;
     }
