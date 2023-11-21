@@ -35,7 +35,7 @@
 
 </style>
 
-<div class = "jumbotron">
+<div class = "jumbotron" style = "background-color : white;">
 	
 	<div style = "display : flex; margin-bottom : 20px; margin-left : 10px;">
 	<a href = "http://localhost:9999/index.jsp" style = "margin-right : 20px;"><img src = "./img/home.png"/>
@@ -56,7 +56,7 @@
 	  </div>
 	</nav>
 	
-	<div id="changePassword" class="jumbotron text-center">
+	<div id="changePassword" class="jumbotron text-center" style = "background-color : white;">
 	    <!-- Change Password form -->
 	    <form id="passwordForm" action="api/updateMember.do" method="post" class="mt-4 d-inline-block w-50">
 		<div id="passwordForm" class="form-group">
@@ -155,9 +155,8 @@
         $('#deleteMemberBtn').on('click', function(e){
 	        $.ajax({
 	            type: 'GET', 
-	            url: 'api/getHistory.do', 
+	            url: 'api/deleteMember.do', 
 	            success: function(data) {
-	                $('#historyTable').html(data); // Show history table
 	            },
 	            error: function() {
 	                // Handle error if necessary
