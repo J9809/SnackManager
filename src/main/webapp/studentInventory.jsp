@@ -89,7 +89,7 @@
 
     <div class="list display-snack-list">
       <c:forEach var="item" items="${snacks}" varStatus="status">
-        <div id="${item.snackId} ${item.name} ${item.quantity}" class="display-each-snack">
+        <div id="${item.snackId}" class="display-each-snack">
           <div class="snack-img-wrapper">
             <img src="${item.imgUrl}" id="snack-img" />
           </div>
@@ -175,9 +175,13 @@
             const snackContainer = document.getElementById("snack-selection-container");
             const snackSelectionList = snackContainer.getElementsByClassName("snack-selected");
 
-            for (i = 0; i < snackSelectionList.length; i++) {
+          for (let i = 0; i < snackSelectionList.length; i++) {
                 const curId = String(snackSelectionList[i].id)
                 const res = document.querySelector("input[name='" + curId + "']")
+                if (parseInt(res.value) === 0) {
+                  alert("수량을 알맞게 입력하세요.");
+                  return false;
+                }
                 const obj = {};
                 obj.snackId = String(curId);
                 obj.quantity = parseInt(res.value);
@@ -189,8 +193,21 @@
 
     $(function () {
         $(".display-each-snack").on("click", function () {
-            const str = this.id
-            let lst = this.id.split(" ")
+            const curId = String(this.id);
+            let snackName = "";
+            let snackQuantity = 0;
+            const searchList = document.getElementsByClassName("display-each-snack");
+            console.log(searchList)
+            for (let i = 0; i < searchList.length; i++) {
+              if (String(searchList[i].id) === curId) {
+                snackName = searchList[i].querySelector(".snack-name").innerText;
+                snackQuantity = Number(searchList[i].querySelector(".snack-quantity").innerText);
+              }
+            }
+            if (snackName === "") {
+              alert("간식이 선택되지 않았습니다.")
+              return false;
+            }
 
             const selectedDiv = document.createElement("div");
             const spanDiv = document.createElement("div");
@@ -199,20 +216,22 @@
             const lowerDiv = document.createElement("div");
 
             spanDiv.id = "snackSpanDiv";
-            span.innerText = lst[1];
+            span.innerText = snackName;
 
             spanDiv.appendChild(span);
 
-            selectedDiv.id = lst[0];
+            selectedDiv.id = curId;
             selectedDiv.className = "snack-selected";
 
             const input = document.createElement("input");
-            input.id=lst[0]
-            input.name=lst[0]
+            input.id=curId;
+            input.name=curId;
             input.type = "number";
             input.classList.add("snack-eat-count")
-            input.min = 1;
-            input.max = lst[2]
+          input.min = "0";
+          input.max = String(snackQuantity);
+          input.onkeydown = preventKeyboardInput;
+          input.value = "0";
 
             const delBtn = document.createElement("button");
             delBtn.innerText = 'X';
@@ -229,11 +248,15 @@
             selectedDiv.appendChild(lowerDiv);
 
             const created = document.getElementsByClassName("snack-selected");
-            for (i = 0; i < created.length; i++) {
-                if (lst[0] === created[i].id) return
+            for (let i = 0; i < created.length; i++) {
+              if (curId === String(created[i].id)) return
             }
 
             snackList.appendChild(selectedDiv);
         })
     })
+
+    function preventKeyboardInput(event) {
+      event.preventDefault();
+    }
 </script>
