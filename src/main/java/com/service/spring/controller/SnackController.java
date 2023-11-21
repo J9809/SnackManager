@@ -1,5 +1,6 @@
 package com.service.spring.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.spring.domain.*;
 import com.service.spring.service.AdminService;
 import com.service.spring.service.RankService;
@@ -110,9 +111,13 @@ public class SnackController {
     public String doGetMemberRank(Model model, HttpSession session) {
         try {
             List<MemberRank> memberRank = rankService.getMemberRank();
-            model.addAttribute("list", memberRank);
+            
+            ObjectMapper mapper = new ObjectMapper();
+            String jsonMemberRank = mapper.writeValueAsString(memberRank);
+            
+            model.addAttribute("list", jsonMemberRank);
             model.addAttribute("title", "멤버 랭킹");
-            return "rank";
+            return "rank_page";
         } catch (Exception e) {
             e.printStackTrace();
         }
