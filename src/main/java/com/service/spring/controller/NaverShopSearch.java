@@ -17,14 +17,14 @@ public class NaverShopSearch {
     public NaverShopSearch() {
     }
 
-    public static List<Snack> search(int start, String option, String category) {
+    public static List<Snack> search(int start, String option, String category, int display) {
         RestTemplate rest = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-Naver-Client-Id", "izKbppH3AqXMDojvYn0E");
         headers.add("X-Naver-Client-Secret", "ewN4O9X02x");
         String body = "";
 
-        String query = makeQuery(start, option);
+        String query = makeQuery(start, option, display);
 
         HttpEntity<String> requestEntity = new HttpEntity<String>(body, headers);
         ResponseEntity<String> responseEntity = rest.exchange(query, HttpMethod.GET, requestEntity, String.class);
@@ -38,17 +38,13 @@ public class NaverShopSearch {
         return fromJSONtoItems(response, category);
     }
 
-    private static String makeQuery(int start, String option) {
-        return "https://openapi.naver.com/v1/search/shop.json?sort=sim&display=80&query="
-                + option + "&start=" + Integer.toString(start);
+    private static String makeQuery(int start, String option, int display) {
+        return "https://openapi.naver.com/v1/search/shop.json?sort=sim&display=" + Integer.toString(display)
+                + "&query=" + option + "&start=" + Integer.toString(start);
     }
 
-    public static List<Snack> makeList() {
-        return search(101, "snack", "과자");
-    }
-
-    public static List<Snack> makeList(int start, String option, String category) {
-        return search(start, option, category);
+    public static List<Snack> makeList(int start, String option, String category, int display) {
+        return search(start, option, category, display);
     }
 
 //    public static void main(String[] args) {
@@ -65,7 +61,7 @@ public class NaverShopSearch {
 //        System.out.println("total = " + rjson.get("total"));
 
         JSONArray items = rjson.getJSONArray("items");
-        System.out.println("JSON LIST LENGTH = " + items.length());
+//        System.out.println("JSON LIST LENGTH = " + items.length());
         
         List<Snack> itemDtoList = new ArrayList<>();
 
@@ -74,8 +70,12 @@ public class NaverShopSearch {
             if (((JSONObject) items.get(i)).getString("title").contains("x")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("X")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("대용량")) continue;
+            if (((JSONObject) items.get(i)).getString("title").contains("/")) continue;
+            if (((JSONObject) items.get(i)).getString("title").contains("+")) continue;
+            if (((JSONObject) items.get(i)).getString("title").length() >= 30) continue;
             if (Integer.parseInt(((JSONObject) items.get(i)).getString("lprice")) >= 10000) continue;
             Snack snack = new Snack(itemJson, category, 40);
+            if (snack.getName().isEmpty() || snack.getImgUrl().isEmpty() || snack.getLink().isEmpty()) continue;
             itemDtoList.add(snack);
         }
         return itemDtoList;
