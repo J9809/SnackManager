@@ -67,8 +67,13 @@
     
     #selection {
       position: fixed;
-      right: 10%;
-      width: 100px; /* 필요에 따라 너비를 조절하세요 */
+      left: 1100px;
+      width: 300px; /* 필요에 따라 너비를 조절하세요 */
+      height: 300px;
+    }
+    #snack-selection-container {
+      height: 100%;
+      overflow-y: auto;
     }
 
 </style>
@@ -104,11 +109,11 @@
     </div>
     
     <div id="selection">
-    <div id="snack-selection-container">
-    </div>
-    <div id="send-btn">
-        <button type="button">EAT!!</button>
-    </div>
+      <div id="snack-selection-container">
+      </div>
+      <div id="send-btn">
+          <button type="button">EAT!!</button>
+      </div>
     </div>
     
    </div>
@@ -175,84 +180,94 @@
             const snackContainer = document.getElementById("snack-selection-container");
             const snackSelectionList = snackContainer.getElementsByClassName("snack-selected");
 
-          for (let i = 0; i < snackSelectionList.length; i++) {
-                const curId = String(snackSelectionList[i].id)
-                const res = document.querySelector("input[name='" + curId + "']")
-                if (parseInt(res.value) === 0) {
-                  alert("수량을 알맞게 입력하세요.");
-                  return false;
-                }
-                const obj = {};
-                obj.snackId = String(curId);
-                obj.quantity = parseInt(res.value);
-                objList.push(obj);
-            }
-            post();
+            for (let i = 0; i < snackSelectionList.length; i++) {
+                  const curId = String(snackSelectionList[i].id)
+                  const res = document.querySelector("input[name='" + curId + "']")
+                  if (parseInt(res.value) === 0) {
+                    alert("수량을 알맞게 입력하세요.");
+                    return false;
+                  }
+                  const obj = {};
+                  obj.snackId = String(curId);
+                  obj.quantity = parseInt(res.value);
+                  objList.push(obj);
+              }
+              post();
         });
     });
 
     $(function () {
         $(".display-each-snack").on("click", function () {
-            const curId = String(this.id);
-            let snackName = "";
-            let snackQuantity = 0;
-            const searchList = document.getElementsByClassName("display-each-snack");
-            console.log(searchList)
-            for (let i = 0; i < searchList.length; i++) {
-              if (String(searchList[i].id) === curId) {
-                snackName = searchList[i].querySelector(".snack-name").innerText;
-                snackQuantity = Number(searchList[i].querySelector(".snack-quantity").innerText);
-              }
+
+          const snackContainer = document.getElementById("snack-selection-container");
+          const snackSelectionList = snackContainer.getElementsByClassName("snack-selected");
+          if (snackSelectionList.length >= 5) return;
+
+          const curId = String(this.id);
+          let snackName = "";
+          let snackQuantity = 0;
+          const searchList = document.getElementsByClassName("display-each-snack");
+          // console.log(searchList)
+
+          for (let i = 0; i < searchList.length; i++) {
+            if (String(searchList[i].id) === curId) {
+              snackName = searchList[i].querySelector(".snack-name").innerText;
+              snackQuantity = Number(searchList[i].querySelector(".snack-quantity").innerText);
+              break;
             }
-            if (snackName === "") {
-              alert("간식이 선택되지 않았습니다.")
-              return false;
-            }
+          }
+          if (snackName === "") {
+            alert("간식이 선택되지 않았습니다.")
+            return false;
+          }
 
-            const selectedDiv = document.createElement("div");
-            const spanDiv = document.createElement("div");
-            const span = document.createElement("span");
-            const upperDiv = document.createElement("div");
-            const lowerDiv = document.createElement("div");
+          const selectedDiv = document.createElement("div");
+          const spanDiv = document.createElement("div");
+          const span = document.createElement("span");
+          const upperDiv = document.createElement("div");
+          const lowerDiv = document.createElement("div");
 
-            spanDiv.id = "snackSpanDiv";
-            span.innerText = snackName;
+          spanDiv.id = "snackSpanDiv";
+          span.innerText = snackName;
 
-            spanDiv.appendChild(span);
+          spanDiv.appendChild(span);
 
-            selectedDiv.id = curId;
-            selectedDiv.className = "snack-selected";
+          selectedDiv.id = curId;
+          selectedDiv.className = "snack-selected";
 
-            const input = document.createElement("input");
-            input.id=curId;
-            input.name=curId;
-            input.type = "number";
-            input.classList.add("snack-eat-count")
+          const input = document.createElement("input");
+          input.id=curId;
+          input.name=curId;
+          input.type = "number";
+          input.classList.add("snack-eat-count")
           input.min = "0";
           input.max = String(snackQuantity);
           input.onkeydown = preventKeyboardInput;
           input.value = "0";
 
-            const delBtn = document.createElement("button");
-            delBtn.innerText = 'X';
-            delBtn.classList.add("delBtn");
-            delBtn.addEventListener("click", deleteSnack);
+          const delBtn = document.createElement("button");
+          delBtn.innerText = 'X';
+          delBtn.classList.add("delBtn");
+          delBtn.addEventListener("click", deleteSnack);
 
-            upperDiv.classList.add("upper-div");
-            lowerDiv.classList.add("lower-div");
-            upperDiv.appendChild(spanDiv);
-            upperDiv.appendChild(input);
-            lowerDiv.appendChild(delBtn);
+          upperDiv.classList.add("upper-div");
+          lowerDiv.classList.add("lower-div");
+          upperDiv.appendChild(spanDiv);
+          upperDiv.appendChild(input);
+          lowerDiv.appendChild(delBtn);
 
-            selectedDiv.appendChild(upperDiv);
-            selectedDiv.appendChild(lowerDiv);
+          selectedDiv.appendChild(upperDiv);
+          selectedDiv.appendChild(lowerDiv);
 
-            const created = document.getElementsByClassName("snack-selected");
-            for (let i = 0; i < created.length; i++) {
-              if (curId === String(created[i].id)) return
-            }
+          const created = document.getElementsByClassName("snack-selected");
+          for (let i = 0; i < created.length; i++) {
+            if (curId === String(created[i].id)) return
+          }
 
-            snackList.appendChild(selectedDiv);
+          snackList.appendChild(selectedDiv);
+
+          let ssc = document.querySelector("#snack-selection-container");
+          ssc.scrollTop = ssc.scrollHeight;
         })
     })
 
