@@ -14,16 +14,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
+
     <style>
 	    table {
 	            font-size: 18px; /* 원하는 크기로 조절 */
 	            border-collapse: collapse; /* 테이블 셀 경계선이 겹치지 않도록 설정 */
                 width: 100%; /* 테이블이 부모 요소에 꽉 차도록 설정 */
 	        }
-	        
+
+        
 	    th, td {
             border: 1px solid #dddddd; /* 각 셀의 테두리 설정 */
             text-align: left;
@@ -38,15 +45,16 @@
         }
 	        
         .table-container {
-            max-height: 550px; /* 표시하고자 하는 최대 높이 설정 */
+            max-height: 570px; /* 표시하고자 하는 최대 높이 설정 */
             overflow-y: auto;
         }
         
-        .sticky-thead th {
+		thead {
             position: sticky;
             top: 0;
-            z-index: 1;
+            width: 100%;
         }
+        
     </style>
 </head>
 <body>
@@ -58,7 +66,7 @@
         <!-- 스크롤바 추가를 위한 부모 컨테이너 -->
         <div class="table-container">
             <table class="table">
-                <thead class="thead-light sticky-thead ">
+                <thead class="thead-light">
                     <tr>
                         <!-- 컬럼 이름 및 정렬 버튼 추가 -->
                         <th>과자 이름</th>
@@ -84,15 +92,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS 및 Popper.js CDN -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
+
 </body>
 </html>
