@@ -35,7 +35,7 @@ public class MemberController {
 				session.setAttribute("loginUser", selected);
 				return "index";
 			} else {
-				return "login";
+				return "redirect:/login.jsp";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
