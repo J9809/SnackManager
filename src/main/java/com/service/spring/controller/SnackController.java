@@ -140,14 +140,15 @@ public class SnackController {
     }
 
     @GetMapping("getMemberRankBySnack.do")
-    public String doGetMemberRankBySnack(Model model, HttpSession session, @RequestParam String snackId) {
+    @ResponseBody
+    public List<MemberRank> doGetMemberRankBySnack(Model model, HttpSession session, @RequestParam String snackId) {
         try {
             System.out.println("✅ getMemberRankBySnack Controller - snackId = " + snackId);
             List<MemberRank> memberRankBySnack = rankService.getMemberRankBySnack(new Snack(Long.parseLong(snackId)));
 
             System.out.println(memberRankBySnack);
             model.addAttribute("memberRankList", memberRankBySnack);
-            return "snackRankTmp";
+            return memberRankBySnack;
         } catch (Exception e) {
             e.printStackTrace();
         }
