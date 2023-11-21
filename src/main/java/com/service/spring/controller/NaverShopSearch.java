@@ -71,7 +71,7 @@ public class NaverShopSearch {
 
         for (int i = 0; i < items.length(); i++) {
             JSONObject itemJson = (JSONObject) items.get(i);
-            Snack snack = new Snack(itemJson, category, 0);
+            Snack snack = new Snack(itemJson, category, 40);
             itemDtoList.add(snack);
         }
         return itemDtoList;
