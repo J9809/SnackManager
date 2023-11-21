@@ -53,10 +53,12 @@
         list-style: none;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /*justify-content: center;*/
         align-items: center;
         margin: 10px;
         padding: 10px;
+        height: 500px;
+        overflow-y: auto;
     }
     .snack-selected {
         background-color: whitesmoke;
@@ -89,7 +91,7 @@
 
             <div class="list display-snack-list">
                 <c:forEach var="item" items="${snacks}">
-                    <div id="${item.snackId} ${item.name} ${item.quantity}" class="display-each-snack">
+                    <div id="${item.snackId}" class="display-each-snack">
                         <div class="snack-img-wrapper">
                             <img src="${item.imgUrl}" id="snack-img" />
                         </div>
@@ -107,7 +109,6 @@
         </div>
         <div id="snack-selection-container">
         </div>
-
     </div>
 </div>
 </body>
@@ -144,6 +145,7 @@
     function deleteSnack(event) {
         const elem = event.target.parentElement.parentElement;
         const delId = elem.getAttribute('id');
+        // console.log(delId);
         $('#snack-selection-container #' + String(delId)).remove()
     }
 
@@ -173,8 +175,18 @@
             if (snackSelectionList.length >= 3) {
                 return;
             }
-            const str = this.id
-            let lst = this.id.split(" ")
+            const curId = String(this.id);
+            let snackName = "";
+
+            const searchList = document.getElementsByClassName("display-each-snack");
+            for (let i = 0; i < searchList.length; i++) {
+                if (String(searchList[i].id) === curId) {
+                    snackName = searchList[i].querySelector(".snack-name").innerText;
+                    break;
+                }
+            }
+
+            // console.log(curId);
 
             const selectedDiv = document.createElement("div");
             const spanDiv = document.createElement("div");
@@ -183,11 +195,11 @@
             const lowerDiv = document.createElement("div");
 
             spanDiv.id = "snackSpanDiv";
-            span.innerText = lst[1];
+            span.innerText = snackName;
 
             spanDiv.appendChild(span);
 
-            selectedDiv.id = lst[0];
+            selectedDiv.id = curId;
             selectedDiv.className = "snack-selected";
 
             const delBtn = document.createElement("button");
@@ -205,10 +217,13 @@
 
             const created = document.getElementsByClassName("snack-selected");
             for (i = 0; i < created.length; i++) {
-                if (lst[0] === created[i].id) return
+                if (String(curId) === created[i].id) return
             }
 
             snackList.appendChild(selectedDiv);
+
+            let ssc = document.querySelector("#snack-selection-container");
+            ssc.scrollTop = ssc.scrollHeight;
         })
     })
 </script>

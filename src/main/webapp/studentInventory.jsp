@@ -50,10 +50,12 @@
         list-style: none;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        /*justify-content: center;*/
         align-items: center;
         margin: 10px;
         padding: 10px;
+        height: 500px;
+        overflow-y: auto;
     }
     .snack-selected {
         background-color: whitesmoke;
@@ -105,7 +107,6 @@
         </div>
         <div id="snack-selection-container">
         </div>
-
     </div>
 </div>
 </body>
@@ -181,6 +182,7 @@
                 if (String(searchList[i].id) === curId) {
                     snackName = searchList[i].querySelector(".snack-name").innerText;
                     snackQuantity = Number(searchList[i].querySelector(".snack-quantity").innerText);
+                    break;
                 }
             }
 
@@ -233,6 +235,9 @@
             }
 
             snackList.appendChild(selectedDiv);
+
+            let ssc = document.querySelector("#snack-selection-container");
+            ssc.scrollTop = ssc.scrollHeight;
         })
     })
 
