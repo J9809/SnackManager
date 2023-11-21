@@ -16,26 +16,37 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
+<style>
+    body a {
+        text-decoration: none !important;
+        color: inherit !important;
+    }
+
+</style>
+
 <body>
 
   <jsp:include page="./header.jsp">
     <jsp:param name="pageTitle" value="과자 랭킹" />
   </jsp:include>
 
-
-<div class="list display-snack-list">
-    <c:forEach var="item" items="${list}">
-        <div class="display-each-snack">
-            <p class="snack-name" id="${item.snackId}">
-                <img src="${item.imgUrl}" style="width: 100px; height: 100px;"/>
-                ${item.rank}
-                <a href="#" data-snackid="${item.snackId}" class="snack-link">${item.name}</a>
-            </p>
-            <div class="additional-info" style="display: none;">
-                <!-- Additional information will be displayed here -->
-            </div>
-        </div>
-    </c:forEach>
+<div style = "display : flex; justify-content : center; align-items : center">
+	<div class="list display-snack-list" style = "width : 80%;">
+	    <c:forEach var="item" items="${list}">
+	        <div class="display-each-snack">
+	            <p class="snack-name" id="${item.snackId}">
+	            	<h2>
+	                ${item.rank}위
+	                </h2>
+	                <img src="${item.imgUrl}" style="width: 100px; height: 100px;"/>
+	                <a href="#" data-snackid="${item.snackId}" class="snack-link">${item.name}</a>
+	            </p>
+	            <div class="additional-info" style="display: none">
+	            </div>
+	        </div>
+	    </c:forEach>
+	</div>
 </div>
 
 
@@ -49,24 +60,31 @@
             var snackId = $(this).data('snackid');
             var additionalInfoContainer = $(this).closest('.display-each-snack').find('.additional-info');
 
+            if (additionalInfoContainer.is(':visible')) {
+                // Slide up to hide the additional info
+                additionalInfoContainer.slideUp();
+                return; // Stop further execution
+            }
+            
+            
             $.ajax({
                 type: 'GET',
                 url: '/getMemberRankBySnack.do',
                 data: { snackId: snackId },
                 dataType: 'json',
                 success: function(response) {
-                    var additionalInfo = '<ul>'; // Assuming a list format
-                    $.each(response, function(index, element) {
-                        additionalInfo += '<li> Rank : ';
-                        additionalInfo += element.rank;
-                        additionalInfo += ' , Count :';
-                        additionalInfo += element.count;
-                        additionalInfo += ', Name : ';
-                        additionalInfo += element.name;
-                        additionalInfo += '</li>';
-                    });
+                	var additionalInfo = '<table class="table table-striped" style="width: 80%;"><thead class="thead-light"><tr><th>순위</th><th>갯수</th><th>이름</th></tr></thead><tbody>';
 
-                    additionalInfo += '</ul>';
+                	$.each(response, function(index, element) {
+                	    additionalInfo += '<tr>';
+                	    additionalInfo += '<td>' + element.rank + '</td>';
+                	    additionalInfo += '<td>' + element.count + '</td>';
+                	    additionalInfo += '<td>' + element.name + '</td>';
+                	    additionalInfo += '</tr>';
+                	});
+
+                	additionalInfo += '</tbody></table>';
+
                     additionalInfoContainer.html(additionalInfo);
                     additionalInfoContainer.slideDown(); // Show the additional info
                 },
