@@ -39,7 +39,7 @@ public class NaverShopSearch {
     }
 
     private static String makeQuery(int start, String option) {
-        return "https://openapi.naver.com/v1/search/shop.json?sort=sim&display=30&query="
+        return "https://openapi.naver.com/v1/search/shop.json?sort=sim&display=80&query="
                 + option + "&start=" + Integer.toString(start);
     }
 
@@ -71,7 +71,11 @@ public class NaverShopSearch {
 
         for (int i = 0; i < items.length(); i++) {
             JSONObject itemJson = (JSONObject) items.get(i);
-            Snack snack = new Snack(itemJson, category, 0);
+            if (((JSONObject) items.get(i)).getString("title").contains("x")) continue;
+            if (((JSONObject) items.get(i)).getString("title").contains("X")) continue;
+            if (((JSONObject) items.get(i)).getString("title").contains("대용량")) continue;
+            if (Integer.parseInt(((JSONObject) items.get(i)).getString("lprice")) >= 10000) continue;
+            Snack snack = new Snack(itemJson, category, 40);
             itemDtoList.add(snack);
         }
         return itemDtoList;

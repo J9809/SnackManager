@@ -56,7 +56,8 @@ public class SnackController {
 
     @PostMapping( "student/fetchSnack.do")
     public String doFetchSnack(@RequestBody List<Snack> list, HttpSession session) {
-//        System.out.println("✅ Fetch Snack Controller");
+        System.out.println("✅ Fetch Snack Controller");
+        System.out.println(list);
         try {
             Member loginUser = (Member) session.getAttribute("loginUser");
             for (Snack s : list) {
@@ -66,6 +67,7 @@ public class SnackController {
             }
             return "index";
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("❗️ERROR");
         }
         return "index";

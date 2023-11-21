@@ -41,19 +41,19 @@ public class Snack {
 		this.imgUrl = imgUrl;
 	}
 
-	private static String parseBrandFromName(String name, String brand) {
-		if (brand.isEmpty()) return name;
+	private static String parseName(String name) {
 		String[] token = name.split(" ");
-		String ret = "";
+		StringBuilder ret = new StringBuilder();
 		for (String tok : token) {
-			if (!tok.equals(brand)) ret += tok + " ";
+			if (tok.isEmpty() || tok.charAt(tok.length() - 1) == 'g') continue;
+			ret.append(tok).append(" ");
 		}
-		return ret;
+		return ret.toString().trim();
 	}
 
 	public Snack(JSONObject item, String category, int quantity) {
 		this.snackId = Long.parseLong(item.getString("productId"));
-		this.name = item.getString("title");
+		this.name = parseName(item.getString("title"));
 		this.price = Integer.parseInt(item.getString("lprice"));
 		this.brand = item.getString("brand");
 		this.imgUrl = item.getString("image");
