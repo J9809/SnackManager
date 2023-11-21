@@ -27,10 +27,13 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   
 <body>
-<div class = "jumbotron" style = "background-color : white;">
-<h1 style = "text-align : center;"><%= pageTitle %></h1>
+<div class = "jumbotron" style = "background-color : white; padding-bottom : 0;">
+<a href = "http://localhost:9999/index.jsp" style = " margin-right : 20px; "><img src = "./img/home.png"/>
+</a>
+<h1 style = "text-align : center ;display : inline-block; margin-left : 33%;"><%= pageTitle %></h1>
 <div style = "display: flex; justify-content : flex-end; ">
     <div style="margin-right: 10px; display:flex; justify-content : center; align-items: center; "><%= userName %> 님</div>
     <button id = "myPageBtn" class = "btn btn-outline-info" style="margin-right: 10px;">마이페이지</button>
