@@ -11,11 +11,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+
+  <jsp:include page="./header.jsp">
+    <jsp:param name="pageTitle" value="과자 랭킹" />
+  </jsp:include>
+
+
+
+
 <div class="list display-snack-list">
     <c:forEach var="item" items="${list}">
         <div id="${item.snackId} ${item.name} " class="display-each-snack">
             <div class="snack-info-wrapper"></div>
             <h4 class="snack-name" id="${item.snackId}">
+            	<img src =  "${item.imgUrl}"/>
                     ${item.rank}
                 <a href="javascript:void(0);" onclick="getMemberRank('${item.snackId}', this)">${item.name}</a>
             </h4>
