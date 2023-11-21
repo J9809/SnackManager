@@ -41,6 +41,16 @@ public class Snack {
 		this.imgUrl = imgUrl;
 	}
 
+	private static String parseBrandFromName(String name, String brand) {
+		if (brand.isEmpty()) return name;
+		String[] token = name.split(" ");
+		String ret = "";
+		for (String tok : token) {
+			if (!tok.equals(brand)) ret += tok + " ";
+		}
+		return ret;
+	}
+
 	public Snack(JSONObject item, String category, int quantity) {
 		this.snackId = Long.parseLong(item.getString("productId"));
 		this.name = item.getString("title");

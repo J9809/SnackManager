@@ -39,7 +39,7 @@ public class NaverShopSearch {
     }
 
     private static String makeQuery(int start, String option) {
-        return "https://openapi.naver.com/v1/search/shop.json?sort=sim&display=100&query="
+        return "https://openapi.naver.com/v1/search/shop.json?sort=sim&display=30&query="
                 + option + "&start=" + Integer.toString(start);
     }
 
