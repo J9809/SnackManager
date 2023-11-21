@@ -14,20 +14,19 @@
         width: 100%;
     }
     
-
-    #container {
+    #hacker-list {
         padding-top: 300px;
           display: flex;
           flex-direction: column;
     }
-    
+
     .form-group {
         position: fixed;
         width: 100%;
-        margin: 10px;
+		margin: 10px;
         padding: 20px 300px;
         background-color: rgba(255, 255, 255, 0.9) ;
-        top: 170px;
+        top: 165px;
         border-bottom: 1px solid rgb(240, 240, 240);
         box-shadow: 0px 12px 10px -10px  rgba(0, 0, 0, 0.3);
 
@@ -37,8 +36,7 @@
         display: flex;
         flex-wrap: wrap;
         width: 70%;
-        margin: 30px;
-        margin-top: 100px;
+        margin: 10px 30px;
         height: 500px;
     }
     
@@ -67,7 +65,7 @@
         border: 1px solid rgb(240, 240, 240); /* 원하는 스타일로 변경 가능 */
     }
     
-    #snack-selection-container {
+    #selection {
       position: fixed;
       right: 10%;
       width: 100px; /* 필요에 따라 너비를 조절하세요 */
@@ -82,11 +80,10 @@
   </div>
   
 
-  <div id="container">
+  <div id="hacker-list">
     <div class="form-group">
       <input type="text" placeholder="Search" class="search form-control" />
     </div>
-
     <div class="list display-snack-list">
       <c:forEach var="item" items="${snacks}" varStatus="status">
         <div id="${item.snackId} ${item.name} ${item.quantity}" class="display-each-snack">
@@ -106,12 +103,15 @@
       </c:forEach>
     </div>
     
+    <div id="selection">
     <div id="snack-selection-container">
+    </div>
     <div id="send-btn">
         <button type="button">EAT!!</button>
     </div>
     </div>
-      </div>
+    
+   </div>
 
 </body>
 </html>
