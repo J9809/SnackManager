@@ -35,7 +35,7 @@
     .display-snack-list {
         display: flex;
         flex-wrap: wrap;
-        width: 70%;
+        width: 80%;
         margin: 10px 30px;
         height: 500px;
     }
@@ -65,15 +65,24 @@
     }
     
     #selection {
+      text-align: center;
       position: fixed;
-      right: 100px;
-      width: 300px; /* 필요에 따라 너비를 조절하세요 */
-      height: 300px;
+      right: 3%;
+      width: 15%; /* 필요에 따라 너비를 조절하세요 */
+      height: 50%;
+      padding: 10px;
+      border: 1px solid rgb(240, 240, 240);
     }
     #snack-selection-container {
-      height: 100%;
+      height: 76%;
       overflow-y: auto;
     }
+    
+    #send-btn {
+    	text-align: center;
+    }
+    
+
 
 </style>
 <body>
@@ -98,7 +107,7 @@
           <div class="snack-info-wrapper"></div>
           <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
           <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
-          <h4 class="snack-quantity">${item.quantity}</h4>
+          <span class="snack-quantity">남은 수량 : ${item.quantity}</span>
         </div>
 
         <!-- 매 4번째 아이템일 때 줄 바꾸기 -->
@@ -109,6 +118,8 @@
     </div>
     
     <div id="selection">
+    	장바구니
+    	<hr>
       <div id="snack-selection-container">
       </div>
       <div id="send-btn">
