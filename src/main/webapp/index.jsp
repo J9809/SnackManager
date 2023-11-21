@@ -45,7 +45,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
    <jsp:include page="./header.jsp">
     <jsp:param name="pageTitle" value="간식관리시스템" />
   </jsp:include>
-  <div class="jumbotron" style = "display: flex; flex-direction : column; justify-content : center; align-items:center; padding-top : 0;">
+  <div class="jumbotron" style = "display: flex; flex-direction : column; justify-content : center; align-items:center; padding-top : 0; background-color : white;">
 
   <c:if test="${not empty sessionScope['loginUser'] and sessionScope['loginUser'].role == 'admin'}">
 	      <ul class="nav flex-column">
