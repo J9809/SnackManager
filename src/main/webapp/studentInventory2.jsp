@@ -3,138 +3,116 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>학생 - 재고</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
 </head>
 <style>
-	#header {
-		position: fixed;
-		width: 100%;
-	}
-	
-
-	#container {
-		padding-top: 300px;
-      	display: flex;
-      	flex-direction: column;
-    }
-    
-	.form-group {
-	    position: fixed;
-        width: 100%;
+    #container {
+        background-color: lightskyblue;
+        height: 90%;
         margin: 10px;
-        padding: 20px 300px;
-        background-color: rgba(255, 255, 255, 0.9) ;
-        top: 170px;
-        border-bottom: 1px solid rgb(240, 240, 240);
-        box-shadow: 0px 12px 10px -10px  rgba(0, 0, 0, 0.3);
-
-	}
-	
+        display: flex;
+    }
+    #left-container {
+        width: 80%;
+        height: 100%;
+        background-color: lightblue;
+    }
+    #right-container {
+        width: 20%;
+        justify-content: center;
+        align-items: center;
+    }
     .display-snack-list {
         display: flex;
         flex-wrap: wrap;
-        width: 70%;
+        overflow-y: auto;
         margin: 30px;
-        margin-top: 100px;
         height: 500px;
     }
-    
-  .display-each-snack {
-	    width: calc(25% - 10px);
-	    height: 320px;
-	    margin: 10px 5px;
-	    background-color: white;
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	    
-  	}
-
-  .display-each-snack:hover {
-    	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* 마우스를 올렸을 때의 테두리 스타일 및 색상 지정 */
-  	}
-  
+    .display-each-snack {
+        width: calc(25% - 10px);
+        height: 320px;
+        margin: 10px 5px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     #snack-img {
         height:150px;
         width: 150px;
     }
-    
-    .list hr {
-	    width: 95%;
-	    border: 1px solid rgb(240, 240, 240); /* 원하는 스타일로 변경 가능 */
+    #snack-selection-container {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        padding: 10px;
     }
-    
-	#snack-selection-container {
-	  position: fixed;
-	  right: 10%;
-	  width: 100px; /* 필요에 따라 너비를 조절하세요 */
-	}
+    .snack-selected {
+        background-color: whitesmoke;
+        width: 90%;
+        padding: 10px;
+        margin: 10px;
+    }
+    .upper-div {
+        display: flex;
+        justify-content: space-between;
+    }
+    .lower-div {
+        display: flex;
+        justify-content: center;
+    }
+    input {
 
+    }
 </style>
 <body>
-<div id="header">
-<jsp:include page="./header.jsp">
-    <jsp:param name="pageTitle" value="간식 선택" />
-  </jsp:include>
-  </div>
-  
+<div id="container">
+    <div id="left-container">
+        <div id="hacker-list">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" placeholder="Search" class="search form-control"/>
+                </div>
 
-  <div id="container">
-    <div class="form-group">
-      <input type="text" placeholder="Search" class="search form-control" />
+            </div>
+
+            <div class="list display-snack-list">
+                <c:forEach var="item" items="${snacks}">
+                    <div id="${item.snackId} ${item.name} ${item.quantity}" class="display-each-snack">
+                        <div class="snack-img-wrapper">
+                            <img src="${item.imgUrl}" id="snack-img" />
+                        </div>
+                        <div class="snack-info-wrapper"></div>
+                        <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
+                        <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
+                        <h4 class="snack-quantity">${item.quantity}</h4>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
     </div>
+    <div id="right-container">
+        <div id="send-btn">
+            <button type="button">EAT!!</button>
+        </div>
+        <div id="snack-selection-container">
+        </div>
 
-	<div class="list display-snack-list">
-	  <c:forEach var="item" items="${snacks}" varStatus="status">
-	    <div id="${item.snackId} ${item.name} ${item.quantity}" class="display-each-snack">
-	      <div class="snack-img-wrapper">
-	        <img src="${item.imgUrl}" id="snack-img" />
-	      </div>
-	      <div class="snack-info-wrapper"></div>
-	      <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
-	      <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
-	      <h4 class="snack-quantity">${item.quantity}</h4>
-	    </div>
-	
-	    <!-- 매 4번째 아이템일 때 줄 바꾸기 -->
-	    <c:if test="${status.index % 4 == 3}">
-	      <hr>
-	    </c:if>
-	  </c:forEach>
-	</div>
-	
-	<div id="snack-selection-container">
-	<div id="send-btn">
-		<button type="button">EAT!!</button>
-	</div>
-	</div>
-  	</div>
-
+    </div>
+</div>
 </body>
 </html>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      // 페이지가 로드될 때 실행되는 함수입니다.
-      var header = $(".header"); // 여기서 ".header"는 헤더의 CSS 클래스나 ID에 맞게 수정하세요.
-      var headerOffset = header.offset().top;
 
-      $(window).scroll(function () {
-        // 스크롤 이벤트를 처리하는 함수입니다.
-        if ($(window).scrollTop() > headerOffset) {
-          // 스크롤이 헤더를 지나쳤을 때 헤더를 고정합니다.
-          header.addClass("fixed-header"); // 여기서 "fixed-header"는 헤더를 고정시키는 CSS 클래스에 맞게 수정하세요.
-        } else {
-          // 스크롤이 헤더 위에 있을 때 고정을 해제합니다.
-          header.removeClass("fixed-header");
-        }
-      });
-    });
-  </script>
 <script>
     const options = {
         valueNames: ['snack-name', 'snack-brand']
