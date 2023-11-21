@@ -9,20 +9,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <style>
-	#header {
-		position: fixed;
-		width: 100%;
-	}
-	
-
-	#container {
-		padding-top: 300px;
-      	display: flex;
-      	flex-direction: column;
+    #header {
+        position: fixed;
+        width: 100%;
     }
     
-	.form-group {
-	    position: fixed;
+
+    #container {
+        padding-top: 300px;
+          display: flex;
+          flex-direction: column;
+    }
+    
+    .form-group {
+        position: fixed;
         width: 100%;
         margin: 10px;
         padding: 20px 300px;
@@ -31,8 +31,8 @@
         border-bottom: 1px solid rgb(240, 240, 240);
         box-shadow: 0px 12px 10px -10px  rgba(0, 0, 0, 0.3);
 
-	}
-	
+    }
+    
     .display-snack-list {
         display: flex;
         flex-wrap: wrap;
@@ -43,19 +43,19 @@
     }
     
   .display-each-snack {
-	    width: calc(25% - 10px);
-	    height: 320px;
-	    margin: 10px 5px;
-	    background-color: white;
-	    display: flex;
-	    flex-direction: column;
-	    align-items: center;
-	    
-  	}
+        width: calc(25% - 10px);
+        height: 320px;
+        margin: 10px 5px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+      }
 
   .display-each-snack:hover {
-    	box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* 마우스를 올렸을 때의 테두리 스타일 및 색상 지정 */
-  	}
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* 마우스를 올렸을 때의 테두리 스타일 및 색상 지정 */
+      }
   
     #snack-img {
         height:150px;
@@ -63,15 +63,15 @@
     }
     
     .list hr {
-	    width: 95%;
-	    border: 1px solid rgb(240, 240, 240); /* 원하는 스타일로 변경 가능 */
+        width: 95%;
+        border: 1px solid rgb(240, 240, 240); /* 원하는 스타일로 변경 가능 */
     }
     
-	#snack-selection-container {
-	  position: fixed;
-	  right: 10%;
-	  width: 100px; /* 필요에 따라 너비를 조절하세요 */
-	}
+    #snack-selection-container {
+      position: fixed;
+      right: 10%;
+      width: 100px; /* 필요에 따라 너비를 조절하세요 */
+    }
 
 </style>
 <body>
@@ -87,31 +87,31 @@
       <input type="text" placeholder="Search" class="search form-control" />
     </div>
 
-	<div class="list display-snack-list">
-	  <c:forEach var="item" items="${snacks}" varStatus="status">
-	    <div id="${item.snackId} ${item.name} ${item.quantity}" class="display-each-snack">
-	      <div class="snack-img-wrapper">
-	        <img src="${item.imgUrl}" id="snack-img" />
-	      </div>
-	      <div class="snack-info-wrapper"></div>
-	      <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
-	      <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
-	      <h4 class="snack-quantity">${item.quantity}</h4>
-	    </div>
-	
-	    <!-- 매 4번째 아이템일 때 줄 바꾸기 -->
-	    <c:if test="${status.index % 4 == 3}">
-	      <hr>
-	    </c:if>
-	  </c:forEach>
-	</div>
-	
-	<div id="snack-selection-container">
-	<div id="send-btn">
-		<button type="button">EAT!!</button>
-	</div>
-	</div>
-  	</div>
+    <div class="list display-snack-list">
+      <c:forEach var="item" items="${snacks}" varStatus="status">
+        <div id="${item.snackId} ${item.name} ${item.quantity}" class="display-each-snack">
+          <div class="snack-img-wrapper">
+            <img src="${item.imgUrl}" id="snack-img" />
+          </div>
+          <div class="snack-info-wrapper"></div>
+          <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
+          <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
+          <h4 class="snack-quantity">${item.quantity}</h4>
+        </div>
+    
+        <!-- 매 4번째 아이템일 때 줄 바꾸기 -->
+        <c:if test="${status.index % 4 == 3}">
+          <hr>
+        </c:if>
+      </c:forEach>
+    </div>
+    
+    <div id="snack-selection-container">
+    <div id="send-btn">
+        <button type="button">EAT!!</button>
+    </div>
+    </div>
+      </div>
 
 </body>
 </html>
