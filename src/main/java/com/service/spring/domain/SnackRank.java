@@ -11,6 +11,7 @@ public class SnackRank {
     private String name;
     private int rank;
     private int count;
+    private String imgUrl;
 	public Long getSnackId() {
 		return snackId;
 	}
@@ -36,6 +37,12 @@ public class SnackRank {
 		this.count = count;
 	}
 
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 	@Override
 	public String toString() {
 		return "SnackRank{" +

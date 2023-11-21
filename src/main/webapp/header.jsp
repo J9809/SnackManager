@@ -33,7 +33,7 @@
 <div class = "jumbotron" style = "background-color : white; padding-bottom : 0;">
 <a href = "http://localhost:9999/index.jsp" style = " margin-right : 20px; "><img src = "./img/home.png"/>
 </a>
-<h1 style = "text-align : center ;display : inline-block; margin-left : 33%;"><%= pageTitle %></h1>
+<h1 style = "text-align : center ;display : inline-block; margin-left : 30%;"><%= pageTitle %></h1>
 <div style = "display: flex; justify-content : flex-end; ">
     <div style="margin-right: 10px; display:flex; justify-content : center; align-items: center; "><%= userName %> 님</div>
     <button id = "myPageBtn" class = "btn btn-outline-info" style="margin-right: 10px;">마이페이지</button>
