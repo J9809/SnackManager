@@ -37,11 +37,12 @@
 
 <div class = "jumbotron">
 	
-	<div>
-	<a href = "http://localhost:9999/index.jsp"><img src = "./img/home.png"/>
+	<div style = "display : flex; margin-bottom : 20px; margin-left : 10px;">
+	<a href = "http://localhost:9999/index.jsp" style = "margin-right : 20px;"><img src = "./img/home.png"/>
 	</a>
-	<h1>마이페이지</h1>
+	<h1 style = "display : flex; text-align : center; justify-content : center; align-items : center;">마이페이지</h1>
 	</div>
+	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="collapse navbar-collapse" id="navbarNav">
 	    <ul class="navbar-nav">
@@ -114,6 +115,8 @@
 	        $('#getHistory').show(); // Show Get History section
 	        $('#historyTable').show(); // Show Get History section
 
+	        $('#historyTable').empty();
+	        
 	        // Make AJAX call or load content for history
 	        $.ajax({
 	            type: 'GET',

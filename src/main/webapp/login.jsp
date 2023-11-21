@@ -17,11 +17,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
-	.custom-background {
-	    background-color: #A3C2F1; /* Your desired background color */
-	    padding: 20px; /* Adjust the padding as needed for spacing */
-	    border-radius: 10px; /* Optionally, add rounded corners for a nicer look */
-	}
+
 	
 	.samsung-bg{
 		color : white;
@@ -41,13 +37,13 @@
   }
 </style>
 
-<body>
-<div class = "jumbotron d-flex flex-column align-items-center" style = "margin-top: 5%">
+<body >
+<div class = "jumbotron d-flex flex-column align-items-center" style = "margin-top: 5%; background-color: white;">
 <h1 class = "title">스낵매니저</h1>
 <h2 class = "heading">로그인</h2>
 <p class = 'paragraph'>회원님께서 가입하신 아이디와 비밀번호를 입력해주세요.</p>
 
-<form action="login.do" method = "post" class = "w-50 custom-background">
+<form action="login.do" method = "post" class = "w-50">
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">ID: </label>
     <div class="col-sm-10">

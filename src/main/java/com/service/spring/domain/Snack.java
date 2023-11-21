@@ -3,6 +3,7 @@ package com.service.spring.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.json.JSONObject;
 
 @Getter @Setter
 @ToString
@@ -38,6 +39,17 @@ public class Snack {
 		this.category = category;
 		this.quantity = quantity;
 		this.imgUrl = imgUrl;
+	}
+
+	public Snack(JSONObject item, String category, int quantity) {
+		this.snackId = Long.parseLong(item.getString("productId"));
+		this.name = item.getString("title");
+		this.price = Integer.parseInt(item.getString("lprice"));
+		this.brand = item.getString("brand");
+		this.imgUrl = item.getString("image");
+		this.link = item.getString("link");
+		this.category = category;
+		this.quantity = quantity;
 	}
 	
     public Snack(Long snackId) {

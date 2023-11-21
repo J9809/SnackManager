@@ -13,6 +13,5 @@ public interface SnackDAO {
     int registerSnack(Snack snack) throws Exception;
     int orderSnack(Snack snack) throws Exception;
     List<SnackRank> getSnackRank() throws Exception;
-
     List<MemberRank> getMemberRankBySnack(Snack snack) throws Exception;
 }

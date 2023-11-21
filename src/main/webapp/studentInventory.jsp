@@ -35,7 +35,7 @@
     }
     .display-each-snack {
         width: calc(25% - 10px);
-        height: 280px;
+        height: 320px;
         margin: 10px 5px;
         background-color: white;
         display: flex;

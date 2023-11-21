@@ -124,8 +124,11 @@
     <!-- 간식 등록 -->
     <insert id="registerSnack" parameterType="snack">
     	INSERT
-    	INTO snack(name, price, brand, category, quantity, img_url, link)
-    	VALUES (#{name}, #{price}, #{brand}, #{category}, #{quantity}, #{imgUrl}, #{link})
+    	INTO snack(snack_id, name, price, brand, category, quantity, img_url, link)
+    	select #{snackId}, #{name}, #{price}, #{brand}, #{category}, #{quantity}, #{imgUrl}, #{link}
+    	FROM dual A where not exists(
+    	    select 0 from SNACK where SNACK_ID = #{snackId}
+		)
     </insert>
     
     <!-- 간식 투표 -->
@@ -149,6 +152,8 @@
 		from VOTE
 		where vote.MEMBER_ID = #{memberId}
 	</select>
+
+
 </mapper>
 
 
