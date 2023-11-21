@@ -140,14 +140,15 @@ public class SnackController {
     }
 
     @GetMapping("getMemberRankBySnack.do")
-    public String doGetMemberRankBySnack(Model model, HttpSession session, @RequestParam String snackId) {
+    @ResponseBody
+    public List<MemberRank> doGetMemberRankBySnack(Model model, HttpSession session, @RequestParam String snackId) {
         try {
             System.out.println("✅ getMemberRankBySnack Controller - snackId = " + snackId);
             List<MemberRank> memberRankBySnack = rankService.getMemberRankBySnack(new Snack(Long.parseLong(snackId)));
 
             System.out.println(memberRankBySnack);
             model.addAttribute("memberRankList", memberRankBySnack);
-            return "snackRankTmp";
+            return memberRankBySnack;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,9 +159,14 @@ public class SnackController {
     @PostMapping("tempSnackUpdate.do")
     public String doUpdateSnack(Model model, HttpSession session) {
         try {
-            List<Snack> snackList = NaverShopSearch.makeList(101, "snack", "과자");
-            snackList.addAll(NaverShopSearch.makeList(101, "jelly", "젤리"));
-            snackList.addAll(NaverShopSearch.makeList(101, "coffee", "음료"));
+            final int snackDisplay = 100;
+            final int otherDisplay = 50;
+            List<Snack> snackList = NaverShopSearch.makeList(101, "snack", "과자", snackDisplay);
+            snackList.addAll(NaverShopSearch.makeList(201, "snack", "과자", snackDisplay));
+            snackList.addAll(NaverShopSearch.makeList(301, "snack", "과자", snackDisplay));
+            snackList.addAll(NaverShopSearch.makeList(101, "jelly", "젤리", otherDisplay));
+            snackList.addAll(NaverShopSearch.makeList(101, "coffee", "음료", otherDisplay));
+            System.out.println("✅Snack Update. snackList.length = " + snackList.size());
             for (Snack s : snackList) {
                 adminService.registerSnack(s);
             }

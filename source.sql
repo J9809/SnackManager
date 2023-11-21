@@ -173,10 +173,12 @@ end;
 -- insert into snack (name, category, price, brand, quantity, img_url, link) values ('후렌치파이 사과', '과자', 1980, '해태', 20, 'https://shopping-phinf.pstatic.net/main_5741707/5741707059.20130319113704.jpg', 'mock_link');
 -- insert into snack (name, category, price, brand, quantity, img_url, link) values ('새우깡 대용량 지퍼백', '과자', 3880, '농심', 20, 'https://shopping-phinf.pstatic.net/main_8226381/82263818665.4.jpg', 'mock_link');
 
-
 insert into member values  ('cos', '최우성', '1234', 'N', 'admin');
 insert into member values  ('did6436', '양석현', '1234', 'N', 'student');
 insert into member values  ('muscleup15', '안광휘', '1234', 'N', 'student');
+insert into member values  ('kimdream', '롤로노아 김현경', '1234', 'N', 'student');
+insert into member values  ('balancekim', '인천불주먹 김현경', '1234', 'N', 'student');
+insert into member values  ('taxikim', '모범택시 김현경', '1234', 'N', 'student');
 
 -- insert into history (member_id, snack_id, time, count) values ('did6436', 1001, CURRENT_DATE, 15);
 -- insert into history (member_id, snack_id, time, count) values ('did6436', 1002, CURRENT_DATE, 13);

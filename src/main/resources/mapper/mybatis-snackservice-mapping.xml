@@ -83,13 +83,15 @@
 	
 	<!-- 전체 과자 랭킹 조회 기능 -->
 	<select id = "viewAllSnackRank" resultType="SnackRank">
-		 SELECT RANK() OVER (ORDER BY count DESC) as rank, s.SNACK_ID as snackId, s.name as name, t.count as count, s.img_url as imgUrl
-	     FROM (
-			 SELECT
-			 snack_id, sum(count) AS count
-			 FROM history
-			 GROUP BY snack_id) t
-	         JOIN snack s ON (t.snack_id=s.snack_id)
+		SELECT rank, snackId, name, count, imgUrl FROM
+			(SELECT RANK() OVER (ORDER BY count DESC) as rank, s.SNACK_ID as snackId, s.name as name, t.count as count, s.img_url as imgUrl
+			 FROM ((
+				 SELECT
+					 snack_id, sum(count) AS count
+				 FROM history
+				 GROUP BY snack_id) t
+				 JOIN snack s ON (t.snack_id=s.snack_id)))
+		WHERE rank BETWEEN 1 AND 11
 	</select>
 	
 	<!-- 과자별 사용자 랭킹 조회 기능 -->

@@ -45,7 +45,11 @@ public class Snack {
 		String[] token = name.split(" ");
 		StringBuilder ret = new StringBuilder();
 		for (String tok : token) {
-			if (tok.isEmpty() || tok.charAt(tok.length() - 1) == 'g') continue;
+			if (tok.isEmpty() || tok.charAt(tok.length() - 1) == 'g' || tok.charAt(tok.length() - 1) == 'G') continue;
+			if (tok.contains("농심") || tok.contains("오리온") || tok.contains("해태") || tok.contains("삼양")
+		|| tok.contains("롯데") || tok.contains("노브랜드") || tok.contains("크라운")) continue;
+			if (tok.contains("중국") || tok.contains("미국") || tok.contains("서울")) continue;
+			if (tok.contains("[") || tok.contains("]")) continue;
 			ret.append(tok).append(" ");
 		}
 		return ret.toString().trim();

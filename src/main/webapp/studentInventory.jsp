@@ -48,7 +48,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
       }
 
   .display-each-snack:hover {
@@ -89,6 +88,7 @@
     <div class="form-group">
       <input type="text" placeholder="Search" class="search form-control" />
     </div>
+
     <div class="list display-snack-list">
       <c:forEach var="item" items="${snacks}" varStatus="status">
         <div id="${item.snackId}" class="display-each-snack">
@@ -100,7 +100,7 @@
           <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
           <h4 class="snack-quantity">${item.quantity}</h4>
         </div>
-    
+
         <!-- 매 4번째 아이템일 때 줄 바꾸기 -->
         <c:if test="${status.index % 4 == 3}">
           <hr>
@@ -115,7 +115,7 @@
           <button type="button">EAT!!</button>
       </div>
     </div>
-    
+
    </div>
 
 </body>
