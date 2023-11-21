@@ -147,4 +147,20 @@ public class SnackController {
         System.out.println("❗️ not returned");
         return null;
     }
+
+    @PostMapping("tempSnackUpdate.do")
+    public String doUpdateSnack(Model model, HttpSession session) {
+        try {
+            List<Snack> snackList = NaverShopSearch.makeList(101, "snack", "과자");
+            snackList.addAll(NaverShopSearch.makeList(101, "jelly", "젤리"));
+            snackList.addAll(NaverShopSearch.makeList(101, "coffee", "음료"));
+            for (Snack s : snackList) {
+                adminService.registerSnack(s);
+            }
+            return "index";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "index";
+    }
 }

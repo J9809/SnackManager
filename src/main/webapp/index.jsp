@@ -62,6 +62,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
       <a href="student/voteSnack.do"><li class="list-group-item">먹고 싶은 간식 투표</li></a>
        <a href="getMemberRank.do"><li class="list-group-item">많이 먹은 학생 순위 조회</li></a>
        <a href="getSnackRank.do"><li class="list-group-item">과자 순위 조회(전체과자, 과자별)</li></a>
+         <a href="tempAdmin.jsp"><li class="list-group-item">임시 관리자 페이지</li></a>
     </ul>
   </c:if>
 </div>
