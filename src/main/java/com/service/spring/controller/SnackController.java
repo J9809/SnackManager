@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -183,21 +185,32 @@ public class SnackController {
         return "order";
     }
 
-    public static int[] findSelectedItems(int[][] dp, int[][] A, int N, int K) {
-        int[] selectedItems = new int[N + 1];
-        int i = N;
-        int k = K;
+    static class Thing {
+        int weight, value;
 
-        while (i > 0 && k > 0) {
-            if (dp[i][k] != dp[i - 1][k]) {
-                selectedItems[i] += 1;
-                k -= A[i][0];
+        public Thing(int weight, int value) {
+            this.weight = weight;
+            this.value = value;
+        }
+    }
+
+    static int[] getSelectedItemCount(int[][] dp, ArrayList<Thing> things, int N, int budget) {
+        int[] selectedItemCounts = new int[things.size()];
+
+        int i = things.size();
+        int j = budget;
+
+        while (i > 0 && j > 0) {
+            if (dp[i][j] != dp[i - 1][j]) {
+                System.out.println("i = " + i + "  j = " + j);
+                selectedItemCounts[i]++;
+                j -= things.get(i).weight;
             } else {
-                i -= 1;
+                i--;
             }
         }
 
-        return selectedItems;
+        return selectedItemCounts;
     }
 
     @GetMapping("/knapsack.do")
@@ -206,41 +219,49 @@ public class SnackController {
 
         try {
             System.out.println("budget = " + budget);
-            List<Snack> snacks = null;
+            List<Snack> snacks = new ArrayList<>();
 
             List<VoteWithSnackInfo> voteWithSnackInfos = adminService.viewVote();
             System.out.println(voteWithSnackInfos);
 
             int N = voteWithSnackInfos.size();
-            int K = budget;
-            int[][] A = new int[N + 1][2];
-            for (int i = 1; i <= N; i++) {
-                A[i][0] = voteWithSnackInfos.get(i - 1).getPrice();
-                A[i][1] = voteWithSnackInfos.get(i - 1).getCount();
-            }
-            int[][] dp = new int[N + 1][K + 1];
+            ArrayList<Thing> things = new ArrayList<>();
+//            things.add(new Thing(0, 0));        // index를 1부터 하기 위해 null값 하나 추가
 
-            for (int i = 1; i <= N; i++) {
-                for (int k = 1; k <= K; k++) {
-                    if (k >= A[i][0]) {
-                        dp[i][k] = Math.max(dp[i - 1][k], dp[i - 1][k - A[i][0]] + A[i][1]);
+            for(int i = 0 ; i < N; i ++ ) {
+                int v = voteWithSnackInfos.get(i).getPrice();  // 물건의 무게
+                int c = voteWithSnackInfos.get(i).getCount();  // 물건의 가치
+                int k = 5;   // 물건의 개수
+
+                int tempK = 1;
+                while(tempK <= k) {
+                    things.add(new Thing(tempK * v, tempK * c));
+                    k -= tempK;
+                    tempK *= 2;
+                }
+                if(k != 0) {
+                    things.add(new Thing(k * v, k * c));
+                }
+            }
+
+            System.out.println("things.length = " + things.size());
+            int[][] dp = new int[things.size() + 10][budget + 10];
+            for(int i = 1 ; i <= things.size() ; i ++) {
+                for(int j = 1 ; j <= budget; j ++) {
+                    if(j < things.get(i - 1).weight) {
+                        dp[i][j] = dp[i - 1][j];
                     } else {
-                        dp[i][k] = Math.max(dp[i][k], dp[i - 1][k]);
+                        dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - things.get(i - 1).weight] + things.get(i - 1).value);
                     }
                 }
             }
 
-//            for (int i = 1; i <= N; i++) {
-//                for (int j = 1; j <= K; j++) {
-//                    System.out.print(dp[i][j] + " ");
-//                }
-//                System.out.println();
-//            }
-            int[] selectedItems = findSelectedItems(dp, A, N, K);
-            System.out.print("Number of each item selected: ");
-            for (int i = 1; i <= N; i++) {
-                System.out.println(voteWithSnackInfos.get(i - 1).getSnackName() + ": " + selectedItems[i]);
+            int[] selectedItemCounts = getSelectedItemCount(dp, things, N, budget);
+            System.out.println("Selected Item Counts:");
+            for (int i = 1; i < selectedItemCounts.length; i++) {
+                System.out.println("Item " + i + ": " + selectedItemCounts[i]);
             }
+
             return snacks;
         } catch (Exception e) {
             e.printStackTrace();

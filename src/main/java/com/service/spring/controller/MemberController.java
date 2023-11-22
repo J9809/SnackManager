@@ -33,7 +33,7 @@ public class MemberController {
 			Member selected = studentService.login(member);
 			if (selected!= null) {
 				session.setAttribute("loginUser", selected);
-				return "index";
+				return "redirect:/index.jsp";
 			} else {
 				return "redirect:/login.jsp";
 			}
