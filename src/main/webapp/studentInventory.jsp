@@ -95,6 +95,26 @@
 	.snack-selected {
 		margin-bottom: 10px;
 	}
+    .snack-info-wrapper {
+    }
+    .snack-name-wrapper {
+      width: 200px;
+      color: black;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .snack-name:hover {
+      display: inline-block;
+      animation: snack-name-wrapper 15s linear infinite;
+    }
+    @keyframes snack-name-wrapper {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+    .snack-brand {
+      color: orange;
+    }
 
 </style>
 <body>
@@ -116,10 +136,13 @@
           <div class="snack-img-wrapper">
             <img src="${item.imgUrl}" id="snack-img" />
           </div>
-          <div class="snack-info-wrapper"></div>
-          <marquee style="z-index: 0" class="snack-name" id="${item.snackId}" direction="left" onmouseover="this.stop()">${item.name}</marquee>
-          <h4 class="snack-brand" id="${item.brand}"></h4>
-          <span class="snack-quantity" style="font-size: 17px;">남은 수량 : ${item.quantity}</span>
+          <div class="snack-info-wrapper">
+            <div class="snack-name-wrapper">
+              <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
+            </div>
+            <h5 class="snack-brand" id="${item.brand}">${item.brand}</h5>
+            <span class="snack-quantity" style="font-size: 17px;">남은 수량 : ${item.quantity}</span>
+          </div>
         </div>
 
         <!-- 매 4번째 아이템일 때 줄 바꾸기 -->

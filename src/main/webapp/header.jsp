@@ -16,6 +16,46 @@
         pageTitle = "간식관리시스템";
     }
 %>
+
+<style>
+    body {
+
+    }
+    .header-container-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+    }
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        height: 200px;
+        width: 90%;
+        margin-bottom: 50px;
+        border-bottom: 1px solid grey;
+    }
+    .header-left-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 33%;
+    }
+    .header-middle-container {
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .header-right-container {
+        width: 33%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 30px;
+    }
+
+</style>
 <html>
 <head>
      <title><%= pageTitle %></title>
@@ -30,16 +70,20 @@
 
   
 <body>
-<div class = "jumbotron" style = "background-color : white; padding-bottom : 0;">
-<a href = "http://localhost:9999/index.jsp" style = " margin-right : 20px; "><img src = "./img/home.png"/>
-</a>
-<h1 style = "text-align : center ;display : inline-block; margin-left : 30%;"><%= pageTitle %></h1>
-<div style = "display: flex; justify-content : flex-end; ">
-    <div style="margin-right: 10px; display:flex; justify-content : center; align-items: center; "><%= userName %> 님</div>
-    <button id = "myPageBtn" class = "btn btn-outline-info" style="margin-right: 10px;">마이페이지</button>
-    <button class = "btn btn-outline-danger" style="margin-right: 10px;" id = "logoutBtn">로그아웃</button>
-</div>
-<hr>
+<div class="header-container-wrapper">
+    <div class="header-container">
+        <div class="header-left-container">
+            <a href = "http://localhost:9999/index.jsp" style = " margin-right : 20px; "><img src = "./img/home.png"/></a>
+        </div>
+
+        <div class="header-middle-container"><h1 style = "text-align : center ;display : inline-block;"><%= pageTitle %></h1></div>
+
+        <div class="header-right-container" style = "display: flex; justify-content : flex-end; ">
+            <div style="margin-right: 10px; display:flex; justify-content : center; align-items: center; "><%= userName %> 님</div>
+            <button id = "myPageBtn" class = "btn btn-outline-info" style="margin-right: 10px;">마이페이지</button>
+            <button class = "btn btn-outline-danger" style="margin-right: 10px;" id = "logoutBtn">로그아웃</button>
+        </div>
+    </div>
 </div>
 </body>
 </html>
