@@ -145,7 +145,7 @@
 	<!-- Controller에서 플러스 해주기 -->
     <update id = "orderSnack" parameterType="snack">
         UPDATE snack
-        SET quantity = #{quantity}
+        SET quantity = quantity + #{quantity}
         WHERE snack_id = #{snackId}
     </update>
 

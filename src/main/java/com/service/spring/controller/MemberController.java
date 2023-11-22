@@ -141,22 +141,6 @@ public class MemberController {
         }
         return "redirect:/login.jsp"; // Redirect to the login page
     }
-<<<<<<< HEAD
-	
-	@GetMapping("deleteVote.do")
-	public String deleteVote() {
-		
-		try {
-			int result = adminService.deleteVote();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "redirect:/index.jsp";
-		
-	}
 	
 	
-=======
->>>>>>> ec4f886fc088031ea30dcd8b7c2f509837719f0e
 }

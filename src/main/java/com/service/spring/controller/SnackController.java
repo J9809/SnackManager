@@ -294,5 +294,21 @@ public class SnackController {
         }
         return null;
     }
-
+    
+    
+    @PostMapping("/updateSnack.do")
+    public String updateSnack(@RequestBody List<Snack> snacks) {
+        try {
+        	for(Snack s : snacks) {
+        		adminService.orderSnack(s);
+        	}
+        	adminService.deleteVote();
+            // Optionally handle success or error scenarios and return appropriate responses
+            return "index";
+        } catch (Exception e) {
+            // Handle exceptions or errors during the update process
+            e.printStackTrace();
+            return "index";
+        }
+    }
 }
