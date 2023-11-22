@@ -69,6 +69,7 @@ public class NaverShopSearch {
 
         for (int i = 0; i < items.length(); i++) {
             JSONObject itemJson = (JSONObject) items.get(i);
+            if (Integer.parseInt(((JSONObject) items.get(i)).getString("lprice")) >= 3000) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("x")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("X")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("대용량")) continue;
@@ -79,8 +80,7 @@ public class NaverShopSearch {
             String title = ((JSONObject) items.get(i)).getString("title");
             if (hash.contains(title)) continue;
             hash.add(title);
-            if (Integer.parseInt(((JSONObject) items.get(i)).getString("lprice")) >= 3000) continue;
-            Snack snack = new Snack(itemJson, category, 40);
+            Snack snack = new Snack(itemJson, category, 0);
             if (snack.getName().isEmpty() || snack.getImgUrl().isEmpty() || snack.getLink().isEmpty()) continue;
             itemDtoList.add(snack);
         }
