@@ -53,6 +53,7 @@
 	s.name AS snackName, h.time, h.count 
 	FROM history h JOIN snack s ON(h.snack_id = s.snack_id)
 	WHERE member_id = #{memberId}
+	ORDER BY h.time DESC
 	</select>
 	
 	<!-- 간식 관리 기능 모음집 -->
