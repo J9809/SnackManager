@@ -51,4 +51,9 @@ public class AdminServiceImpl implements AdminService {
     public List<VoteWithSnackInfo> viewVote() throws Exception {
         return voteDAO.viewVote();
     }
+
+	@Override
+	public int deleteVote() throws Exception {
+		return voteDAO.deleteVote();
+	}
 }
