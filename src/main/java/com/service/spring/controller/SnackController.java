@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class SnackController {
@@ -216,12 +214,21 @@ public class SnackController {
         return selectedItemCounts;
     }
 
+    private Snack findSnackById(Long id, List<VoteWithSnackInfo> vs, int q) {
+        for (VoteWithSnackInfo elem : vs) {
+            if (Objects.equals(elem.getSnackId(), id)) {
+                return new Snack(elem.getSnackId(), elem.getSnackName(), elem.getPrice(), q);
+            }
+        }
+        return null;
+    }
+
     @GetMapping("/knapsack.do")
     @ResponseBody
     public List<Snack> knapsack(Model model, HttpSession session, @RequestParam int budget) throws Exception {
 
         try {
-            System.out.println("budget = " + budget);
+//            System.out.println("budget = " + budget);
             List<Snack> snacks = new ArrayList<>();
 
             List<VoteWithSnackInfo> voteWithSnackInfos = adminService.viewVote();
@@ -249,7 +256,7 @@ public class SnackController {
                 }
             }
 
-            System.out.println("things.length = " + things.size());
+//            System.out.println("things.length = " + things.size());
             int[][] dp = new int[things.size() + 10][budget + 10];
             for(int i = 1 ; i <= things.size() ; i ++) {
                 for(int j = 1 ; j <= budget; j ++) {
@@ -261,14 +268,26 @@ public class SnackController {
                 }
             }
 
+            Map<Long, Integer> mp = new HashMap<>();
             int[] selectedItemCounts = getSelectedItemCount(dp, things, N, budget);
-            System.out.println("Selected Item Counts:");
+//            System.out.println("Selected Item Counts:");
             for (int i = 1; i < selectedItemCounts.length; i++) {
-                System.out.println("Item " + i + ": "
-                        + selectedItemCounts[i] + " " + things.get(i - 1).price
-                        + " " + things.get(i - 1).weight + " " + things.get(i - 1).value);
+                if (selectedItemCounts[i] == 0) continue;
+//                System.out.println("Item " + i + ": "
+//                        + selectedItemCounts[i] + " " + things.get(i - 1).price
+//                        + " " + things.get(i - 1).weight + " " + things.get(i - 1).value);
+                Long sId = things.get(i - 1).id;
+                if (!mp.containsKey(sId)) {
+                    mp.put(sId, things.get(i - 1).weight / things.get(i - 1).price);
+                } else {
+                    mp.put(sId, mp.get(sId) + things.get(i - 1).weight / things.get(i - 1).price);
+                }
             }
-
+            for (Map.Entry<Long, Integer> entry : mp.entrySet()) {
+                Long id = entry.getKey();
+                Snack snack = findSnackById(id, voteWithSnackInfos, entry.getValue());
+                snacks.add(snack);
+            }
             return snacks;
         } catch (Exception e) {
             e.printStackTrace();
