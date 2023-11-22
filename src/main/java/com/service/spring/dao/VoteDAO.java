@@ -9,6 +9,5 @@ import java.util.List;
 public interface VoteDAO {
     List<VoteWithSnackInfo> viewVote() throws Exception;
     int voteSnack(Vote vote) throws Exception;
-
     int checkVote(Member member) throws Exception;
 }

@@ -176,4 +176,76 @@ public class SnackController {
         }
         return "index";
     }
+
+    @GetMapping("/orderSnack.do")
+    public String doOrderSnack(Model model, HttpSession session) {
+        System.out.println("✅ Order Snack Controller");
+        return "order";
+    }
+
+    public static int[] findSelectedItems(int[][] dp, int[][] A, int N, int K) {
+        int[] selectedItems = new int[N + 1];
+        int i = N;
+        int k = K;
+
+        while (i > 0 && k > 0) {
+            if (dp[i][k] != dp[i - 1][k]) {
+                selectedItems[i] += 1;
+                k -= A[i][0];
+            } else {
+                i -= 1;
+            }
+        }
+
+        return selectedItems;
+    }
+
+    @GetMapping("/knapsack.do")
+    @ResponseBody
+    public List<Snack> knapsack(Model model, HttpSession session, @RequestParam int budget) throws Exception {
+
+        try {
+            System.out.println("budget = " + budget);
+            List<Snack> snacks = null;
+
+            List<VoteWithSnackInfo> voteWithSnackInfos = adminService.viewVote();
+            System.out.println(voteWithSnackInfos);
+
+            int N = voteWithSnackInfos.size();
+            int K = budget;
+            int[][] A = new int[N + 1][2];
+            for (int i = 1; i <= N; i++) {
+                A[i][0] = voteWithSnackInfos.get(i - 1).getPrice();
+                A[i][1] = voteWithSnackInfos.get(i - 1).getCount();
+            }
+            int[][] dp = new int[N + 1][K + 1];
+
+            for (int i = 1; i <= N; i++) {
+                for (int k = 1; k <= K; k++) {
+                    if (k >= A[i][0]) {
+                        dp[i][k] = Math.max(dp[i - 1][k], dp[i - 1][k - A[i][0]] + A[i][1]);
+                    } else {
+                        dp[i][k] = Math.max(dp[i][k], dp[i - 1][k]);
+                    }
+                }
+            }
+
+//            for (int i = 1; i <= N; i++) {
+//                for (int j = 1; j <= K; j++) {
+//                    System.out.print(dp[i][j] + " ");
+//                }
+//                System.out.println();
+//            }
+            int[] selectedItems = findSelectedItems(dp, A, N, K);
+            System.out.print("Number of each item selected: ");
+            for (int i = 1; i <= N; i++) {
+                System.out.println(voteWithSnackInfos.get(i - 1).getSnackName() + ": " + selectedItems[i]);
+            }
+            return snacks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

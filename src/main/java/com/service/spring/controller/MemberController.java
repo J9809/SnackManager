@@ -141,8 +141,4 @@ public class MemberController {
         }
         return "redirect:/login.jsp"; // Redirect to the login page
     }
-	
-	
-	
-	
 }

@@ -8,43 +8,60 @@ import lombok.Setter;
 public class VoteWithSnackInfo extends Vote {
 
     private String snackName;
+    private Long snackId;
     private int count;
-
-    public VoteWithSnackInfo(String memberId, Long snackId, String snackName, int count) {
-        super(memberId, snackId);
-        this.snackName = snackName;
-        this.count = count;
-    }
+    private int price;
 
     public VoteWithSnackInfo() {
     }
 
-    public VoteWithSnackInfo(String snackName, int count) {
+
+    public VoteWithSnackInfo(String snackName, Long snackId, int count, int price) {
         this.snackName = snackName;
+        this.snackId = snackId;
         this.count = count;
+        this.price = price;
     }
 
     public String getSnackName() {
-		return snackName;
-	}
+        return snackName;
+    }
 
-	public void setSnackName(String snackName) {
-		this.snackName = snackName;
-	}
+    public void setSnackName(String snackName) {
+        this.snackName = snackName;
+    }
 
-	public int getCount() {
-		return count;
-	}
+    public Long getSnackId() {
+        return snackId;
+    }
 
-	public void setCount(int count) {
-		this.count = count;
-	}
+    public void setSnackId(Long snackId) {
+        this.snackId = snackId;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     @Override
     public String toString() {
         return "VoteWithSnackInfo{" +
                 "snackName='" + snackName + '\'' +
+                ", snackId=" + snackId +
                 ", count=" + count +
+                ", price=" + price +
                 '}';
     }
 }

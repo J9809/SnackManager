@@ -35,15 +35,34 @@
 	  	</div>
 	  </div>
 	<hr style = "width : 80%;">
-	결과 여기에
 
-
-	<script>
-	
-	
-	
-	
-	</script>
 
 </body>
 </html>
+
+<script>
+
+	function getRequest(b) {
+		const settings = {
+			"url": "http://localhost:9999/knapsack.do?budget=" + String(b),
+			"method": "GET",
+			"timeout": 0,
+		};
+		$.ajax(settings).done(function (response) {
+			console.log(response);
+			location.reload();
+		});
+	}
+
+	$(function () {
+		$("button").click(function (e) {
+			e.preventDefault()
+			console.log(e)
+
+			const res = document.querySelector(".form-control");
+			console.log(res.value)
+
+			getRequest(Number(res.value));
+		});
+	});
+</script>

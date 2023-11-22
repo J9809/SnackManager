@@ -70,10 +70,11 @@ public class NaverShopSearch {
             if (((JSONObject) items.get(i)).getString("title").contains("x")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("X")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("대용량")) continue;
+            if (((JSONObject) items.get(i)).getString("title").contains("바나나킥")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("/")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("+")) continue;
             if (((JSONObject) items.get(i)).getString("title").length() >= 30) continue;
-            if (Integer.parseInt(((JSONObject) items.get(i)).getString("lprice")) >= 10000) continue;
+            if (Integer.parseInt(((JSONObject) items.get(i)).getString("lprice")) >= 3000) continue;
             Snack snack = new Snack(itemJson, category, 40);
             if (snack.getName().isEmpty() || snack.getImgUrl().isEmpty() || snack.getLink().isEmpty()) continue;
             itemDtoList.add(snack);
