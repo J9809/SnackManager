@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class NaverShopSearch {
@@ -64,6 +65,7 @@ public class NaverShopSearch {
 //        System.out.println("JSON LIST LENGTH = " + items.length());
         
         List<Snack> itemDtoList = new ArrayList<>();
+        HashSet<String> hash = new HashSet<>();
 
         for (int i = 0; i < items.length(); i++) {
             JSONObject itemJson = (JSONObject) items.get(i);
@@ -74,6 +76,9 @@ public class NaverShopSearch {
             if (((JSONObject) items.get(i)).getString("title").contains("/")) continue;
             if (((JSONObject) items.get(i)).getString("title").contains("+")) continue;
             if (((JSONObject) items.get(i)).getString("title").length() >= 30) continue;
+            String title = ((JSONObject) items.get(i)).getString("title");
+            if (hash.contains(title)) continue;
+            hash.add(title);
             if (Integer.parseInt(((JSONObject) items.get(i)).getString("lprice")) >= 3000) continue;
             Snack snack = new Snack(itemJson, category, 40);
             if (snack.getName().isEmpty() || snack.getImgUrl().isEmpty() || snack.getLink().isEmpty()) continue;
