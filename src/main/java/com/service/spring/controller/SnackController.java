@@ -28,6 +28,7 @@ public class SnackController {
     public String doSelectAllAdmin(Model model) {
         try {
             List<Snack> snacks = adminService.selectAll();
+            snacks.sort(Comparator.comparingInt(Snack::getQuantity));
             System.out.println(snacks);
             model.addAttribute("snacks", snacks);
             model.addAttribute("title", "관리자 - 전체 재고 조회");
@@ -43,6 +44,7 @@ public class SnackController {
         System.out.println("✅ Select All Snack Controller");
         try {
             List<Snack> snacks = studentService.selectAll();
+            snacks.sort(Comparator.comparingInt(Snack::getQuantity));
             System.out.println(snacks);
 //            System.out.println("snacks size = " + snacks.size());
             model.addAttribute("snacks", snacks);
@@ -198,7 +200,7 @@ public class SnackController {
     }
 
     static int[] getSelectedItemCount(int[][] dp, ArrayList<Thing> things, int N, int budget) {
-        int[] selectedItemCounts = new int[things.size()];
+        int[] selectedItemCounts = new int[things.size() + 10];
 
         int i = things.size();
         int k = budget;
@@ -228,7 +230,7 @@ public class SnackController {
     public List<Snack> knapsack(Model model, HttpSession session, @RequestParam int budget) throws Exception {
 
         try {
-//            System.out.println("budget = " + budget);
+            System.out.println("budget = " + budget);
             List<Snack> snacks = new ArrayList<>();
 
             List<VoteWithSnackInfo> voteWithSnackInfos = adminService.viewVote();
@@ -238,7 +240,7 @@ public class SnackController {
             ArrayList<Thing> things = new ArrayList<>();
 //            things.add(new Thing(0, 0));        // index를 1부터 하기 위해 null값 하나 추가
 
-            for(int i = 0 ; i < N; i ++ ) {
+            for (int i = 0 ; i < N; i ++ ) {
                 int v = voteWithSnackInfos.get(i).getPrice();  // 물건의 무게
                 int c = voteWithSnackInfos.get(i).getCount();  // 물건의 가치
                 int k = 7;   // 물건의 개수
