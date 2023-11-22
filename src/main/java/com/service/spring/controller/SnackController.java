@@ -186,11 +186,16 @@ public class SnackController {
     }
 
     static class Thing {
-        int weight, value;
+        int weight, value, price;
+        Long id;
+        String name;
 
-        public Thing(int weight, int value) {
+        public Thing(int weight, int value, Long id, int price, String n) {
             this.weight = weight;
             this.value = value;
+            this.price = price;
+            this.id = id;
+            this.name = n;
         }
     }
 
@@ -198,16 +203,14 @@ public class SnackController {
         int[] selectedItemCounts = new int[things.size()];
 
         int i = things.size();
-        int j = budget;
+        int k = budget;
 
-        while (i > 0 && j > 0) {
-            if (dp[i][j] != dp[i - 1][j]) {
-                System.out.println("i = " + i + "  j = " + j);
-                selectedItemCounts[i]++;
-                j -= things.get(i).weight;
-            } else {
-                i--;
+        while (i > 0 && k > 0) {
+            if (dp[i][k] != dp[i - 1][k]) {
+                selectedItemCounts[i] += 1;
+                k -= things.get(i - 1).weight;
             }
+            i--;
         }
 
         return selectedItemCounts;
@@ -231,16 +234,18 @@ public class SnackController {
             for(int i = 0 ; i < N; i ++ ) {
                 int v = voteWithSnackInfos.get(i).getPrice();  // 물건의 무게
                 int c = voteWithSnackInfos.get(i).getCount();  // 물건의 가치
-                int k = 5;   // 물건의 개수
+                int k = 7;   // 물건의 개수
 
                 int tempK = 1;
                 while(tempK <= k) {
-                    things.add(new Thing(tempK * v, tempK * c));
+                    things.add(new Thing(tempK * v, tempK * c, voteWithSnackInfos.get(i).getSnackId(), voteWithSnackInfos.get(i).getPrice(),
+                            voteWithSnackInfos.get(i).getSnackName()));
                     k -= tempK;
                     tempK *= 2;
                 }
                 if(k != 0) {
-                    things.add(new Thing(k * v, k * c));
+                    things.add(new Thing(k * v, k * c, voteWithSnackInfos.get(i).getSnackId(), voteWithSnackInfos.get(i).getPrice(),
+                            voteWithSnackInfos.get(i).getSnackName()));
                 }
             }
 
@@ -259,7 +264,9 @@ public class SnackController {
             int[] selectedItemCounts = getSelectedItemCount(dp, things, N, budget);
             System.out.println("Selected Item Counts:");
             for (int i = 1; i < selectedItemCounts.length; i++) {
-                System.out.println("Item " + i + ": " + selectedItemCounts[i]);
+                System.out.println("Item " + i + ": "
+                        + selectedItemCounts[i] + " " + things.get(i - 1).price
+                        + " " + things.get(i - 1).weight + " " + things.get(i - 1).value);
             }
 
             return snacks;
