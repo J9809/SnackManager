@@ -20,18 +20,18 @@ import com.service.spring.service.StudentService;
 
 @Controller
 public class MemberController {
-	
+
 	@Autowired
 	StudentService studentService;
 	@Autowired
 	AdminService adminService;
-	
+
 	@PostMapping("login.do")
 	public String doLogin(Member member, HttpSession session, Model model) {
 		try {
 //			System.out.println(member);
 			Member selected = studentService.login(member);
-			if (selected!= null) {
+			if (selected != null) {
 				session.setAttribute("loginUser", selected);
 				return "redirect:/index.jsp";
 			} else {
@@ -43,7 +43,7 @@ public class MemberController {
 			return "Error";
 		}
 	}
-	
+
 	@PostMapping("api/registerMember.do")
 	public String registerMember(Member member, Model model) {
 		System.out.println("회원가입");
@@ -51,101 +51,100 @@ public class MemberController {
 			int result = studentService.registerMember(member);
 			if (result == 1) {
 				return "redirect:/login.jsp";
-			}else {
+			} else {
 				return "Error";
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-	        model.addAttribute("message", "문제내용 - 회원가입 진행 중 에러 발생");
-	        return "Error";
+			model.addAttribute("message", "문제내용 - 회원가입 진행 중 에러 발생");
+			return "Error";
 		}
 	}
-	
-	
+
+
 	@PostMapping("api/updateMember.do")
 	public String updateMember(Member member, HttpSession session, Model model) {
-		 System.out.println("비밀번호 변경");
-		    try {
-		        Member loggedInUser = (Member) session.getAttribute("loginUser");
-		        if (loggedInUser != null) {
-		            String memberId = loggedInUser.getMemberId();
-		            member.setMemberId(memberId);
-		            int result = studentService.updateMember(member);
-		            return "redirect:/myPage.jsp";
-		        } else {
-		            return "login"; 
-		        }
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		        model.addAttribute("message", "문제내용 - 비밀번호 변경 진행 중 에러 발생");
-		        return "Error";
-		    }
+		System.out.println("비밀번호 변경");
+		try {
+			Member loggedInUser = (Member) session.getAttribute("loginUser");
+			if (loggedInUser != null) {
+				String memberId = loggedInUser.getMemberId();
+				member.setMemberId(memberId);
+				int result = studentService.updateMember(member);
+				return "redirect:/myPage.jsp";
+			} else {
+				return "login";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "문제내용 - 비밀번호 변경 진행 중 에러 발생");
+			return "Error";
+		}
 	}
-	
+
 	@GetMapping("api/viewHistory.do")
 	@ResponseBody
 	public List<HistoryWithSnackName> viewHistory(Model model, HttpSession session) {
-	    try {
-	        Member loggedInUser = (Member) session.getAttribute("loginUser");
-	        if (loggedInUser != null) {
-	            List<HistoryWithSnackName> list = studentService.getHistory(loggedInUser);
-	            return list;
-	        } else {
-	            // Handle the case where the user is not logged in
-	            return Collections.emptyList(); // Return an empty list or handle the case according to your logic
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        // Handle the exception
-	        return Collections.emptyList(); // Return an empty list or handle the error case
-	    }
+		try {
+			Member loggedInUser = (Member) session.getAttribute("loginUser");
+			if (loggedInUser != null) {
+				List<HistoryWithSnackName> list = studentService.getHistory(loggedInUser);
+				return list;
+			} else {
+				// Handle the case where the user is not logged in
+				return Collections.emptyList(); // Return an empty list or handle the case according to your logic
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Handle the exception
+			return Collections.emptyList(); // Return an empty list or handle the error case
+		}
 	}
 
-	
+
 	@PostMapping("/api/deleteMember.do")
 	public String deleteMember(Model model, HttpSession session) {
 		try {
-	        Member loggedInUser = (Member) session.getAttribute("loginUser");
-	        int result = studentService.deleteMember(loggedInUser.getMemberId());
-            return "redirect:/login.jsp"; 
+			Member loggedInUser = (Member) session.getAttribute("loginUser");
+			int result = studentService.deleteMember(loggedInUser.getMemberId());
+			return "redirect:/login.jsp";
 		} catch (Exception e) {
-	        e.printStackTrace();
-	        model.addAttribute("message", "문제내용 - 사용자 회원탈퇴중 받던 중 에러 발생");
-	        return "Error";
+			e.printStackTrace();
+			model.addAttribute("message", "문제내용 - 사용자 회원탈퇴중 받던 중 에러 발생");
+			return "Error";
 		}
-		
+
 	}
-	
+
 	@GetMapping("checkDuplicateId.do")
 	@ResponseBody
 	public String chkId(String memberId, Model model) {
 		try {
-	        Member member = studentService.checkDuplicateId(memberId);
-	        if (member != null) {
-	        	return "duplicated";
-	        } else {
-	        	return "not duplicated";
-	        }
+			Member member = studentService.checkDuplicateId(memberId);
+			if (member != null) {
+				return "duplicated";
+			} else {
+				return "not duplicated";
+			}
 		} catch (Exception e) {
-	        e.printStackTrace();
-	        model.addAttribute("message", "문제내용 - id 중복확인중 받던 중 에러 발생");
-	        return "Error";
+			e.printStackTrace();
+			model.addAttribute("message", "문제내용 - id 중복확인중 받던 중 에러 발생");
+			return "Error";
 		}
-		
+
 	}
-	
-    @GetMapping("logout.do")
-    public String logout(HttpSession session) {
-        if (session != null) {
-            session.invalidate(); // Invalidate the session
-        }
-        return "redirect:/login.jsp"; // Redirect to the login page
-    }
-<<<<<<< HEAD
-	
+
+	@GetMapping("logout.do")
+	public String logout(HttpSession session) {
+		if (session != null) {
+			session.invalidate(); // Invalidate the session
+		}
+		return "redirect:/login.jsp"; // Redirect to the login page
+	}
+
 	@GetMapping("deleteVote.do")
 	public String deleteVote() {
-		
+
 		try {
 			int result = adminService.deleteVote();
 		} catch (Exception e) {
@@ -153,10 +152,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		return "redirect:/index.jsp";
-		
+
 	}
-	
-	
-=======
->>>>>>> ec4f886fc088031ea30dcd8b7c2f509837719f0e
+
 }
