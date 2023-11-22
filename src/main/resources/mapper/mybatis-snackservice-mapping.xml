@@ -64,9 +64,9 @@
 	
 	<!-- 전체 투표 결과 조회 기능 -->
 	<select id = "viewVote" resultType="voteWithSnackInfo">
-		SELECT s.NAME as snackName, COUNT(member_id) AS count
+		SELECT s.NAME as snackName, COUNT(member_id) AS count, s.PRICE, s.SNACK_ID
 		FROM vote v JOIN snack s ON (v.SNACK_ID = s.SNACK_ID)
-		GROUP BY s.NAME
+		GROUP BY s.NAME, s.PRICE, s.SNACK_ID
 	</select>
 	
 	<!-- 전체 사용자 랭킹 조회 기능 -->

@@ -33,7 +33,7 @@ public class MemberController {
 			Member selected = studentService.login(member);
 			if (selected!= null) {
 				session.setAttribute("loginUser", selected);
-				return "index";
+				return "redirect:/index.jsp";
 			} else {
 				return "redirect:/login.jsp";
 			}
@@ -141,6 +141,7 @@ public class MemberController {
         }
         return "redirect:/login.jsp"; // Redirect to the login page
     }
+<<<<<<< HEAD
 	
 	@GetMapping("deleteVote.do")
 	public String deleteVote() {
@@ -156,4 +157,6 @@ public class MemberController {
 	}
 	
 	
+=======
+>>>>>>> ec4f886fc088031ea30dcd8b7c2f509837719f0e
 }

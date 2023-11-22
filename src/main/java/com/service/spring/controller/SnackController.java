@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -176,4 +178,95 @@ public class SnackController {
         }
         return "index";
     }
+
+    @GetMapping("/orderSnack.do")
+    public String doOrderSnack(Model model, HttpSession session) {
+        System.out.println("✅ Order Snack Controller");
+        return "order";
+    }
+
+    static class Thing {
+        int weight, value;
+
+        public Thing(int weight, int value) {
+            this.weight = weight;
+            this.value = value;
+        }
+    }
+
+    static int[] getSelectedItemCount(int[][] dp, ArrayList<Thing> things, int N, int budget) {
+        int[] selectedItemCounts = new int[things.size()];
+
+        int i = things.size();
+        int j = budget;
+
+        while (i > 0 && j > 0) {
+            if (dp[i][j] != dp[i - 1][j]) {
+                System.out.println("i = " + i + "  j = " + j);
+                selectedItemCounts[i]++;
+                j -= things.get(i).weight;
+            } else {
+                i--;
+            }
+        }
+
+        return selectedItemCounts;
+    }
+
+    @GetMapping("/knapsack.do")
+    @ResponseBody
+    public List<Snack> knapsack(Model model, HttpSession session, @RequestParam int budget) throws Exception {
+
+        try {
+            System.out.println("budget = " + budget);
+            List<Snack> snacks = new ArrayList<>();
+
+            List<VoteWithSnackInfo> voteWithSnackInfos = adminService.viewVote();
+            System.out.println(voteWithSnackInfos);
+
+            int N = voteWithSnackInfos.size();
+            ArrayList<Thing> things = new ArrayList<>();
+//            things.add(new Thing(0, 0));        // index를 1부터 하기 위해 null값 하나 추가
+
+            for(int i = 0 ; i < N; i ++ ) {
+                int v = voteWithSnackInfos.get(i).getPrice();  // 물건의 무게
+                int c = voteWithSnackInfos.get(i).getCount();  // 물건의 가치
+                int k = 5;   // 물건의 개수
+
+                int tempK = 1;
+                while(tempK <= k) {
+                    things.add(new Thing(tempK * v, tempK * c));
+                    k -= tempK;
+                    tempK *= 2;
+                }
+                if(k != 0) {
+                    things.add(new Thing(k * v, k * c));
+                }
+            }
+
+            System.out.println("things.length = " + things.size());
+            int[][] dp = new int[things.size() + 10][budget + 10];
+            for(int i = 1 ; i <= things.size() ; i ++) {
+                for(int j = 1 ; j <= budget; j ++) {
+                    if(j < things.get(i - 1).weight) {
+                        dp[i][j] = dp[i - 1][j];
+                    } else {
+                        dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - things.get(i - 1).weight] + things.get(i - 1).value);
+                    }
+                }
+            }
+
+            int[] selectedItemCounts = getSelectedItemCount(dp, things, N, budget);
+            System.out.println("Selected Item Counts:");
+            for (int i = 1; i < selectedItemCounts.length; i++) {
+                System.out.println("Item " + i + ": " + selectedItemCounts[i]);
+            }
+
+            return snacks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

@@ -91,7 +91,7 @@
 					<th>먹은시간</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="history-tbody">
 				<c:forEach items="${histories}" var="history">
 				<tr>
 					<td>${history.snackName}</td>
@@ -115,7 +115,7 @@
 	        $('#getHistory').show(); // Show Get History section
 	        $('#historyTable').show(); // Show Get History section
 
-	        $('#historyTable').empty();
+	        $('.history-tbody').empty();
 	        
 	        // Make AJAX call or load content for history
 	        $.ajax({
