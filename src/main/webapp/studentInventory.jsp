@@ -27,12 +27,15 @@
 		margin-top: 20px;
         padding: 20px 300px;
         background-color: rgba(255, 255, 255, 0.9) ;
-        top: 165px;
+        top: 200px;
         border-bottom: 1px solid rgb(240, 240, 240);
         box-shadow: 0px 12px 10px -10px  rgba(0, 0, 0, 0.3);
 
     }
-    
+    .snack-img-wrapper {
+    	width: 75%;
+    	height: 75%;
+    }
     .display-snack-list {
         display: flex;
         flex-wrap: wrap;
@@ -45,7 +48,7 @@
     
   .display-each-snack {
         width: calc(25% - 30px);
-        height: 320px;
+        height: 10%;
         background-color: white;
         display: flex;
         flex-direction: column;
@@ -57,8 +60,8 @@
       }
   
     #snack-img {
-        height:150px;
-        width: 150px;
+        height: 80%;
+        width: 80%;
     }
     
     .list hr {
@@ -69,6 +72,7 @@
     #selection {
       text-align: center;
       position: fixed;
+      top: 37%;
       right: 3%;
       width: 15%; /* 필요에 따라 너비를 조절하세요 */
       height: 60%;
@@ -76,6 +80,7 @@
       border: 1px solid rgb(220, 220, 220);
     }
     #snack-selection-container {
+      padding-left: 20px;
       height: 80%;
       overflow-y: auto;
     }
@@ -113,7 +118,15 @@
       100% { transform: translate(-100%, 0); }
     }
     .snack-brand {
-      color: orange;
+    	color: 404040;
+    }
+    
+    .snack-eat-count {
+    	width: 70%;
+    }
+    
+    .snack-quantity {
+   		color: #FF4E2B;
     }
 
 </style>
@@ -137,11 +150,11 @@
             <img src="${item.imgUrl}" id="snack-img" />
           </div>
           <div class="snack-info-wrapper">
+          	<h5 class="snack-brand" id="${item.brand}">${item.brand}</h5>
             <div class="snack-name-wrapper">
               <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
             </div>
-            <h5 class="snack-brand" id="${item.brand}">${item.brand}</h5>
-            <span class="snack-quantity" style="font-size: 17px;">남은 수량 : ${item.quantity}</span>
+            <span class="snack-quantity" style="font-size: 17px;">남은 수량 : ${item.quantity}개</span>
           </div>
         </div>
 
