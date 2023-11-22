@@ -31,26 +31,26 @@
 	<jsp:param name="pageTitle" value="과자 랭킹" />
 </jsp:include>
 
-<div>
+<div style=" width:90%; padding-left: 10%">
 	<table class="table table-borderless">
-		<thead>
-		<tr class="table-primary" style="text-align: center; vertical-align: middle;">
-			<th><h2>순위</h1></th>
-			<th><h2>간식명</h2></th>
-			<th><h2>과자별 사용자 랭킹</h2></th>
-		</tr>
-		</thead>
+		<thead class="table" style="background-color: #E4EEFF; text-align: center; vertical-align: middle">
+            <tr>
+                <th style="border-bottom: 1px solid #C1D3F2;"><h3>순위</h3></th>
+                <th style="border-bottom: 1px solid #C1D3F2;"><h3>간식명</h3></th>
+                <th style="border-bottom: 1px solid #C1D3F2; width: 40%;"><h3>과자별 사용자 랭킹</h3></th>
+            </tr>
+        </thead>
 		<tbody>
-		<div class="list display-snack-list" style = "width : 80%;">
+		<div class="list display-snack-list" style="width:80%;">
 			<c:forEach var="item" items="${list}">
-				<tr class="display-each-snack">
-					<td style="text-align: center; vertical-align: middle;">${item.rank}위</td>
-					<td class="snack-name" id="${item.snackId}" style="vertical-align: middle;">
-						<img src="${item.imgUrl}" style="width: 100px; height: 100px;"/>
+				<tr class="display-each-snack" style="border-bottom : dotted #C1D3F2 1px">
+					<td style="text-align: center; vertical-align: middle">${item.rank}위</td>
+					<td class="snack-name" id="${item.snackId}" style="vertical-align: middle ">
+						<img src="${item.imgUrl}" style="width: 100px; height: 100px; margin-left:33%;"/>
 						<a href="#" data-snackid="${item.snackId}" class="snack-link">${item.name}</a>
 					</td>
-					<td class="additional-info" style="display: none"></td>
-				</tr>
+					<td class="additional-info" style="display: none;" ></td>
+				</tr>	
 			</c:forEach>
 		</div>
 		</tbody>
@@ -81,7 +81,7 @@
 				data: { snackId: snackId },
 				dataType: 'json',
 				success: function(response) {
-					var additionalInfo = '<table class="table table-striped" style="width: 80%;"><thead class="thead-light"><tr style="text-align: center;"><th>순위</th><th>갯수</th><th>이름</th></tr></thead><tbody>';
+					var additionalInfo = '<table class="table table-striped table-hover" style="width: 80%;  margin-left:12%"><thead class="thead-light"><tr style="text-align: center;"><th>순위</th><th>갯수</th><th>이름</th></tr></thead><tbody>';
 
 					$.each(response, function(index, element) {
 						additionalInfo += '<tr style="text-align: center;">';
