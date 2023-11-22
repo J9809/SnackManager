@@ -11,4 +11,5 @@ public interface VoteDAO {
     int voteSnack(Vote vote) throws Exception;
 
     int checkVote(Member member) throws Exception;
+    int deleteVote() throws Exception;
 }

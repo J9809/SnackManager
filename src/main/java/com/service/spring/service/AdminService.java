@@ -13,4 +13,5 @@ public interface AdminService {
     int registerSnack(Snack snack) throws Exception;
     int orderSnack(Snack snack) throws Exception;
     List<VoteWithSnackInfo> viewVote() throws Exception;
+    int deleteVote() throws Exception;
 }

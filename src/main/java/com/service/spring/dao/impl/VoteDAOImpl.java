@@ -36,4 +36,9 @@ public class VoteDAOImpl implements VoteDAO {
 		return sqlSession.selectOne(NS + "checkVote", member);
 	}
 
+	@Override
+	public int deleteVote() throws Exception {
+		return sqlSession.delete(NS + "deleteVote");
+	}
+
 }
