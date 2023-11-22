@@ -16,14 +16,15 @@
     
     #hacker-list {
         padding-top: 300px;
-          display: flex;
-          flex-direction: column;
+	    display: flex;
+	    flex-direction: column;
     }
 
     .form-group {
         position: fixed;
+        z-index: 5;
         width: 100%;
-		margin: 10px;
+		margin-top: 20px;
         padding: 20px 300px;
         background-color: rgba(255, 255, 255, 0.9) ;
         top: 165px;
@@ -35,15 +36,16 @@
     .display-snack-list {
         display: flex;
         flex-wrap: wrap;
-        width: 80%;
-        margin: 10px 30px;
-        height: 500px;
+        width: 75%;
+        margin: 10px 40px;
+        height: 15%;
+        justify-content: space-between; /* 요소 사이의 간격 조절 */
+	    gap: 10px;
     }
     
   .display-each-snack {
-        width: calc(25% - 10px);
+        width: calc(25% - 30px);
         height: 320px;
-        margin: 10px 5px;
         background-color: white;
         display: flex;
         flex-direction: column;
@@ -69,20 +71,30 @@
       position: fixed;
       right: 3%;
       width: 15%; /* 필요에 따라 너비를 조절하세요 */
-      height: 50%;
+      height: 60%;
       padding: 10px;
-      border: 1px solid rgb(240, 240, 240);
+      border: 1px solid rgb(220, 220, 220);
     }
     #snack-selection-container {
-      height: 76%;
+      height: 80%;
       overflow-y: auto;
     }
     
     #send-btn {
     	text-align: center;
     }
-    
-
+    .upper-div {
+        display: flex;
+    }
+    .lower-div {
+        display: flex;
+    }
+	.lower-div > * {
+		margin-right: 10px;
+	}
+	.snack-selected {
+		margin-bottom: 10px;
+	}
 
 </style>
 <body>
@@ -105,9 +117,9 @@
             <img src="${item.imgUrl}" id="snack-img" />
           </div>
           <div class="snack-info-wrapper"></div>
-          <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
-          <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
-          <span class="snack-quantity">남은 수량 : ${item.quantity}</span>
+          <marquee style="z-index: 0" class="snack-name" id="${item.snackId}" direction="left" onmouseover="this.stop()">${item.name}</marquee>
+          <h4 class="snack-brand" id="${item.brand}"></h4>
+          <span class="snack-quantity" style="font-size: 17px;">남은 수량 : ${item.quantity}</span>
         </div>
 
         <!-- 매 4번째 아이템일 때 줄 바꾸기 -->
@@ -118,12 +130,12 @@
     </div>
     
     <div id="selection">
-    	장바구니
+    	<span style="font-size: 20px;">장바구니</span>
     	<hr>
       <div id="snack-selection-container">
       </div>
       <div id="send-btn">
-          <button type="button">EAT!!</button>
+          <button class="btn btn-primary" type="button">EAT!!</button>
       </div>
     </div>
 
@@ -258,13 +270,15 @@
 
           const delBtn = document.createElement("button");
           delBtn.innerText = 'X';
+          delBtn.classList.add("btn")
+          delBtn.classList.add("btn-danger")
           delBtn.classList.add("delBtn");
           delBtn.addEventListener("click", deleteSnack);
 
           upperDiv.classList.add("upper-div");
           lowerDiv.classList.add("lower-div");
           upperDiv.appendChild(spanDiv);
-          upperDiv.appendChild(input);
+          lowerDiv.appendChild(input);
           lowerDiv.appendChild(delBtn);
 
           selectedDiv.appendChild(upperDiv);
