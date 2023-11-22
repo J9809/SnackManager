@@ -6,174 +6,111 @@
 %>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>학생 - 재고</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
 </head>
 <style>
-    #header {
-        position: fixed;
-        width: 100%;
+    #container {
+        background-color: lightskyblue;
+        height: 90%;
+        margin: 10px;
+        display: flex;
     }
-    
-    #hacker-list {
-        padding-top: 300px;
-	    display: flex;
-	    flex-direction: column;
+    #left-container {
+        width: 80%;
+        height: 100%;
+        background-color: lightblue;
     }
-
-    .form-group {
-        position: fixed;
-        z-index: 5;
-        width: 100%;
-		margin-top: 20px;
-        padding: 20px 300px;
-        background-color: rgba(255, 255, 255, 0.9) ;
-        top: 200px;
-        border-bottom: 1px solid rgb(240, 240, 240);
-        box-shadow: 0px 12px 10px -10px  rgba(0, 0, 0, 0.3);
-
-    }
-    .snack-img-wrapper {
-    	width: 75%;
-    	height: 75%;
+    #right-container {
+        width: 20%;
+        justify-content: center;
+        align-items: center;
     }
     .display-snack-list {
         display: flex;
         flex-wrap: wrap;
-        width: 75%;
-        margin: 10px 40px;
-        height: 15%;
-        justify-content: space-between; /* 요소 사이의 간격 조절 */
-	    gap: 10px;
+        overflow-y: auto;
+        margin: 30px;
+        height: 500px;
     }
-    
-  .display-each-snack {
-        width: calc(25% - 30px);
-        height: 10%;
+    .display-each-snack {
+        width: calc(25% - 10px);
+        height: 280px;
+        margin: 10px 5px;
         background-color: white;
         display: flex;
         flex-direction: column;
         align-items: center;
-      }
-
-  .display-each-snack:hover {
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* 마우스를 올렸을 때의 테두리 스타일 및 색상 지정 */
-      }
-  
+    }
     #snack-img {
-        height: 80%;
-        width: 80%;
-    }
-    
-    .list hr {
-        width: 95%;
-        border: 1px solid rgb(240, 240, 240); /* 원하는 스타일로 변경 가능 */
-    }
-    
-    #selection {
-      text-align: center;
-      position: fixed;
-      top: 44%;
-      right: 3%;
-      width: 15%; /* 필요에 따라 너비를 조절하세요 */
-      height: 40%;
-      padding: 10px;
-      border: 1px solid rgb(220, 220, 220);
+        height:150px;
+        width: 150px;
     }
     #snack-selection-container {
-      padding: 20px;
-      height: 70%;
-      overflow-y: auto;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        /*justify-content: center;*/
+        align-items: center;
+        margin: 10px;
+        padding: 10px;
+        height: 500px;
+        overflow-y: auto;
     }
-    
-    #send-btn {
-    	text-align: center;
+    .snack-selected {
+        background-color: whitesmoke;
+        width: 90%;
+        padding: 10px;
+        margin: 10px;
     }
     .upper-div {
         display: flex;
+        justify-content: space-between;
     }
     .lower-div {
         display: flex;
+        justify-content: center;
     }
-	.lower-div > * {
-		margin-right: 10px;
-	}
-	.snack-selected {
-		margin-bottom: 10px;
-	}
-    .snack-info-wrapper {
-    }
-    .snack-name-wrapper {
-      width: 200px;
-      color: black;
-      white-space: nowrap;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-    .snack-name:hover {
-      display: inline-block;
-      animation: snack-name-wrapper 15s linear infinite;
-    }
-    @keyframes snack-name-wrapper {
-      0%   { transform: translate(0, 0); }
-      100% { transform: translate(-100%, 0); }
-    }
-    .snack-brand {
-      color: 404040;;
-    }
-    .upper-div {
-    	display: flex;
-    	justify-content: space-between;
+    input {
+
     }
 </style>
 <body>
-<div id="header">
-<jsp:include page="./header.jsp">
-    <jsp:param name="pageTitle" value="간식 투표" />
-  </jsp:include>
-  </div>
-  
+<div id="container">
+    <div id="left-container">
+        <div id="hacker-list">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" placeholder="Search" class="search form-control"/>
+                </div>
 
-  <div id="hacker-list">
-    <div class="form-group">
-      <input type="text" placeholder="Search" class="search form-control" />
-    </div>
-
-    <div class="list display-snack-list">
-      <c:forEach var="item" items="${snacks}" varStatus="status">
-        <div id="${item.snackId}" class="display-each-snack">
-          <div class="snack-img-wrapper">
-            <img src="${item.imgUrl}" id="snack-img" />
-          </div>
-          <div class="snack-info-wrapper">
-          	<h5 class="snack-brand" id="${item.brand}">${item.brand}</h5>
-            <div class="snack-name-wrapper">
-              <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
             </div>
-          </div>
+
+            <div class="list display-snack-list">
+                <c:forEach var="item" items="${snacks}">
+                    <div id="${item.snackId}" class="display-each-snack">
+                        <div class="snack-img-wrapper">
+                            <img src="${item.imgUrl}" id="snack-img" />
+                        </div>
+                        <div class="snack-info-wrapper"></div>
+                        <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
+                        <h4 class="snack-brand" id="${item.brand}">${item.brand}</h4>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
-
-        <!-- 매 4번째 아이템일 때 줄 바꾸기 -->
-        <c:if test="${status.index % 4 == 3}">
-          <hr>
-        </c:if>
-      </c:forEach>
     </div>
-    
-    <div id="selection">
-    	<span style="font-size: 20px;">투표함</span>
-    	<hr>
-      <div id="snack-selection-container">
-      </div>
-      <div id="send-btn">
-          <button class="btn btn-primary" type="button">VOTE!!</button>
-      </div>
+    <div id="right-container">
+        <div id="send-btn">
+            <button type="button">Vote!!</button>
+        </div>
+        <div id="snack-selection-container">
+        </div>
     </div>
-
-   </div>
-
+</div>
 </body>
 </html>
 
@@ -267,15 +204,13 @@
 
             const delBtn = document.createElement("button");
             delBtn.innerText = 'X';
-            delBtn.classList.add("btn")
-            delBtn.classList.add("btn-danger")
             delBtn.classList.add("delBtn");
             delBtn.addEventListener("click", deleteSnack);
 
             upperDiv.classList.add("upper-div");
             lowerDiv.classList.add("lower-div");
             upperDiv.appendChild(spanDiv);
-            upperDiv.appendChild(delBtn);
+            lowerDiv.appendChild(delBtn);
 
             selectedDiv.appendChild(upperDiv);
             selectedDiv.appendChild(lowerDiv);
