@@ -153,10 +153,12 @@
         });
 		
         $('#deleteMemberBtn').on('click', function(e){
+        	console.log('expire')
 	        $.ajax({
-	            type: 'GET', 
+	            type: 'POST', 
 	            url: 'api/deleteMember.do', 
 	            success: function(data) {
+	            	window.location.href = './login.jsp';
 	            },
 	            error: function() {
 	                // Handle error if necessary
