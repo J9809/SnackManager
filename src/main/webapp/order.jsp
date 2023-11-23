@@ -26,6 +26,12 @@
 	.total-price {
 		display: flex;
 		justify-content: flex-end;
+		margin-right : 20px;
+	}
+	
+	.total-container{
+		display:flex;
+		justify-content: flex-end;
 	}
 </style>
 
@@ -74,7 +80,9 @@
 			  </c:forEach>
 			  </tbody>
 		  </table>
+		  <div class = "total-container">
 		  <div class="total-price"></div>
+		  </div>
 	  </div>
   </div>
 </body>
@@ -98,6 +106,36 @@
 			console.log(totalPrice);
 			const tp = document.querySelector('.total-price');
 			tp.innerHTML = "총액: " + String(totalPrice) + "원";
+			
+	        if (!document.querySelector('.submit-btn')) {
+	            const submitButton = document.createElement("button");
+	            submitButton.innerText = "주문"; // Set the button text
+	            submitButton.classList.add("btn"); // Add classes if needed
+	            submitButton.classList.add("btn-primary"); // Add classes if needed
+	            submitButton.classList.add("submit-btn");
+	            // Append the button after the total-price div
+	            tp.insertAdjacentElement('afterend', submitButton);
+
+	            // Handling click event for the submit button
+	            submitButton.addEventListener("click", function () {
+	            	 $.ajax({
+	                     url: '/updateSnack.do',
+	                     type: 'POST',
+	                     contentType: 'application/json',
+	                     data: JSON.stringify(data), // Sending the list of snacks in the request body
+	                     success: function (response) {
+	                         console.log("updateSnack.do success");
+                            window.location.href = '/index.jsp';
+	                     },
+	                     error: function (error) {
+	                         console.error("Error in updateSnack.do");
+	                     }
+	                 });
+	            
+	            
+	            });
+	        }
+			
 		});
 	}
 

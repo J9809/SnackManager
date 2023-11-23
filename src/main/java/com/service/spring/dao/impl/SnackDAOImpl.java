@@ -34,7 +34,7 @@ public class SnackDAOImpl implements SnackDAO {
 
     @Override
     public int orderSnack(Snack snack) throws Exception {
-        return sqlSession.update(NS + "orederSnack", snack);
+        return sqlSession.update(NS + "orderSnack", snack);
     }
 
     @Override
