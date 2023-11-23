@@ -154,7 +154,7 @@
             <div class="snack-name-wrapper">
               <h4 class="snack-name" id="${item.snackId}">${item.name}</h4>
             </div>
-            <span class="snack-quantity" style="font-size: 17px;">남은 수량 : ${item.quantity}개</span>
+            <span class="snack-quantity" id="${item.quantity}" style="font-size: 17px;">남은 수량 : ${item.quantity}개</span>
           </div>
         </div>
 
@@ -266,12 +266,12 @@
           let snackName = "";
           let snackQuantity = 0;
           const searchList = document.getElementsByClassName("display-each-snack");
-          // console.log(searchList)
+          console.log(searchList)
 
           for (let i = 0; i < searchList.length; i++) {
             if (String(searchList[i].id) === curId) {
               snackName = searchList[i].querySelector(".snack-name").innerText;
-              snackQuantity = Number(searchList[i].querySelector(".snack-quantity").innerText);
+              snackQuantity = Number(searchList[i].querySelector(".snack-quantity").id);
               break;
             }
           }
@@ -279,6 +279,8 @@
             alert("간식이 선택되지 않았습니다.")
             return false;
           }
+
+          console.log("maxElem = ", snackQuantity)
 
           const selectedDiv = document.createElement("div");
           const spanDiv = document.createElement("div");
