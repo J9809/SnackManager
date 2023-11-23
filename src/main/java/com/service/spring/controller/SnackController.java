@@ -28,7 +28,7 @@ public class SnackController {
     public String doSelectAllAdmin(Model model) {
         try {
             List<Snack> snacks = adminService.selectAll();
-            snacks.sort(Comparator.comparingInt(Snack::getQuantity));
+            snacks.sort(Comparator.comparingInt(Snack::getQuantity).reversed());
             System.out.println(snacks);
             model.addAttribute("snacks", snacks);
             model.addAttribute("title", "관리자 - 전체 재고 조회");
@@ -44,7 +44,7 @@ public class SnackController {
         System.out.println("✅ Select All Snack Controller");
         try {
             List<Snack> snacks = studentService.selectAll();
-            snacks.sort(Comparator.comparingInt(Snack::getQuantity));
+            snacks.sort(Comparator.comparingInt(Snack::getQuantity).reversed());
             System.out.println(snacks);
 //            System.out.println("snacks size = " + snacks.size());
             model.addAttribute("snacks", snacks);
