@@ -2,7 +2,9 @@ package com.service.spring.controller;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,21 +29,24 @@ public class MemberController {
 	AdminService adminService;
 
 	@PostMapping("login.do")
-	public String doLogin(Member member, HttpSession session, Model model) {
-		try {
-//			System.out.println(member);
-			Member selected = studentService.login(member);
-			if (selected != null) {
-				session.setAttribute("loginUser", selected);
-				return "redirect:/index.jsp";
-			} else {
-				return "redirect:/login.jsp";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("message", "문제내용 - 회원 로그인 진행 중 에러 발생");
-			return "Error";
-		}
+	@ResponseBody // Ensure this annotation is added to return JSON
+	public Map<String, Object> doLogin(Member member, HttpSession session) {
+	    Map<String, Object> response = new HashMap<>();
+	    try {
+	        Member selected = studentService.login(member);
+	        if (selected != null) {
+	            session.setAttribute("loginUser", selected);
+	            response.put("success", true);
+	        } else {
+	            response.put("success", false);
+	            response.put("message", "아이디 혹은 비밀번호를 다시 확인해주세요");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        response.put("success", false);
+	        response.put("message", "An error occurred during login.");
+	    }
+	    return response;
 	}
 
 	@PostMapping("api/registerMember.do")
@@ -73,7 +78,7 @@ public class MemberController {
 				int result = studentService.updateMember(member);
 				return "redirect:/myPage.jsp";
 			} else {
-				return "login";
+				return "redirect:/login.jsp";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +109,7 @@ public class MemberController {
 
 	@PostMapping("/api/deleteMember.do")
 	public String deleteMember(Model model, HttpSession session) {
+		
 		try {
 			Member loggedInUser = (Member) session.getAttribute("loginUser");
 			int result = studentService.deleteMember(loggedInUser.getMemberId());
