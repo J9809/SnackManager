@@ -104,6 +104,7 @@ public class MemberController {
 
 	@PostMapping("/api/deleteMember.do")
 	public String deleteMember(Model model, HttpSession session) {
+		
 		try {
 			Member loggedInUser = (Member) session.getAttribute("loginUser");
 			int result = studentService.deleteMember(loggedInUser.getMemberId());

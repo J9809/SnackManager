@@ -25,7 +25,10 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int deleteMember(String memberId) throws Exception {
-		int result = sqlSession.delete(NS + "deleteMember", memberId);
+		int result = sqlSession.delete(NS + "deleteMember1", memberId);
+		int result1 = sqlSession.delete(NS + "deleteMember2", memberId);
+		int result2 = sqlSession.delete(NS + "deleteMember3", memberId);
+
 		return result;
 	}
 

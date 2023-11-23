@@ -20,7 +20,13 @@
 	</insert>
 	
 	<!-- 회원 탈퇴 -->
-	<delete id="deleteMember" parameterType="string">
+	<delete id="deleteMember1" parameterType="string">
+		DELETE FROM history WHERE member_id=#{VALUE}	
+	</delete>
+	<delete id="deleteMember2" parameterType="string">
+		DELETE FROM vote WHERE member_id=#{VALUE}
+	</delete>
+	<delete id="deleteMember3" parameterType="string">
 		DELETE FROM member WHERE member_id=#{VALUE}
 	</delete>
 	
